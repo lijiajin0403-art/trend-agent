@@ -3,165 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TREND AGENT — 跨行业趋势研究系统</title>
+<title>TREND AGENT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 :root{
-  --bg:#0C0C0C;
-  --s1:#161616;
-  --s2:#1E1E1E;
-  --bd:#2A2A2A;
-  --tx:#F0EDE8;
-  --dim:#88887A;
-  --ac:#D4C5A9;
-  --ac2:#E8D5B0;
+  --bg:#0C0C0C;--s1:#161616;--s2:#1E1E1E;--s3:#252525;
+  --bd:#2A2A2A;--tx:#F0EDE8;--dim:#888878;
+  --ac:#D4C5A9;--ac2:#E8D5B0;
 }
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);height:100vh;display:flex;flex-direction:column;overflow:hidden}
 
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
-
-/* ── Header ── */
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:1px solid var(--bd);flex-shrink:0}
-.logo{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;letter-spacing:.18em;color:var(--ac)}
-.logo-sub{font-size:10px;color:var(--dim);letter-spacing:.08em;margin-top:3px}
-.api-badge{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);cursor:pointer;padding:5px 10px;border:1px solid var(--bd);border-radius:20px}
+/* Header */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--bd);flex-shrink:0}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--ac)}
+.logo-s{font-size:10px;color:var(--dim);letter-spacing:.07em;margin-top:2px}
+.api-chip{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);cursor:pointer;padding:5px 12px;border:1px solid var(--bd);border-radius:20px;transition:.2s}
+.api-chip:hover{border-color:var(--ac)}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--bd);transition:.3s}
 .dot.on{background:#5C9}
 
-/* ── Layout ── */
-.wrap{display:flex;flex:1;overflow:hidden;height:calc(100vh - 57px)}
+/* Layout */
+.wrap{display:flex;flex:1;overflow:hidden}
 
-/* ── Left Panel ── */
-.left{width:340px;flex-shrink:0;border-right:1px solid var(--bd);overflow-y:auto;display:flex;flex-direction:column}
-.sec{padding:18px 22px;border-bottom:1px solid var(--bd)}
-.sec-lbl{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-bottom:11px}
-
-input.field,textarea.field{
-  width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:6px;
-  padding:9px 11px;color:var(--tx);font-size:12px;font-family:'Inter',sans-serif;outline:none;transition:.2s
-}
-input.field:focus,textarea.field:focus{border-color:var(--ac)}
-input.field::placeholder,textarea.field::placeholder{color:var(--dim)}
-textarea.field{min-height:170px;resize:vertical;line-height:1.65}
-
-.key-row{display:flex;gap:8px}
-.key-row input{flex:1;font-family:monospace}
-.btn-xs{padding:9px 13px;background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--tx);font-size:11px;cursor:pointer;white-space:nowrap;transition:.2s}
-.btn-xs:hover{border-color:var(--ac);color:var(--ac)}
-
-.hint{font-size:11px;color:var(--dim);line-height:1.5;margin-bottom:10px}
+/* Left */
+.left{width:320px;flex-shrink:0;border-right:1px solid var(--bd);overflow-y:auto;display:flex;flex-direction:column}
+.sec{padding:16px 20px;border-bottom:1px solid var(--bd)}
+.lbl{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-bottom:10px}
+textarea.field{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:10px 12px;color:var(--tx);font-size:12px;font-family:inherit;outline:none;line-height:1.65;resize:vertical;min-height:160px;transition:.2s}
+textarea.field:focus{border-color:var(--ac)}
+textarea.field::placeholder{color:var(--dim)}
 
 /* Layout buttons */
-.ly-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.ly-btn{padding:9px 11px;background:var(--s2);border:1px solid var(--bd);border-radius:7px;color:var(--dim);font-size:11px;cursor:pointer;text-align:left;transition:.2s;line-height:1.3}
-.ly-btn:hover{border-color:var(--ac);color:var(--tx)}
-.ly-btn.active{background:var(--ac);border-color:var(--ac);color:#0C0C0C;font-weight:600}
-.ly-num{font-size:9px;opacity:.6;display:block;margin-bottom:2px}
+.ly-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ly{padding:9px 11px;background:var(--s2);border:1px solid var(--bd);border-radius:7px;color:var(--dim);font-size:11px;cursor:pointer;text-align:left;transition:.2s;line-height:1.3}
+.ly:hover{border-color:var(--ac);color:var(--tx)}
+.ly.active{background:var(--ac);border-color:var(--ac);color:#0C0C0C;font-weight:600}
+.ly-n{font-size:9px;opacity:.55;display:block;margin-bottom:2px}
 .ly-wide{grid-column:span 2}
 
-/* Analyze */
-.btn-go{
-  width:100%;padding:13px;background:var(--ac);border:none;border-radius:8px;
-  color:#0C0C0C;font-size:13px;font-weight:700;font-family:'Space Grotesk',sans-serif;
-  letter-spacing:.05em;cursor:pointer;transition:.2s
-}
+.btn-go{width:100%;padding:12px;background:var(--ac);border:none;border-radius:8px;color:#0C0C0C;font-size:13px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.05em;cursor:pointer;transition:.2s}
 .btn-go:hover{background:var(--ac2)}
 .btn-go:disabled{opacity:.35;cursor:not-allowed}
 
-/* ── Right Panel ── */
-.right{flex:1;overflow-y:auto;position:relative}
-.out{padding:36px 40px}
+/* Right */
+.right{flex:1;overflow-y:auto}
+.out{padding:32px 36px}
 
-/* Empty */
-.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:14px;color:var(--dim)}
-.empty-ico{font-size:36px;opacity:.2}
-.empty-t{font-family:'Space Grotesk',sans-serif;font-size:20px;color:var(--tx);opacity:.25}
-.empty-s{font-size:12px;max-width:260px;text-align:center;line-height:1.7}
+/* Empty / Loading */
+.empty,.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100vh - 57px);gap:14px;color:var(--dim)}
+.empty-ico{font-size:32px;opacity:.18}
+.empty-t{font-family:'Space Grotesk',sans-serif;font-size:18px;color:var(--tx);opacity:.2}
+.empty-s{font-size:12px;text-align:center;line-height:1.7;max-width:240px}
+.load-bar{width:160px;height:2px;background:var(--bd);border-radius:1px;overflow:hidden}
+.load-prog{height:100%;background:var(--ac);animation:prog 1.6s ease-in-out infinite}
+@keyframes prog{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
+.load-txt{font-size:11px;color:var(--dim);letter-spacing:.07em}
+.err{background:rgba(200,60,60,.1);border:1px solid rgba(200,60,60,.3);border-radius:8px;padding:14px 18px;font-size:13px;color:#E88;margin:32px 36px}
 
-/* Loading */
-.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:18px}
-.load-bar{width:180px;height:2px;background:var(--bd);border-radius:1px;overflow:hidden}
-.load-prog{height:100%;background:var(--ac);animation:prog 1.8s ease-in-out infinite}
-@keyframes prog{0%{width:0%;margin-left:0}60%{width:75%}100%{width:0%;margin-left:100%}}
-.load-txt{font-size:11px;color:var(--dim);letter-spacing:.08em}
+/* Board Header */
+.brd-hdr{margin-bottom:32px}
+.t-en{font-family:'Space Grotesk',sans-serif;font-size:48px;font-weight:700;line-height:1;letter-spacing:-.025em;word-break:break-word}
+.t-zh{font-size:13px;color:var(--dim);margin-top:7px;letter-spacing:.12em}
+.t-def{font-size:13px;line-height:1.85;color:var(--dim);margin-top:12px;max-width:620px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.pill{padding:4px 12px;border:1px solid var(--bd);border-radius:20px;font-size:11px;color:var(--dim)}
 
-/* Error */
-.err{background:rgba(200,60,60,.1);border:1px solid rgba(200,60,60,.3);border-radius:8px;padding:16px 20px;font-size:13px;color:#E88;margin:36px 40px}
-
-/* ── Board Header (shared) ── */
-.brd-hdr{margin-bottom:36px}
-.trend-en{font-family:'Space Grotesk',sans-serif;font-size:52px;font-weight:700;line-height:1;letter-spacing:-.025em;word-break:break-word}
-.trend-zh{font-size:14px;color:var(--dim);margin-top:8px;letter-spacing:.12em}
-.trend-def{font-size:13px;line-height:1.85;color:var(--dim);margin-top:14px;max-width:640px}
-.emotion-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
-.pill{padding:5px 13px;border:1px solid var(--bd);border-radius:20px;font-size:11px;color:var(--dim)}
+/* Image box */
+.img-box{overflow:hidden;border-radius:8px;background:var(--s2);position:relative}
+.img-box img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .4s}
+.img-box img[src=""]{opacity:0}
+.shimmer{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);animation:sh 1.4s infinite}
+@keyframes sh{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
 /* ── 01 Storytelling ── */
-.story-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.story-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:18px;position:relative}
-.story-card:not(:last-child)::after{content:'›';position:absolute;right:-9px;top:50%;transform:translateY(-50%);color:var(--bd);font-size:20px;z-index:1}
-.stage-lbl{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--ac);text-transform:uppercase;margin-bottom:10px}
-.stage-txt{font-size:12px;line-height:1.65;color:var(--tx)}
+.story-hero{height:280px;margin-bottom:28px;border-radius:12px;background:var(--s2);position:relative;overflow:hidden}
+.story-hero img{width:100%;height:100%;object-fit:cover}
+.story-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%)}
+.story-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.sc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.sc-img{height:90px;background:var(--s2);position:relative}
+.sc-img img{width:100%;height:100%;object-fit:cover}
+.sc-body{padding:14px}
+.sc-lbl{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--ac);text-transform:uppercase;margin-bottom:8px}
+.sc-txt{font-size:11.5px;line-height:1.65;color:var(--tx)}
 
 /* ── 02 CMF Board ── */
-.cmf-pal{display:flex;gap:3px;height:72px;border-radius:10px;overflow:hidden;margin-bottom:28px}
-.swatch{flex:1;position:relative;display:flex;align-items:flex-end;padding:7px;cursor:pointer;transition:flex .3s ease}
-.swatch:hover{flex:2.5}
-.sw-lbl{font-size:9px;font-weight:600;color:rgba(255,255,255,.85);text-shadow:0 1px 4px rgba(0,0,0,.6);opacity:0;transition:.2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.swatch:hover .sw-lbl{opacity:1}
-.cmf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.cmf-sec{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:18px}
-.cmf-sec-t{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--ac);text-transform:uppercase;margin-bottom:12px}
-.cmf-tags{display:flex;flex-direction:column;gap:6px}
-.cmf-tag{font-size:12px;color:var(--tx);padding:6px 10px;background:var(--s2);border-radius:4px;line-height:1.4}
+.cmf-pal{display:flex;gap:3px;height:64px;border-radius:10px;overflow:hidden;margin-bottom:24px}
+.sw{flex:1;position:relative;display:flex;align-items:flex-end;padding:6px;cursor:pointer;transition:flex .3s}
+.sw:hover{flex:2.5}
+.sw-lbl{font-size:9px;font-weight:600;color:rgba(255,255,255,.9);text-shadow:0 1px 4px rgba(0,0,0,.7);opacity:0;transition:.2s;white-space:nowrap;overflow:hidden}
+.sw:hover .sw-lbl{opacity:1}
+.cmf-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cmf-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.cmf-card-img{height:180px;background:var(--s2);position:relative}
+.cmf-card-img img{width:100%;height:100%;object-fit:cover}
+.cmf-card-body{padding:16px}
+.cmf-card-en{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;margin-bottom:2px}
+.cmf-card-zh{font-size:11px;color:var(--dim);letter-spacing:.06em;margin-bottom:10px}
+.cmf-card-dir{font-size:11.5px;line-height:1.6;color:var(--dim);margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--bd)}
+.color-dots{display:flex;gap:5px;margin-bottom:10px}
+.cdot{width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(255,255,255,.1);flex-shrink:0;cursor:pointer;position:relative}
+.cdot:hover::after{content:attr(title);position:absolute;bottom:22px;left:50%;transform:translateX(-50%);background:#000;color:#fff;font-size:10px;padding:3px 7px;border-radius:4px;white-space:nowrap;pointer-events:none}
+.cmf-row{display:flex;gap:6px;margin-bottom:6px;align-items:flex-start}
+.cmf-k{font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--ac);text-transform:uppercase;white-space:nowrap;margin-top:2px;min-width:52px}
+.cmf-v{font-size:11px;color:var(--dim);line-height:1.5}
+.cases-row{margin-top:10px;padding-top:10px;border-top:1px solid var(--bd);display:flex;flex-direction:column;gap:4px}
+.case-t{font-size:10px;color:var(--dim);padding:2px 7px;background:var(--s2);border-radius:4px;display:inline-block}
 
 /* ── 03 Collage ── */
-.collage-wrap{position:relative;overflow:hidden}
-.collage-bg{position:absolute;top:-10px;left:-10px;font-family:'Space Grotesk',sans-serif;font-size:130px;font-weight:700;color:var(--tx);opacity:.04;pointer-events:none;line-height:.95;text-transform:uppercase;word-break:break-all;z-index:0;width:calc(100% + 20px)}
-.collage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative;z-index:1;padding:10px}
-.col-card{background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:22px;box-shadow:0 6px 24px rgba(0,0,0,.35)}
-.col-card:nth-child(1){transform:rotate(-1.8deg) translateY(-6px)}
-.col-card:nth-child(2){transform:rotate(.8deg) translateY(10px)}
+.collage-wrap{position:relative;min-height:480px}
+.col-bg{position:absolute;top:-5px;left:-10px;font-family:'Space Grotesk',sans-serif;font-size:120px;font-weight:700;color:var(--tx);opacity:.04;pointer-events:none;line-height:.9;text-transform:uppercase;word-break:break-all;width:calc(100% + 20px);z-index:0}
+.col-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative;z-index:1;padding:8px}
+.col-card{background:var(--s1);border:1px solid var(--bd);border-radius:8px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.col-card:nth-child(1){transform:rotate(-1.8deg) translateY(-5px)}
+.col-card:nth-child(2){transform:rotate(.7deg) translateY(8px)}
 .col-card:nth-child(3){transform:rotate(-1deg) translateY(-3px)}
-.col-card:nth-child(4){transform:rotate(2deg) translateY(4px)}
-.col-card:nth-child(5){transform:rotate(-1.5deg) translateY(-8px)}
-.col-card:nth-child(6){transform:rotate(1.2deg) translateY(6px)}
-.col-t{font-size:9px;letter-spacing:.15em;color:var(--ac);margin-bottom:8px;text-transform:uppercase;font-weight:600}
-.col-txt{font-size:13px;line-height:1.65;color:var(--tx)}
+.col-card:nth-child(4){transform:rotate(1.8deg) translateY(6px)}
+.col-card:nth-child(5){transform:rotate(-1.2deg) translateY(-7px)}
+.col-card:nth-child(6){transform:rotate(1deg) translateY(4px)}
+.col-img{height:140px;background:var(--s2);position:relative}
+.col-img img{width:100%;height:100%;object-fit:cover}
+.col-body{padding:16px}
+.col-tag{font-size:9px;letter-spacing:.15em;color:var(--ac);font-weight:600;text-transform:uppercase;margin-bottom:7px}
+.col-txt{font-size:12px;line-height:1.65;color:var(--tx)}
 
 /* ── 04 Minimal ── */
-.min-hero{padding:50px 0;border-bottom:1px solid var(--bd);margin-bottom:36px}
-.min-en{font-family:'Space Grotesk',sans-serif;font-size:78px;font-weight:700;line-height:.95;letter-spacing:-.03em;word-break:break-word}
-.min-zh{font-size:16px;color:var(--dim);margin-top:12px;letter-spacing:.14em}
-.min-sub{font-size:14px;color:var(--dim);margin-top:16px;max-width:520px;line-height:1.8}
-.min-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px}
-.min-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:26px;aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:flex-end}
-.min-card-lbl{font-size:9px;letter-spacing:.15em;color:var(--ac);text-transform:uppercase;margin-bottom:8px;font-weight:600}
-.min-card-txt{font-size:13px;line-height:1.6;color:var(--tx)}
+.min-hero-img{height:320px;border-radius:12px;overflow:hidden;background:var(--s2);margin-bottom:32px;position:relative}
+.min-hero-img img{width:100%;height:100%;object-fit:cover}
+.min-hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(12,12,12,.6) 30%,transparent)}
+.min-name{font-family:'Space Grotesk',sans-serif;font-size:72px;font-weight:700;line-height:.95;letter-spacing:-.03em;word-break:break-word;position:absolute;top:50%;left:36px;transform:translateY(-50%);z-index:1;max-width:60%}
+.min-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+.min-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.min-card-img{height:120px;background:var(--s2);position:relative}
+.min-card-img img{width:100%;height:100%;object-fit:cover}
+.min-card-body{padding:18px}
+.min-card-lbl{font-size:9px;letter-spacing:.15em;color:var(--ac);text-transform:uppercase;margin-bottom:7px;font-weight:600}
+.min-card-txt{font-size:12px;line-height:1.65;color:var(--tx)}
 
 /* ── 05 Trend Map ── */
-.map-svg-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:20px;margin-bottom:32px}
+.map-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:28px}
 
-/* ── Sub-trends list (shared) ── */
-.sub-sec{margin-top:40px}
-.sub-hdr{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-bottom:14px}
-.sub-item{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:18px 22px;margin-bottom:10px;display:grid;grid-template-columns:180px 1fr auto;gap:18px;align-items:start}
+/* Sub-trends */
+.sub-sec{margin-top:36px}
+.sub-hdr{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-bottom:12px}
+.sub-item{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin-bottom:9px;display:grid;grid-template-columns:170px 1fr auto;gap:16px;align-items:start}
 .sub-en{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600}
-.sub-zh{font-size:11px;color:var(--dim);margin-top:3px;letter-spacing:.06em}
+.sub-zh{font-size:11px;color:var(--dim);margin-top:2px;letter-spacing:.06em}
 .sub-dir{font-size:12px;line-height:1.65;color:var(--dim)}
-.sub-cases{display:flex;flex-direction:column;gap:5px}
-.case-t{font-size:10px;color:var(--dim);padding:3px 9px;background:var(--s2);border-radius:4px;white-space:nowrap}
+.sub-cases{display:flex;flex-direction:column;gap:4px}
+.case-chip{font-size:10px;color:var(--dim);padding:2px 8px;background:var(--s2);border-radius:4px;white-space:nowrap}
 
-/* ── JSON toggle ── */
-.json-sec{margin-top:36px;padding-top:22px;border-top:1px solid var(--bd)}
+/* JSON */
+.json-sec{margin-top:32px;padding-top:20px;border-top:1px solid var(--bd)}
 .json-row{display:flex;align-items:center;justify-content:space-between}
-.json-btn{background:none;border:none;color:var(--dim);font-size:11px;cursor:pointer;letter-spacing:.08em;padding:0}
+.json-btn{background:none;border:none;color:var(--dim);font-size:11px;cursor:pointer;letter-spacing:.07em;padding:0}
 .json-btn:hover{color:var(--tx)}
-.copy-btn{padding:5px 12px;background:var(--s2);border:1px solid var(--bd);border-radius:5px;color:var(--dim);font-size:10px;cursor:pointer;letter-spacing:.06em}
+.copy-btn{padding:5px 11px;background:var(--s2);border:1px solid var(--bd);border-radius:5px;color:var(--dim);font-size:10px;cursor:pointer;letter-spacing:.05em}
 .copy-btn:hover{border-color:var(--ac);color:var(--ac)}
-.json-code{margin-top:12px;background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:18px;font-family:'SF Mono','Fira Code',monospace;font-size:10.5px;color:var(--dim);overflow-x:auto;white-space:pre;max-height:420px;overflow-y:auto;display:none}
+.json-code{margin-top:10px;background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:16px;font-family:monospace;font-size:10px;color:var(--dim);overflow-x:auto;white-space:pre;max-height:400px;overflow-y:auto;display:none}
 .json-code.show{display:block}
 
 /* Scrollbar */
@@ -169,66 +170,55 @@ textarea.field{min-height:170px;resize:vertical;line-height:1.65}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
 
-/* ── API Modal ── */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.modal{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:32px;width:420px;max-width:90vw}
-.modal-t{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;margin-bottom:8px}
-.modal-s{font-size:12px;color:var(--dim);line-height:1.7;margin-bottom:22px}
+/* Modal */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:30px;width:400px;max-width:90vw;position:relative}
+.modal-t{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;margin-bottom:7px}
+.modal-s{font-size:12px;color:var(--dim);line-height:1.7;margin-bottom:20px}
 .modal-row{display:flex;gap:8px}
-.modal-row input{flex:1;font-family:monospace;font-size:13px}
+.modal-row input{flex:1;background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:9px 11px;color:var(--tx);font-size:12px;font-family:monospace;outline:none}
+.modal-row input:focus{border-color:var(--ac)}
+.btn-xs{padding:9px 13px;background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--tx);font-size:11px;cursor:pointer;white-space:nowrap}
+.btn-xs:hover{border-color:var(--ac)}
 .modal-hint{font-size:11px;color:var(--dim);margin-top:10px;line-height:1.6}
 .modal-hint a{color:var(--ac)}
-.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--dim);font-size:18px;cursor:pointer}
+.modal-x{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--dim);font-size:18px;cursor:pointer}
 </style>
 </head>
 <body>
 
-<!-- Header -->
 <header class="hdr">
   <div>
     <div class="logo">TREND AGENT</div>
-    <div class="logo-sub">跨行业趋势研究系统 · Powered by DeepSeek</div>
+    <div class="logo-s">跨行业趋势研究系统 · Powered by DeepSeek</div>
   </div>
-  <div class="api-badge" onclick="showApiModal()">
-    <div class="dot" id="apiDot"></div>
+  <div class="api-chip" onclick="showModal()">
+    <div class="dot" id="dot"></div>
     <span id="apiTxt">配置 API Key</span>
   </div>
 </header>
 
-<!-- Main -->
 <div class="wrap">
-
-  <!-- Left Panel -->
   <aside class="left">
     <div class="sec">
-      <div class="sec-lbl">输入信息</div>
-      <div class="hint">每条信息单独一行，可混合多个行业</div>
-      <textarea class="field" id="infoInput" placeholder="例：
+      <div class="lbl">输入信息</div>
+      <textarea class="field" id="inp" placeholder="每条信息单独一行，支持混合多个行业：
+
 Apple Vision Pro 发布，空间计算界面彻底抛弃物理按键
 Prada 2025秋冬用回收尼龙做主材，哑光表面处理
-小米汽车 SU7 内饰采用无缝编织材料覆盖中控
+小米汽车 SU7 内饰采用无缝编织材料
 Sony WH-1000XM6 取消实体按键，全触控表面
-Dyson 新品空气净化器用木质饰面，家电家居化趋势"></textarea>
+Dyson 新品空气净化器用木质饰面"></textarea>
     </div>
 
     <div class="sec">
-      <div class="sec-lbl">版式模式</div>
+      <div class="lbl">版式模式（分析一次，随时切换）</div>
       <div class="ly-grid">
-        <button class="ly-btn active" data-ly="Storytelling" onclick="selectLy('Storytelling')">
-          <span class="ly-num">01</span>Storytelling
-        </button>
-        <button class="ly-btn" data-ly="CMF" onclick="selectLy('CMF')">
-          <span class="ly-num">02</span>CMF Board
-        </button>
-        <button class="ly-btn" data-ly="Collage" onclick="selectLy('Collage')">
-          <span class="ly-num">03</span>Collage
-        </button>
-        <button class="ly-btn" data-ly="Minimal" onclick="selectLy('Minimal')">
-          <span class="ly-num">04</span>Minimal
-        </button>
-        <button class="ly-btn ly-wide" data-ly="Map" onclick="selectLy('Map')">
-          <span class="ly-num">05</span>Trend Map
-        </button>
+        <button class="ly active" data-ly="Storytelling" onclick="selLy('Storytelling')"><span class="ly-n">01</span>Storytelling</button>
+        <button class="ly" data-ly="CMF" onclick="selLy('CMF')"><span class="ly-n">02</span>CMF Board</button>
+        <button class="ly" data-ly="Collage" onclick="selLy('Collage')"><span class="ly-n">03</span>Collage</button>
+        <button class="ly" data-ly="Minimal" onclick="selLy('Minimal')"><span class="ly-n">04</span>Minimal</button>
+        <button class="ly ly-wide" data-ly="Map" onclick="selLy('Map')"><span class="ly-n">05</span>Trend Map</button>
       </div>
     </div>
 
@@ -237,428 +227,365 @@ Dyson 新品空气净化器用木质饰面，家电家居化趋势"></textarea>
     </div>
   </aside>
 
-  <!-- Right Panel -->
   <main class="right">
     <div id="out">
       <div class="empty">
         <div class="empty-ico">◈</div>
         <div class="empty-t">TREND AGENT</div>
-        <div class="empty-s">输入行业信息，选择版式模式<br>点击「分析趋势」开始</div>
+        <div class="empty-s">输入行业信息<br>选版式，点分析</div>
       </div>
     </div>
   </main>
 </div>
 
-<!-- API Modal -->
+<!-- Modal -->
 <div class="modal-bg" id="modalBg" style="display:none" onclick="if(event.target===this)closeModal()">
-  <div class="modal" style="position:relative">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <div class="modal-t">配置 DeepSeek API Key</div>
-    <div class="modal-s">Key 仅存储在你的浏览器本地（localStorage），不会上传到任何服务器。</div>
+  <div class="modal">
+    <button class="modal-x" onclick="closeModal()">×</button>
+    <div class="modal-t">DeepSeek API Key</div>
+    <div class="modal-s">Key 仅存储在你的浏览器本地，不会上传到任何服务器。</div>
     <div class="modal-row">
-      <input type="password" class="field" id="keyInput" placeholder="sk-..." />
+      <input type="password" id="keyInp" placeholder="sk-..." />
       <button class="btn-xs" onclick="saveKey()">保存</button>
     </div>
-    <div class="modal-hint">
-      没有 Key？前往 <a href="https://platform.deepseek.com" target="_blank">platform.deepseek.com</a> 免费注册获取。
-    </div>
+    <div class="modal-hint">前往 <a href="https://platform.deepseek.com" target="_blank">platform.deepseek.com</a> 注册获取 Key</div>
   </div>
 </div>
 
 <script>
-// ── State ──
+const UNSPLASH = 'VD49E1CnAoIl05mkqyK85HxXSYBqHQZNq9lgHZbUCC4';
+
 const S = {
   key: localStorage.getItem('ta_key') || '',
   ly: 'Storytelling',
-  loading: false,
   result: null,
+  imgs: {},   // keyword -> url
+  loading: false,
+  error: null,
   showJson: false
 };
 
-// ── Init ──
+// Init
 updateStatus();
-if (!S.key) setTimeout(showApiModal, 600);
+if (!S.key) setTimeout(showModal, 500);
 
 function updateStatus() {
-  document.getElementById('apiDot').classList.toggle('on', !!S.key);
+  document.getElementById('dot').classList.toggle('on', !!S.key);
   document.getElementById('apiTxt').textContent = S.key ? 'API 已连接' : '配置 API Key';
 }
-
-// ── API Modal ──
-function showApiModal() {
-  document.getElementById('modalBg').style.display = 'flex';
-  const inp = document.getElementById('keyInput');
-  inp.value = S.key ? '••••••••' + S.key.slice(-4) : '';
-  setTimeout(() => { if (!S.key) inp.focus(); }, 100);
-}
+function showModal() { document.getElementById('modalBg').style.display = 'flex'; }
 function closeModal() { document.getElementById('modalBg').style.display = 'none'; }
 function saveKey() {
-  const v = document.getElementById('keyInput').value.trim();
+  const v = document.getElementById('keyInp').value.trim();
   if (!v || v.startsWith('•')) { closeModal(); return; }
-  S.key = v;
-  localStorage.setItem('ta_key', v);
-  updateStatus();
-  closeModal();
+  S.key = v; localStorage.setItem('ta_key', v);
+  updateStatus(); closeModal();
 }
 
-// ── Layout Select ──
-function selectLy(ly) {
+function selLy(ly) {
   S.ly = ly;
-  document.querySelectorAll('.ly-btn').forEach(b => b.classList.toggle('active', b.dataset.ly === ly));
+  document.querySelectorAll('.ly').forEach(b => b.classList.toggle('active', b.dataset.ly === ly));
+  if (S.result) renderOut();
 }
 
-// ── System Prompt ──
-function buildPrompt(ly) {
-  const structureNote = {
-    Storytelling: '5个元素数组，依次是：["起点场景（1-2句）","发展过程（1-2句）","关键转折（1-2句）","设计表达（1-2句）","情绪结语（一句话）"]',
-    CMF: '5个元素数组，依次是：["主视觉意象","色彩趋势叙述","材质趋势叙述","工艺趋势叙述","纹理趋势叙述"]',
-    Collage: '4个元素数组，依次是：["冲突元素（对立的两个概念）","叠加关系描述","核心张力","情绪基调"]',
-    Minimal: '5个元素数组，依次是：["大标题（3词以内，英文，有力）","副标题（一句话）","关键词A","关键词B","关键词C"]',
-    Map: '每个子趋势的延伸说明，与sub_trends数组长度一致'
-  }[ly];
-
-  return `你是一个「跨行业趋势研究 + 设计表达 + 版式生成 Agent」。
-将输入内容转化为设计趋势表达系统，输出结构化 JSON。
-覆盖领域：消费电子 / 汽车 / 家居 / 时尚 / 科技 / AI
-
-执行6步流程后，只输出 JSON，不要任何解释或 markdown 代码块：
+const PROMPT = `你是「跨行业趋势研究 + 设计表达 Agent」。
+将输入信息转化为设计趋势系统，只输出 JSON，绝对不要任何说明文字：
 
 {
   "core_trend": {
-    "name_en": "2-3词英文趋势名，有力量",
+    "name_en": "2-3词英文趋势名（有力量）",
     "name_zh": "中文趋势名",
     "definition": "2-3句趋势定义，说明这是什么变化方向",
-    "emotion": "核心情绪关键词（一个词）"
+    "emotion": "核心情绪词"
   },
   "sub_trends": [
     {
       "name_en": "子趋势英文名",
       "name_zh": "子趋势中文名",
-      "direction": "这个方向的变化描述（一句话，是变化不是描述）",
-      "cases": ["品牌 · 产品 · 年份", "品牌 · 产品 · 年份"]
+      "direction": "变化方向（一句话，是变化不是描述）",
+      "cases": ["品牌 · 产品 · 年份"],
+      "img_kw": "2-3 word english Unsplash photo search term"
     }
   ],
   "cmf": {
-    "color": [
-      {"name": "色彩名称", "hex": "#RRGGBB", "description": "颜色的设计含义"}
-    ],
-    "material": ["材质趋势描述1", "材质趋势描述2", "材质趋势描述3"],
-    "finish": ["工艺描述1", "工艺描述2"],
-    "texture": ["纹理描述1", "纹理描述2"]
+    "color": [{"name": "色彩名", "hex": "#RRGGBB", "desc": "设计含义"}],
+    "material": ["材质1", "材质2", "材质3"],
+    "finish": ["工艺1", "工艺2"],
+    "texture": ["纹理1", "纹理2"]
   },
-  "emotion_keywords": ["关键词1", "关键词2", "关键词3", "关键词4"],
-  "layout": {
-    "type": "${ly}",
-    "structure": [${structureNote}],
-    "image_slots": ["英文图片搜索词1", "英文图片搜索词2", "英文图片搜索词3"],
-    "text_blocks": ["主标题文字", "副标题文字", "核心句子"]
-  }
+  "emotion_keywords": ["词1", "词2", "词3", "词4"],
+  "narrative": {
+    "start": "起点场景（2句）",
+    "develop": "发展过程（2句）",
+    "turn": "关键转折（2句）",
+    "express": "设计表达（2句）",
+    "emotion": "情绪结语（1句）"
+  },
+  "visual_kw": ["英文搜索词1", "英文搜索词2", "英文搜索词3"],
+  "headline": "主标题（英文，3词内，有冲击力）"
 }
 
-规则：
-- sub_trends 提炼3-6个，每个必须是"变化方向"
-- cmf.color 提供3-5个色彩，hex 值要准确反映趋势
-- 只输出 JSON，绝对不要有任何其他文字`;
-}
+规则：sub_trends 提炼3-5个；cmf.color 3-5个颜色；img_kw 要体现趋势视觉特征；只输出JSON。`;
 
-// ── Parse JSON robustly ──
-function parseJSON(txt) {
-  try { return JSON.parse(txt); } catch {}
-  const m = txt.match(/```(?:json)?\s*([\s\S]*?)```/);
+function parseJ(t) {
+  try { return JSON.parse(t); } catch {}
+  const m = t.match(/```(?:json)?\s*([\s\S]*?)```/);
   if (m) { try { return JSON.parse(m[1]); } catch {} }
-  const s = txt.indexOf('{'), e = txt.lastIndexOf('}');
-  if (s !== -1 && e !== -1) { try { return JSON.parse(txt.slice(s, e + 1)); } catch {} }
-  throw new Error('无法解析 JSON 响应，请重试');
+  const s = t.indexOf('{'), e = t.lastIndexOf('}');
+  if (s !== -1 && e !== -1) { try { return JSON.parse(t.slice(s, e + 1)); } catch {} }
+  throw new Error('JSON 解析失败，请重试');
 }
 
-// ── Analyze ──
 async function analyze() {
-  const txt = document.getElementById('infoInput').value.trim();
+  const txt = document.getElementById('inp').value.trim();
   if (!txt) { alert('请先输入信息'); return; }
-  if (!S.key) { showApiModal(); return; }
-
-  S.loading = true; S.result = null;
+  if (!S.key) { showModal(); return; }
+  S.loading = true; S.result = null; S.imgs = {}; S.error = null;
   document.getElementById('goBtn').disabled = true;
   renderOut();
-
   try {
     const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${S.key}` },
+      headers: {'Content-Type':'application/json','Authorization':`Bearer ${S.key}`},
       body: JSON.stringify({
         model: 'deepseek-chat',
-        messages: [
-          { role: 'system', content: buildPrompt(S.ly) },
-          { role: 'user', content: txt }
-        ],
+        messages: [{role:'system',content:PROMPT},{role:'user',content:txt}],
         temperature: 0.75,
-        response_format: { type: 'json_object' }
+        response_format: {type:'json_object'}
       })
     });
-
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error?.message || `HTTP ${res.status}`);
-    }
-
+    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.error?.message || `HTTP ${res.status}`); }
     const data = await res.json();
-    S.result = parseJSON(data.choices[0].message.content);
-  } catch (err) {
-    S.error = err.message;
-    S.result = null;
+    S.result = parseJ(data.choices[0].message.content);
+    S.loading = false;
+    renderOut();
+    fetchImgs(S.result);
+  } catch(e) {
+    S.error = e.message; S.loading = false;
+    renderOut();
   }
-
-  S.loading = false;
   document.getElementById('goBtn').disabled = false;
-  renderOut();
 }
 
-// ── Render ──
+async function fetchImgs(r) {
+  const kws = [
+    ...(r.visual_kw || []),
+    ...(r.sub_trends || []).map(s => s.img_kw).filter(Boolean)
+  ].filter(Boolean);
+  const uniq = [...new Set(kws)];
+  await Promise.all(uniq.map(async kw => {
+    try {
+      const res = await fetch(
+        `https://api.unsplash.com/search/photos?query=${encodeURIComponent(kw)}&per_page=1&orientation=landscape`,
+        {headers:{'Authorization':`Client-ID ${UNSPLASH}`}}
+      );
+      const d = await res.json();
+      if (d.results?.[0]) S.imgs[kw] = d.results[0].urls.regular;
+    } catch {}
+    if (S.result === r) renderOut();
+  }));
+}
+
+function imgSrc(kw) { return kw ? (S.imgs[kw] || '') : ''; }
+function imgEl(kw, h = 180) {
+  const src = imgSrc(kw);
+  return `<div class="img-box" style="height:${h}px">
+    ${!src ? '<div class="shimmer"></div>' : ''}
+    <img src="${src}" alt="" loading="lazy">
+  </div>`;
+}
+
 function renderOut() {
   const el = document.getElementById('out');
-
   if (S.loading) {
-    el.innerHTML = `<div class="loading">
-      <div class="load-bar"><div class="load-prog"></div></div>
-      <div class="load-txt">正在分析趋势...</div>
-    </div>`;
+    el.innerHTML = `<div class="loading"><div class="load-bar"><div class="load-prog"></div></div><div class="load-txt">正在分析趋势...</div></div>`;
     return;
   }
-
   if (!S.result) {
-    if (S.error) {
-      el.innerHTML = `<div class="err">⚠ ${esc(S.error)}</div>`;
-    } else {
-      el.innerHTML = `<div class="empty">
-        <div class="empty-ico">◈</div>
-        <div class="empty-t">TREND AGENT</div>
-        <div class="empty-s">输入行业信息，选择版式模式<br>点击「分析趋势」开始</div>
-      </div>`;
-    }
+    if (S.error) { el.innerHTML = `<div class="err">⚠ ${esc(S.error)}</div>`; return; }
+    el.innerHTML = `<div class="empty"><div class="empty-ico">◈</div><div class="empty-t">TREND AGENT</div><div class="empty-s">输入行业信息<br>选版式，点分析</div></div>`;
     return;
   }
-
   const r = S.result;
-  let html = '<div class="out">';
-
-  // Board header (shared)
-  html += `<div class="brd-hdr">
-    <div class="trend-en">${esc(r.core_trend?.name_en || '')}</div>
-    <div class="trend-zh">${esc(r.core_trend?.name_zh || '')}</div>
-    <div class="trend-def">${esc(r.core_trend?.definition || '')}</div>
-    <div class="emotion-pills">
-      ${(r.emotion_keywords || []).map(k => `<div class="pill">${esc(k)}</div>`).join('')}
-    </div>
-  </div>`;
-
-  // Layout-specific board
-  const ly = r.layout?.type || S.ly;
-  if (ly === 'Storytelling') html += renderStorytelling(r);
-  else if (ly === 'CMF') html += renderCMF(r);
-  else if (ly === 'Collage') html += renderCollage(r);
-  else if (ly === 'Minimal') html += renderMinimal(r);
-  else if (ly === 'Map') html += renderMap(r);
-
-  // Sub-trends list
-  html += renderSubTrends(r);
-
-  // JSON toggle
-  html += `<div class="json-sec">
+  let h = '<div class="out">';
+  h += brdHdr(r);
+  if (S.ly === 'Storytelling') h += renderStory(r);
+  else if (S.ly === 'CMF') h += renderCMF(r);
+  else if (S.ly === 'Collage') h += renderCollage(r);
+  else if (S.ly === 'Minimal') h += renderMinimal(r);
+  else if (S.ly === 'Map') h += renderMap(r);
+  h += renderSubs(r);
+  h += `<div class="json-sec">
     <div class="json-row">
-      <button class="json-btn" onclick="toggleJson()">▸ 查看原始 JSON</button>
-      <button class="copy-btn" onclick="copyJson()">复制 JSON</button>
+      <button class="json-btn" id="jBtn" onclick="toggleJ()">▸ 原始 JSON</button>
+      <button class="copy-btn" onclick="copyJ()">复制 JSON</button>
     </div>
-    <pre class="json-code ${S.showJson ? 'show' : ''}" id="jsonCode">${esc(JSON.stringify(r, null, 2))}</pre>
+    <pre class="json-code ${S.showJson?'show':''}" id="jCode">${esc(JSON.stringify(r,null,2))}</pre>
   </div>`;
+  h += '</div>';
+  el.innerHTML = h;
+}
 
-  html += '</div>';
-  el.innerHTML = html;
+function brdHdr(r) {
+  const pills = (r.emotion_keywords||[]).map(k=>`<div class="pill">${esc(k)}</div>`).join('');
+  return `<div class="brd-hdr">
+    <div class="t-en">${esc(r.core_trend?.name_en||'')}</div>
+    <div class="t-zh">${esc(r.core_trend?.name_zh||'')}</div>
+    <div class="t-def">${esc(r.core_trend?.definition||'')}</div>
+    <div class="pills">${pills}</div>
+  </div>`;
 }
 
 // 01 Storytelling
-function renderStorytelling(r) {
-  const struct = r.layout?.structure || [];
-  const stages = ['起点', '发展', '转折', '表达', '情绪'];
-  const cards = stages.map((s, i) => `
-    <div class="story-card">
-      <div class="stage-lbl">${s}</div>
-      <div class="stage-txt">${esc(struct[i] || '—')}</div>
-    </div>`).join('');
-  return `<div class="story-flow">${cards}</div>`;
+function renderStory(r) {
+  const nav = r.narrative || {};
+  const vkw = (r.visual_kw||[])[0] || '';
+  const stages = [
+    {l:'起点', t:nav.start},
+    {l:'发展', t:nav.develop},
+    {l:'转折', t:nav.turn},
+    {l:'表达', t:nav.express},
+    {l:'情绪', t:nav.emotion}
+  ];
+  const subs = r.sub_trends || [];
+  const cards = stages.map((s,i) => {
+    const kw = subs[i]?.img_kw || (r.visual_kw||[])[i] || '';
+    return `<div class="sc">
+      <div class="sc-img">${imgEl(kw,90)}</div>
+      <div class="sc-body">
+        <div class="sc-lbl">${s.l}</div>
+        <div class="sc-txt">${esc(s.t||'—')}</div>
+      </div>
+    </div>`;
+  }).join('');
+  return `<div class="story-hero">
+    <img src="${imgSrc(vkw)}" alt="" loading="lazy">
+    <div class="story-hero-overlay"></div>
+  </div>
+  <div class="story-flow">${cards}</div>`;
 }
 
 // 02 CMF Board
 function renderCMF(r) {
   const cmf = r.cmf || {};
   const colors = cmf.color || [];
+  const subs = r.sub_trends || [];
 
-  const swatches = colors.map(c => `
-    <div class="swatch" style="background:${c.hex || '#333'}" title="${esc(c.description || '')}">
-      <div class="sw-lbl">${esc(c.name || '')}</div>
-    </div>`).join('');
+  const pal = colors.map(c=>`<div class="sw" style="background:${c.hex||'#333'}" title="${esc(c.desc||'')}"><div class="sw-lbl">${esc(c.name||'')}</div></div>`).join('');
 
-  const pal = swatches ? `<div class="cmf-pal">${swatches}</div>` : '';
-
-  const sections = [
-    { t: 'Color', items: colors.map(c => c.name + (c.description ? ' — ' + c.description : '')) },
-    { t: 'Material', items: cmf.material || [] },
-    { t: 'Finish', items: cmf.finish || [] },
-    { t: 'Texture', items: cmf.texture || [] }
-  ];
-
-  const grid = sections.map(sec => `
-    <div class="cmf-sec">
-      <div class="cmf-sec-t">${sec.t}</div>
-      <div class="cmf-tags">
-        ${sec.items.map(i => `<div class="cmf-tag">${esc(i)}</div>`).join('')}
+  const cards = subs.map(st => {
+    const cdots = colors.slice(0,4).map(c=>`<div class="cdot" style="background:${c.hex}" title="${esc(c.name)}"></div>`).join('');
+    const cases = (st.cases||[]).map(c=>`<div class="case-t">${esc(c)}</div>`).join('');
+    return `<div class="cmf-card">
+      <div class="cmf-card-img">${imgEl(st.img_kw,180)}</div>
+      <div class="cmf-card-body">
+        <div class="cmf-card-en">${esc(st.name_en||'')}</div>
+        <div class="cmf-card-zh">${esc(st.name_zh||'')}</div>
+        <div class="cmf-card-dir">${esc(st.direction||'')}</div>
+        <div class="color-dots">${cdots}</div>
+        <div class="cmf-row"><span class="cmf-k">Material</span><span class="cmf-v">${esc((cmf.material||[]).slice(0,2).join(' · '))}</span></div>
+        <div class="cmf-row"><span class="cmf-k">Finish</span><span class="cmf-v">${esc((cmf.finish||[]).slice(0,2).join(' · '))}</span></div>
+        <div class="cmf-row"><span class="cmf-k">Texture</span><span class="cmf-v">${esc((cmf.texture||[]).slice(0,2).join(' · '))}</span></div>
+        ${cases?`<div class="cases-row">${cases}</div>`:''}
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
-  return `${pal}<div class="cmf-grid">${grid}</div>`;
+  return `<div class="cmf-pal">${pal}</div><div class="cmf-cards">${cards}</div>`;
 }
 
 // 03 Collage
 function renderCollage(r) {
-  const struct = r.layout?.structure || [];
-  const tb = r.layout?.text_blocks || [];
-
-  // Build cards from structure + sub-trends
-  const items = [
-    ...struct.map((s, i) => ({ t: ['冲突', '叠加', '张力', '情绪'][i] || '', txt: s })),
-    ...(r.sub_trends || []).slice(0, 3).map(st => ({ t: st.name_en, txt: st.direction }))
-  ].slice(0, 6);
-
-  const cards = items.map(item => `
-    <div class="col-card">
-      <div class="col-t">${esc(item.t)}</div>
-      <div class="col-txt">${esc(item.txt)}</div>
-    </div>`).join('');
-
+  const subs = r.sub_trends || [];
+  const vkws = r.visual_kw || [];
+  const items = [...subs.slice(0,3).map((s,i)=>({kw:s.img_kw,t:s.name_en,txt:s.direction})),
+    ...vkws.slice(0,3).map((kw,i)=>({kw,t:['Tension','Layer','Form'][i]||'',txt:(subs[i+3]?.direction||r.core_trend?.definition||'')}))
+  ].slice(0,6);
+  const cards = items.map(it=>`<div class="col-card">
+    <div class="col-img">${imgEl(it.kw,140)}</div>
+    <div class="col-body"><div class="col-tag">${esc(it.t)}</div><div class="col-txt">${esc(it.txt)}</div></div>
+  </div>`).join('');
   return `<div class="collage-wrap">
-    <div class="collage-bg">${esc(r.core_trend?.name_en || '')}</div>
-    <div class="collage-grid">${cards}</div>
+    <div class="col-bg">${esc(r.core_trend?.name_en||'')}</div>
+    <div class="col-grid">${cards}</div>
   </div>`;
 }
 
 // 04 Minimal
 function renderMinimal(r) {
-  const struct = r.layout?.structure || [];
-  const tb = r.layout?.text_blocks || [];
-
+  const vkw = (r.visual_kw||[])[0]||(r.sub_trends||[])[0]?.img_kw||'';
+  const subs = r.sub_trends||[];
   const cards = [
-    { lbl: 'Core Direction', txt: r.core_trend?.definition || struct[1] || '' },
-    { lbl: struct[2] || 'Focus A', txt: (r.sub_trends || [])[0]?.direction || '' },
-    { lbl: struct[3] || 'Focus B', txt: (r.sub_trends || [])[1]?.direction || '' }
-  ];
-
-  const grid = cards.map(c => `
-    <div class="min-card">
-      <div class="min-card-lbl">${esc(c.lbl)}</div>
-      <div class="min-card-txt">${esc(c.txt)}</div>
-    </div>`).join('');
-
-  return `<div class="min-hero">
-    <div class="min-en">${esc(struct[0] || r.core_trend?.name_en || '')}</div>
-    <div class="min-zh">${esc(r.core_trend?.name_zh || '')}</div>
-    <div class="min-sub">${esc(struct[1] || r.core_trend?.definition || '')}</div>
+    {kw:subs[0]?.img_kw||'',lbl:'Direction 01',txt:subs[0]?.direction||''},
+    {kw:subs[1]?.img_kw||'',lbl:'Direction 02',txt:subs[1]?.direction||''},
+    {kw:subs[2]?.img_kw||'',lbl:'Direction 03',txt:subs[2]?.direction||''}
+  ].map(c=>`<div class="min-card">
+    <div class="min-card-img">${imgEl(c.kw,120)}</div>
+    <div class="min-card-body"><div class="min-card-lbl">${esc(c.lbl)}</div><div class="min-card-txt">${esc(c.txt)}</div></div>
+  </div>`).join('');
+  return `<div class="min-hero-img">
+    <img src="${imgSrc(vkw)}" alt="" loading="lazy">
+    <div class="min-name">${esc(r.headline||r.core_trend?.name_en||'')}</div>
   </div>
-  <div class="min-grid">${grid}</div>`;
+  <div class="min-grid">${cards}</div>`;
 }
 
-// 05 Trend Map (SVG)
+// 05 Trend Map
 function renderMap(r) {
-  const subs = r.sub_trends || [];
-  const n = subs.length;
-  if (!n) return '<div class="map-svg-wrap"><p style="color:var(--dim);text-align:center;padding:40px">无子趋势数据</p></div>';
-
-  const W = 720, H = 480;
-  const cx = W / 2, cy = H / 2;
-  const cR = 68, subR = 52, orbit = 185;
-
-  // Calculate positions
-  const pts = subs.map((st, i) => {
-    const a = (i / n) * 2 * Math.PI - Math.PI / 2;
-    return { ...st, x: cx + Math.cos(a) * orbit, y: cy + Math.sin(a) * orbit, a };
-  });
-
-  let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">`;
-
-  // Connecting lines
-  pts.forEach(p => {
-    svg += `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="#2A2A2A" stroke-width="1.5" stroke-dasharray="5,4"/>`;
-  });
-
-  // Case dots
-  pts.forEach(p => {
-    (p.cases || []).slice(0, 2).forEach((c, j) => {
-      const ca = p.a + (j === 0 ? -.35 : .35);
-      const dist = 108;
-      const px = Math.max(35, Math.min(W - 35, p.x + Math.cos(ca) * dist));
-      const py = Math.max(20, Math.min(H - 20, p.y + Math.sin(ca) * dist));
-      svg += `<line x1="${p.x}" y1="${p.y}" x2="${px}" y2="${py}" stroke="#222" stroke-width="1"/>`;
-      svg += `<circle cx="${px}" cy="${py}" r="4" fill="#D4C5A9" opacity=".65"/>`;
-      const brand = (c.split('·')[0] || c).trim().slice(0, 12);
-      svg += `<text x="${px}" y="${py - 8}" text-anchor="middle" fill="#666" font-size="8" font-family="Inter">${esc(brand)}</text>`;
+  const subs = r.sub_trends||[];
+  const n = subs.length; if(!n) return '';
+  const W=700,H=460,cx=W/2,cy=H/2,cR=65,sR=50,orb=180;
+  const pts = subs.map((s,i)=>{const a=(i/n)*2*Math.PI-Math.PI/2;return{...s,x:cx+Math.cos(a)*orb,y:cy+Math.sin(a)*orb,a};});
+  let svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">`;
+  pts.forEach(p=>svg+=`<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="#2A2A2A" stroke-width="1.5" stroke-dasharray="5,4"/>`);
+  pts.forEach(p=>{
+    (p.cases||[]).slice(0,2).forEach((c,j)=>{
+      const ca=p.a+(j?0.38:-0.38),d=108;
+      const px=Math.max(40,Math.min(W-40,p.x+Math.cos(ca)*d));
+      const py=Math.max(20,Math.min(H-20,p.y+Math.sin(ca)*d));
+      svg+=`<line x1="${p.x}" y1="${p.y}" x2="${px}" y2="${py}" stroke="#222" stroke-width="1"/>`;
+      svg+=`<circle cx="${px}" cy="${py}" r="4" fill="#D4C5A9" opacity=".6"/>`;
+      svg+=`<text x="${px}" y="${py-8}" text-anchor="middle" fill="#666" font-size="7.5" font-family="Inter">${esc((c.split('·')[0]||c).trim().slice(0,12))}</text>`;
     });
   });
-
-  // Sub-trend nodes
-  pts.forEach(p => {
-    svg += `<circle cx="${p.x}" cy="${p.y}" r="${subR}" fill="#1E1E1E" stroke="#D4C5A9" stroke-width="1.5"/>`;
-    const en = (p.name_en || '').slice(0, 14);
-    const zh = (p.name_zh || '').slice(0, 6);
-    svg += `<text x="${p.x}" y="${p.y - 5}" text-anchor="middle" fill="#F0EDE8" font-size="9.5" font-family="Space Grotesk" font-weight="600">${esc(en)}</text>`;
-    svg += `<text x="${p.x}" y="${p.y + 11}" text-anchor="middle" fill="#888" font-size="8.5" font-family="Inter">${esc(zh)}</text>`;
+  pts.forEach(p=>{
+    svg+=`<circle cx="${p.x}" cy="${p.y}" r="${sR}" fill="#1E1E1E" stroke="#D4C5A9" stroke-width="1.5"/>`;
+    svg+=`<text x="${p.x}" y="${p.y-5}" text-anchor="middle" fill="#F0EDE8" font-size="9.5" font-family="Space Grotesk" font-weight="600">${esc((p.name_en||'').slice(0,14))}</text>`;
+    svg+=`<text x="${p.x}" y="${p.y+10}" text-anchor="middle" fill="#888" font-size="8.5" font-family="Inter">${esc((p.name_zh||'').slice(0,6))}</text>`;
   });
-
-  // Core node
-  const en = (r.core_trend?.name_en || '').slice(0, 14);
-  const zh = (r.core_trend?.name_zh || '').slice(0, 6);
-  svg += `<circle cx="${cx}" cy="${cy}" r="${cR}" fill="#D4C5A9"/>`;
-  svg += `<text x="${cx}" y="${cy - 5}" text-anchor="middle" fill="#0C0C0C" font-size="11" font-family="Space Grotesk" font-weight="700">${esc(en)}</text>`;
-  svg += `<text x="${cx}" y="${cy + 12}" text-anchor="middle" fill="#0C0C0C" font-size="9" font-family="Inter" opacity=".75">${esc(zh)}</text>`;
-
-  svg += '</svg>';
-  return `<div class="map-svg-wrap">${svg}</div>`;
+  svg+=`<circle cx="${cx}" cy="${cy}" r="${cR}" fill="#D4C5A9"/>`;
+  svg+=`<text x="${cx}" y="${cy-6}" text-anchor="middle" fill="#0C0C0C" font-size="11" font-family="Space Grotesk" font-weight="700">${esc((r.core_trend?.name_en||'').slice(0,14))}</text>`;
+  svg+=`<text x="${cx}" y="${cy+11}" text-anchor="middle" fill="#0C0C0C" font-size="9" font-family="Inter" opacity=".75">${esc((r.core_trend?.name_zh||'').slice(0,6))}</text>`;
+  svg+='</svg>';
+  return `<div class="map-wrap">${svg}</div>`;
 }
 
-// Sub-trends list
-function renderSubTrends(r) {
-  const subs = r.sub_trends || [];
-  if (!subs.length) return '';
-  const items = subs.map(st => `
-    <div class="sub-item">
-      <div>
-        <div class="sub-en">${esc(st.name_en || '')}</div>
-        <div class="sub-zh">${esc(st.name_zh || '')}</div>
-      </div>
-      <div class="sub-dir">${esc(st.direction || '')}</div>
-      <div class="sub-cases">
-        ${(st.cases || []).map(c => `<div class="case-t">${esc(c)}</div>`).join('')}
-      </div>
-    </div>`).join('');
-  return `<div class="sub-sec"><div class="sub-hdr">Sub Trends</div>${items}</div>`;
+function renderSubs(r) {
+  const subs = r.sub_trends||[];
+  if(!subs.length) return '';
+  return `<div class="sub-sec"><div class="sub-hdr">Sub Trends</div>
+    ${subs.map(s=>`<div class="sub-item">
+      <div><div class="sub-en">${esc(s.name_en||'')}</div><div class="sub-zh">${esc(s.name_zh||'')}</div></div>
+      <div class="sub-dir">${esc(s.direction||'')}</div>
+      <div class="sub-cases">${(s.cases||[]).map(c=>`<div class="case-chip">${esc(c)}</div>`).join('')}</div>
+    </div>`).join('')}
+  </div>`;
 }
 
-// JSON toggle
-function toggleJson() {
-  S.showJson = !S.showJson;
-  const el = document.getElementById('jsonCode');
-  if (el) el.classList.toggle('show', S.showJson);
-  const btn = document.querySelector('.json-btn');
-  if (btn) btn.textContent = (S.showJson ? '▾' : '▸') + ' 查看原始 JSON';
+function toggleJ() {
+  S.showJson=!S.showJson;
+  document.getElementById('jCode')?.classList.toggle('show',S.showJson);
+  const b=document.getElementById('jBtn');
+  if(b) b.textContent=(S.showJson?'▾':'▸')+' 原始 JSON';
 }
-
-function copyJson() {
-  if (!S.result) return;
-  navigator.clipboard.writeText(JSON.stringify(S.result, null, 2))
-    .then(() => { const b = document.querySelector('.copy-btn'); if (b) { b.textContent = '已复制 ✓'; setTimeout(() => b.textContent = '复制 JSON', 1500); } });
+function copyJ() {
+  if(!S.result) return;
+  navigator.clipboard.writeText(JSON.stringify(S.result,null,2)).then(()=>{
+    const b=document.querySelector('.copy-btn');
+    if(b){b.textContent='已复制 ✓';setTimeout(()=>b.textContent='复制 JSON',1500);}
+  });
 }
-
-// Escape HTML
-function esc(s) {
-  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 </script>
 </body>
 </html>

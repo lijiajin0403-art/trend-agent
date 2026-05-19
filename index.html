@@ -3,865 +3,1316 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TREND AGENT</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>TREND RESEARCH AGENT</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0C0C0C;--s1:#161616;--s2:#1E1E1E;--s3:#252525;
-  --bd:#2A2A2A;--tx:#F0EDE8;--dim:#88887A;
-  --ac:#D4C5A9;--ac2:#E8D5B0;
+  --bg:#0A0A0A;--s1:#111111;--s2:#181818;--s3:#202020;
+  --bd:#282828;--tx:#F0EDE8;--dim:#777770;--muted:#4A4A46;
+  --ac:#C8B89A;--ac2:#D4C5A9;--ac3:#E0D2B8;
+  --green:#4D9970;--blue:#4A7FA5;--gold:#B09040;--red:#A05050;
 }
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);height:100vh;display:flex;flex-direction:column;overflow:hidden}
 
-/* ── Header ── */
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:13px 22px;border-bottom:1px solid var(--bd);flex-shrink:0}
-.logo{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--ac)}
-.logo-s{font-size:10px;color:var(--dim);letter-spacing:.07em;margin-top:2px}
-.api-chip{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);cursor:pointer;padding:5px 11px;border:1px solid var(--bd);border-radius:20px;transition:.2s}
-.api-chip:hover{border-color:var(--ac)}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--bd);transition:.3s}
-.dot.on{background:#5C9}
+/* ── HEADER ── */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:1px solid var(--bd);flex-shrink:0}
+.logo{display:flex;align-items:baseline;gap:14px}
+.logo-name{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--ac)}
+.logo-ver{font-size:9px;color:var(--muted);letter-spacing:.06em}
+.hdr-r{display:flex;align-items:center;gap:8px}
+.api-btn{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--dim);cursor:pointer;padding:4px 10px;border:1px solid var(--bd);border-radius:20px;background:none;transition:.15s;letter-spacing:.04em}
+.api-btn:hover{border-color:var(--ac);color:var(--ac2)}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--muted);transition:.3s;flex-shrink:0}
+.dot.on{background:#5BC98A}
+.reset-btn{font-size:10px;color:var(--muted);cursor:pointer;padding:4px 10px;border:1px solid var(--bd);border-radius:20px;background:none;transition:.15s}
+.reset-btn:hover{border-color:var(--dim);color:var(--dim)}
 
-/* ── Layout ── */
-.wrap{display:flex;flex:1;min-height:0;overflow:hidden}
+/* ── STAGE BAR ── */
+.stagebar{display:flex;align-items:center;padding:0 20px;height:40px;border-bottom:1px solid var(--bd);flex-shrink:0;gap:0}
+.stage-item{display:flex;align-items:center;gap:7px;padding:0 14px;height:100%;cursor:default;transition:.15s}
+.stage-item:first-child{padding-left:0}
+.stage-item.clickable{cursor:pointer}
+.stage-item.clickable:hover .stage-lbl{color:var(--dim)}
+.stage-n{width:18px;height:18px;border-radius:50%;border:1px solid var(--muted);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--muted);font-family:'Space Grotesk',sans-serif;flex-shrink:0;transition:.2s}
+.stage-lbl{font-size:9px;font-weight:700;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;transition:.2s;white-space:nowrap}
+.stage-arr{color:var(--muted);font-size:9px;padding:0 2px;opacity:.5}
+.stage-item.active .stage-n{border-color:var(--ac);color:var(--ac);background:rgba(200,184,154,.1)}
+.stage-item.active .stage-lbl{color:var(--ac2)}
+.stage-item.done .stage-n{border-color:var(--green);background:rgba(77,153,112,.12);color:var(--green);font-size:10px}
+.stage-item.done .stage-lbl{color:var(--dim)}
 
-/* ── LEFT SIDEBAR ── */
-.left{width:260px;flex-shrink:0;border-right:1px solid var(--bd);display:flex;flex-direction:column;min-height:0}
-.left-input{flex-shrink:0;padding:14px 16px;border-bottom:1px solid var(--bd)}
-.input-lbl{font-size:9px;font-weight:600;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;margin-bottom:8px}
-textarea.field{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:9px 11px;color:var(--tx);font-size:11px;font-family:inherit;outline:none;line-height:1.65;resize:none;height:110px;transition:.2s}
-textarea.field:focus{border-color:var(--ac)}
-textarea.field::placeholder{color:var(--dim)}
-.btn-go{width:100%;padding:10px;background:var(--ac);border:none;border-radius:7px;color:#0C0C0C;font-size:12px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.05em;cursor:pointer;transition:.2s;margin-top:8px}
-.btn-go:hover{background:var(--ac2)}
-.btn-go:disabled{opacity:.35;cursor:not-allowed}
+/* ── MAIN ── */
+.main{display:flex;flex:1;min-height:0;overflow:hidden}
 
-/* ── NAV ── */
-.left-nav{flex:1;min-height:0;overflow-y:auto;padding:10px 10px}
-.nav-section{margin-bottom:6px}
-.nav-sec-lbl{font-size:9px;font-weight:600;letter-spacing:.15em;color:var(--dim);text-transform:uppercase;padding:12px 8px 6px}
-.nav-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:12px;color:var(--dim);transition:.15s;user-select:none;margin-bottom:1px}
-.nav-item:hover{background:var(--s2);color:var(--tx)}
-.nav-item.active{background:var(--s2);color:var(--tx)}
-.nav-ico{font-size:12px;width:16px;text-align:center;flex-shrink:0;opacity:.7}
-.nav-item.active .nav-ico{opacity:1}
-.nav-subs{padding:0 0 4px 34px;display:flex;flex-direction:column;gap:1px}
-.nav-sub{padding:5px 9px;border-radius:5px;font-size:11px;color:var(--dim);cursor:pointer;transition:.15s}
-.nav-sub:hover{color:var(--tx);background:var(--s3)}
-.nav-sub.active{color:var(--ac);font-weight:500}
-.nav-empty{padding:20px 8px;font-size:11px;color:var(--dim);line-height:1.7;opacity:.6}
+/* ── LEFT ── */
+.left{width:270px;flex-shrink:0;border-right:1px solid var(--bd);display:flex;flex-direction:column;min-height:0}
+.left-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:0}
+.left-body::-webkit-scrollbar{width:3px}
+.left-body::-webkit-scrollbar-thumb{background:var(--bd)}
+.plbl{font-size:9px;font-weight:700;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.flbl{font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px;margin-top:10px}
+.flbl:first-of-type{margin-top:0}
+input.fi,textarea.fi,select.fi{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:7px 10px;color:var(--tx);font-size:11px;font-family:inherit;outline:none;transition:.15s;line-height:1.5}
+input.fi:focus,textarea.fi:focus,select.fi:focus{border-color:var(--ac)}
+input.fi::placeholder,textarea.fi::placeholder{color:var(--muted)}
+textarea.fi{resize:none}
+select.fi{cursor:pointer;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555550'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.div{height:1px;background:var(--bd);margin:14px 0}
+.btn-go{width:100%;padding:9px;background:var(--ac);border:none;border-radius:6px;color:#0A0A0A;font-size:11px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.07em;cursor:pointer;transition:.15s;text-transform:uppercase;margin-top:12px}
+.btn-go:hover{background:var(--ac3)}
+.btn-go:disabled{opacity:.3;cursor:not-allowed}
+.btn-ok{width:100%;padding:9px;background:rgba(77,153,112,.15);border:1px solid rgba(77,153,112,.35);border-radius:6px;color:var(--green);font-size:11px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.07em;cursor:pointer;transition:.15s;text-transform:uppercase;margin-top:8px}
+.btn-ok:hover{background:rgba(77,153,112,.25)}
+.btn-ok:disabled{opacity:.35;cursor:not-allowed}
+.btn-ghost{width:100%;padding:8px;background:none;border:1px solid var(--bd);border-radius:6px;color:var(--dim);font-size:10px;font-weight:600;font-family:'Space Grotesk',sans-serif;letter-spacing:.07em;cursor:pointer;transition:.15s;text-transform:uppercase;margin-top:6px}
+.btn-ghost:hover{border-color:var(--dim);color:var(--tx)}
+.stat-num{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:300;color:var(--ac);letter-spacing:-.02em;line-height:1}
+.stat-lbl{font-size:9px;color:var(--muted);letter-spacing:.1em;margin-top:2px}
+.dim-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.dtag{padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.08em}
+.dtag-S{background:rgba(74,127,165,.18);color:#80AECB}
+.dtag-T{background:rgba(100,80,160,.18);color:#A090D0}
+.dtag-E{background:rgba(180,140,50,.18);color:#C8A040}
+.dtag-E2{background:rgba(77,153,112,.18);color:#6DB890}
+.dtag-P{background:rgba(160,80,80,.18);color:#C08080}
+.dtag-C{background:rgba(160,100,160,.18);color:#C090C0}
+.cluster-sum{padding:8px 10px;background:var(--s2);border-radius:6px;border:1px solid var(--bd);margin-bottom:6px}
+.cluster-sum-name{font-size:11px;color:var(--tx);margin-bottom:2px}
+.cluster-sum-en{font-size:9px;color:var(--dim);letter-spacing:.06em}
+.cluster-sum-cnt{font-size:9px;color:var(--muted);margin-top:2px}
+.notice{background:rgba(176,144,64,.1);border:1px solid rgba(176,144,64,.25);border-radius:6px;padding:9px 11px;font-size:10px;color:var(--gold);line-height:1.55;margin-top:8px}
+.notice strong{display:block;font-size:8px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px;color:var(--gold)}
 
-/* ── RIGHT PANEL ── */
-.right{flex:1;min-height:0;overflow-y:auto}
-.view{padding:30px 36px 48px}
+/* ── RIGHT ── */
+.right{flex:1;overflow-y:auto;padding:20px 24px;min-height:0}
+.right::-webkit-scrollbar{width:4px}
+.right::-webkit-scrollbar-thumb{background:var(--bd)}
+.r-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
+.r-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--tx);letter-spacing:.02em}
+.r-sub{font-size:10px;color:var(--dim);letter-spacing:.04em}
 
-/* View header */
-.view-hdr{margin-bottom:28px}
-.view-en{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin-bottom:6px}
-.view-t{font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;line-height:1;letter-spacing:-.02em}
-.view-sub{font-size:13px;color:var(--dim);margin-top:10px;line-height:1.8;max-width:580px}
+/* ── CENTER STATE ── */
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:14px;color:var(--muted);text-align:center}
+.center-ico{font-size:28px;opacity:.35}
+.center-msg{font-size:11px;letter-spacing:.04em;line-height:1.6;max-width:260px}
+.loadbar{width:180px;height:2px;background:var(--bd);border-radius:2px;overflow:hidden}
+.loadprog{height:100%;background:var(--ac);animation:lp 1.4s ease-in-out infinite}
+@keyframes lp{0%{width:0;margin-left:0}50%{width:60%;margin-left:20%}100%{width:0;margin-left:100%}}
+.stream-txt{font-size:10px;font-family:monospace;color:var(--muted);margin-top:8px;max-width:320px;text-align:left;line-height:1.6;max-height:80px;overflow:hidden;word-break:break-all}
 
-/* ── BOARD VIEW ── */
-.brd-hdr{margin-bottom:24px}
-.t-en{font-family:'Space Grotesk',sans-serif;font-size:42px;font-weight:700;line-height:1;letter-spacing:-.025em;word-break:break-word}
-.t-zh{font-size:13px;color:var(--dim);margin-top:6px;letter-spacing:.12em}
-.t-def{font-size:12px;line-height:1.85;color:var(--dim);margin-top:10px;max-width:580px}
-.pills{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}
-.pill{padding:3px 11px;border:1px solid var(--bd);border-radius:20px;font-size:11px;color:var(--dim)}
-.img-box{overflow:hidden;border-radius:8px;background:var(--s2);position:relative}
-.img-box img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .4s}
-.shimmer{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);animation:sh 1.4s infinite}
-@keyframes sh{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+/* ── SIGNAL TABLE ── */
+.sig-wrap{overflow-x:auto}
+.sig-table{width:100%;border-collapse:collapse;font-size:11px;min-width:700px}
+.sig-table th{text-align:left;font-size:8px;font-weight:700;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;padding:7px 10px;border-bottom:1px solid var(--bd);white-space:nowrap}
+.sig-table td{padding:8px 10px;border-bottom:1px solid rgba(40,40,40,.7);vertical-align:top;line-height:1.4}
+.sig-table tr:last-child td{border-bottom:none}
+.sig-table tr:hover td{background:var(--s1)}
+.sig-id{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;color:var(--muted);white-space:nowrap}
+.sig-text{font-size:11px;color:var(--dim);line-height:1.4}
+.sbadge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:8px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.05em;white-space:nowrap}
+.sb-L{background:rgba(160,80,80,.18);color:#C08080}
+.sb-M{background:rgba(176,144,64,.18);color:#C8A040}
+.sb-S{background:rgba(80,80,80,.18);color:#888}
+.sb-高{color:#5BC98A}
+.sb-中{color:var(--gold)}
+.sb-低{color:var(--red)}
+.conf-dot{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.cd-高{background:#5BC98A}
+.cd-中{background:var(--gold)}
+.cd-低{background:var(--red)}
+.sum-bar{background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:14px 16px;margin-top:16px;font-size:11px;color:var(--dim);line-height:1.5}
+.sum-bar strong{color:var(--ac);font-weight:500}
 
-/* Story */
-.story-hero{height:240px;margin-bottom:20px;border-radius:11px;background:var(--s2);overflow:hidden;position:relative}
-.story-hero img{width:100%;height:100%;object-fit:cover}
-.story-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 55%)}
-.story-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.sc{background:var(--s1);border:1px solid var(--bd);border-radius:8px;overflow:hidden}
-.sc-img{height:70px;background:var(--s2);position:relative}
-.sc-img img{width:100%;height:100%;object-fit:cover}
-.sc-body{padding:11px}
-.sc-lbl{font-size:8.5px;font-weight:600;letter-spacing:.18em;color:var(--ac);text-transform:uppercase;margin-bottom:6px}
-.sc-txt{font-size:11px;line-height:1.65;color:var(--tx)}
+/* ── CLUSTER CARDS ── */
+.cluster-grid{display:grid;gap:12px}
+.c-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:16px;transition:.15s;cursor:pointer;position:relative}
+.c-card:hover{border-color:var(--dim)}
+.c-card.sel{border-color:var(--green);background:rgba(77,153,112,.04)}
+.c-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.c-id{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.12em;margin-bottom:4px}
+.c-name-zh{font-size:15px;font-weight:500;color:var(--tx);line-height:1.2}
+.c-name-en{font-size:9px;color:var(--dim);letter-spacing:.1em;margin-top:3px;text-transform:uppercase}
+.c-dim{font-size:9px;color:var(--ac);font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.1em}
+.c-check{width:20px;height:20px;border-radius:50%;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:.2s;color:transparent}
+.c-card.sel .c-check{border-color:var(--green);background:rgba(77,153,112,.18);color:var(--green)}
+.c-action{font-size:11px;color:var(--dim);line-height:1.5;margin-bottom:8px}
+.c-shift{padding:10px 12px;background:var(--s2);border-radius:6px;border-left:2px solid var(--ac);margin-bottom:8px}
+.c-shift-from{font-size:10px;color:var(--muted);margin-bottom:4px}
+.c-shift-arr{font-size:11px;color:var(--ac);margin-bottom:4px}
+.c-shift-to{font-size:10px;color:var(--ac2);margin-bottom:4px}
+.c-shift-emo{font-size:9px;color:var(--muted);font-style:italic}
+.c-sigs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.c-sig-tag{padding:2px 6px;background:var(--s2);border-radius:3px;font-size:9px;color:var(--muted);font-family:'Space Grotesk',sans-serif}
+.c-edit-area{margin-top:8px;display:none}
+.c-card.editing .c-edit-area{display:block}
+.c-edit-row{margin-bottom:6px}
+.c-edit-lbl{font-size:8px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.c-edit-input{width:100%;background:var(--s2);border:1px solid var(--ac);border-radius:4px;padding:5px 8px;color:var(--tx);font-size:11px;font-family:inherit;outline:none}
+.c-btns{display:flex;gap:6px;margin-top:8px}
+.c-btn{flex:1;padding:6px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:4px;cursor:pointer;border:1px solid var(--bd);background:none;color:var(--dim);font-family:'Space Grotesk',sans-serif;transition:.15s}
+.c-btn:hover{border-color:var(--dim);color:var(--tx)}
+.c-btn.edit-btn{color:var(--muted)}
+.outlier-box{background:var(--s1);border:1px dashed var(--bd);border-radius:8px;padding:14px 16px;margin-top:12px}
+.outlier-title{font-size:9px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.outlier-tags{display:flex;flex-wrap:wrap;gap:4px}
+.outlier-tag{padding:2px 7px;border:1px dashed var(--bd);border-radius:4px;font-size:10px;color:var(--muted)}
 
+/* ── BIG IDEA CARD ── */
+.bia{background:var(--s1);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+.bia-head{padding:22px 24px;background:var(--s2);border-bottom:1px solid var(--bd)}
+.bia-eyebrow{font-size:8px;font-weight:700;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.bia-title-zh{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:300;color:var(--tx);line-height:1.15;letter-spacing:-.01em}
+.bia-title-en{font-size:13px;letter-spacing:.12em;color:var(--ac);margin-top:5px;text-transform:uppercase}
+.bia-meta{display:flex;gap:20px;margin-top:14px;flex-wrap:wrap}
+.bia-mi{font-size:10px;color:var(--muted)}
+.bia-mi span{color:var(--dim);margin-left:4px}
+.bia-status{display:inline-block;padding:2px 8px;border-radius:12px;font-size:9px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.08em;text-transform:uppercase;border:1px solid}
+.bs-emerging{border-color:rgba(77,153,112,.4);color:var(--green)}
+.bs-accelerating{border-color:rgba(176,144,64,.4);color:var(--gold)}
+.bs-peak{border-color:rgba(200,184,154,.4);color:var(--ac)}
+.bs-declining{border-color:rgba(80,80,80,.4);color:var(--muted)}
+.bia-body{padding:20px 24px;display:flex;flex-direction:column;gap:18px}
+.bia-sec{border-bottom:1px solid var(--bd);padding-bottom:16px}
+.bia-sec:last-child{border-bottom:none;padding-bottom:0}
+.bia-sec-t{font-size:8px;font-weight:700;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.bia-p{font-size:11px;color:var(--dim);line-height:1.7}
+.driver-row{display:flex;gap:10px;margin-bottom:7px;font-size:11px}
+.driver-n{color:var(--ac);font-weight:700;flex-shrink:0;font-family:'Space Grotesk',sans-serif;width:20px}
+.driver-body{color:var(--dim);line-height:1.5}
+.driver-src{color:var(--muted);font-size:9px;margin-top:2px}
+.vs-box{background:var(--s2);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:5px}
+.vs-from{font-size:11px;color:var(--muted);padding:5px 9px;border-radius:4px;background:rgba(40,40,40,.5)}
+.vs-arr{text-align:center;font-size:13px;color:var(--ac);padding:1px 0}
+.vs-to{font-size:11px;color:var(--ac2);padding:5px 9px;border-radius:4px;background:rgba(200,184,154,.07)}
+.vs-emo{text-align:center;font-size:9px;color:var(--muted);font-style:italic;margin-top:3px}
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.impact-item{background:var(--s2);border-radius:6px;padding:10px 12px}
+.impact-lbl{font-size:8px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.impact-val{font-size:11px;color:var(--dim);line-height:1.4}
+.cats-list{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.cat-tag{padding:2px 7px;background:var(--s3);border-radius:4px;font-size:10px;color:var(--dim)}
 /* CMF */
-.cmf-pal{display:flex;gap:3px;height:52px;border-radius:8px;overflow:hidden;margin-bottom:18px}
-.sw{flex:1;display:flex;align-items:flex-end;padding:5px;cursor:pointer;transition:flex .3s}
-.sw:hover{flex:2.5}
-.sw-lbl{font-size:9px;font-weight:600;color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(0,0,0,.7);opacity:0;transition:.2s;white-space:nowrap;overflow:hidden}
-.sw:hover .sw-lbl{opacity:1}
-.cmf-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.cmf-card{background:var(--s1);border:1px solid var(--bd);border-radius:9px;overflow:hidden}
-.cmf-card-img{height:155px;background:var(--s2);position:relative}
-.cmf-card-img img{width:100%;height:100%;object-fit:cover}
-.cmf-card-body{padding:13px}
-.cmf-card-en{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;margin-bottom:2px}
-.cmf-card-zh{font-size:10px;color:var(--dim);margin-bottom:8px;letter-spacing:.05em}
-.cmf-card-dir{font-size:11px;line-height:1.6;color:var(--dim);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)}
-.color-dots{display:flex;gap:4px;margin-bottom:8px}
-.cdot{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(255,255,255,.1);cursor:pointer;transition:.2s}
-.cdot:hover{transform:scale(1.3)}
-.cmf-row{display:flex;gap:5px;margin-bottom:4px}
-.cmf-k{font-size:8.5px;font-weight:600;letter-spacing:.1em;color:var(--ac);text-transform:uppercase;white-space:nowrap;min-width:46px;margin-top:1px}
-.cmf-v{font-size:10.5px;color:var(--dim);line-height:1.5}
+.cmf-colors{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+.color-item{display:flex;gap:10px;align-items:flex-start}
+.color-swatch{width:44px;height:44px;border-radius:8px;flex-shrink:0;border:1px solid rgba(255,255,255,.06)}
+.color-info{}
+.ci-zh{font-size:11px;font-weight:500;color:var(--tx)}
+.ci-en{font-size:9px;color:var(--dim);letter-spacing:.06em;margin-top:1px}
+.ci-hex{font-family:'Space Grotesk',sans-serif;font-size:9px;color:var(--muted);letter-spacing:.06em}
+.ci-role{font-size:8px;color:var(--ac);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.ci-desc{font-size:9px;color:var(--muted);margin-top:2px;line-height:1.4}
+.cmf-row{margin-top:12px}
+.cmf-row-lbl{font-size:8px;font-weight:700;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.cmf-tags{display:flex;flex-wrap:wrap;gap:5px}
+.cmf-tag{padding:3px 9px;background:var(--s2);border:1px solid var(--bd);border-radius:5px;font-size:10px;color:var(--dim)}
+.kw-tags{display:flex;flex-wrap:wrap;gap:5px}
+.kw-tag{padding:3px 9px;border:1px solid var(--bd);border-radius:5px;font-size:10px;color:var(--dim)}
+.kw-en{font-size:8px;color:var(--muted);margin-left:4px}
+.sig-list{display:flex;flex-direction:column;gap:5px}
+.sig-item{font-size:10px;color:var(--muted);line-height:1.4;padding-left:10px;position:relative}
+.sig-item::before{content:'·';position:absolute;left:0;color:var(--ac)}
+.sig-item span{color:var(--dim)}
+.conf-box{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--s2);border-radius:6px;border:1px solid var(--bd)}
+.conf-lvl{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700}
+.cl-高{color:#5BC98A}
+.cl-中{color:var(--gold)}
+.cl-低{color:var(--red)}
+.conf-detail{font-size:10px;color:var(--dim);line-height:1.5}
+.conf-unc{font-size:9px;color:var(--muted);margin-top:4px;font-style:italic}
 
-/* Collage */
-.col-bg{font-family:'Space Grotesk',sans-serif;font-size:90px;font-weight:700;color:var(--tx);opacity:.04;line-height:.9;text-transform:uppercase;word-break:break-all;position:absolute;top:-5px;left:-5px;width:calc(100% + 10px);pointer-events:none}
-.col-wrap{position:relative;min-height:400px}
-.col-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;position:relative;z-index:1;padding:6px}
-.col-card{background:var(--s1);border:1px solid var(--bd);border-radius:8px;overflow:hidden;box-shadow:0 5px 18px rgba(0,0,0,.4)}
-.col-card:nth-child(1){transform:rotate(-1.8deg) translateY(-5px)}
-.col-card:nth-child(2){transform:rotate(.7deg) translateY(7px)}
-.col-card:nth-child(3){transform:rotate(-1deg) translateY(-3px)}
-.col-card:nth-child(4){transform:rotate(1.8deg) translateY(5px)}
-.col-card:nth-child(5){transform:rotate(-1.2deg) translateY(-6px)}
-.col-card:nth-child(6){transform:rotate(1deg) translateY(4px)}
-.col-img{height:110px;background:var(--s2);position:relative}
-.col-img img{width:100%;height:100%;object-fit:cover}
-.col-body{padding:12px}
-.col-tag{font-size:8.5px;letter-spacing:.15em;color:var(--ac);font-weight:600;text-transform:uppercase;margin-bottom:5px}
-.col-txt{font-size:11px;line-height:1.65;color:var(--tx)}
+/* ── APPLICATION CARDS ── */
+.app-grid{display:grid;gap:14px}
+.app-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.app-head{padding:12px 18px;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px}
+.app-n{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.12em;min-width:24px}
+.app-t{font-size:12px;font-weight:500;color:var(--tx)}
+.app-body{padding:16px 18px;font-size:11px;color:var(--dim);line-height:1.65}
+.app-sec{margin-bottom:12px}
+.app-sec:last-child{margin-bottom:0}
+.app-sec-lbl{font-size:8px;font-weight:700;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+.concept-item{background:var(--s2);border-radius:6px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--bd)}
+.concept-name{font-size:12px;font-weight:500;color:var(--tx);margin-bottom:3px}
+.concept-def{font-size:11px;color:var(--dim);line-height:1.5}
+.concept-cmf{font-size:10px;color:var(--ac);margin-top:4px}
+.brand-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.brand-chip{padding:3px 8px;border-radius:4px;font-size:10px}
+.brand-fit{background:rgba(77,153,112,.12);color:var(--green);border:1px solid rgba(77,153,112,.25)}
+.brand-repo{background:rgba(176,144,64,.12);color:var(--gold);border:1px solid rgba(176,144,64,.25)}
+.brand-avoid{background:rgba(160,80,80,.12);color:var(--red);border:1px solid rgba(160,80,80,.25)}
+.cat-row{background:var(--s2);border-radius:6px;padding:9px 12px;margin-bottom:6px;border:1px solid var(--bd)}
+.cat-name{font-size:11px;font-weight:500;color:var(--tx);margin-bottom:3px}
+.cat-opp{font-size:10px;color:var(--dim);margin-bottom:4px}
+.cat-meta{display:flex;gap:8px;font-size:9px;color:var(--muted)}
+.audience-card{background:var(--s2);border-radius:8px;padding:14px;border:1px solid var(--bd)}
+.aud-name{font-size:15px;font-weight:500;color:var(--tx)}
+.aud-en{font-size:9px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.aud-meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;font-size:10px;color:var(--muted)}
+.aud-voc{padding:8px 12px;border-left:2px solid var(--ac);font-size:11px;color:var(--dim);font-style:italic;line-height:1.5;margin:10px 0;background:rgba(200,184,154,.05);border-radius:0 4px 4px 0}
+.aud-list{list-style:none;display:flex;flex-direction:column;gap:3px}
+.aud-list li{font-size:11px;color:var(--dim);padding-left:10px;position:relative}
+.aud-list li::before{content:'·';position:absolute;left:0;color:var(--ac)}
 
-/* Minimal */
-.min-hero{height:270px;border-radius:11px;overflow:hidden;background:var(--s2);margin-bottom:22px;position:relative}
-.min-hero img{width:100%;height:100%;object-fit:cover}
-.min-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(12,12,12,.65) 35%,transparent)}
-.min-name{font-family:'Space Grotesk',sans-serif;font-size:56px;font-weight:700;line-height:.95;letter-spacing:-.03em;word-break:break-word;position:absolute;top:50%;left:28px;transform:translateY(-50%);z-index:1;max-width:60%}
-.min-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
-.min-card{background:var(--s1);border:1px solid var(--bd);border-radius:9px;overflow:hidden}
-.min-card-img{height:95px;background:var(--s2);position:relative}
-.min-card-img img{width:100%;height:100%;object-fit:cover}
-.min-card-body{padding:14px}
-.min-card-lbl{font-size:8.5px;letter-spacing:.15em;color:var(--ac);text-transform:uppercase;margin-bottom:5px;font-weight:600}
-.min-card-txt{font-size:11px;line-height:1.65;color:var(--tx)}
+/* ── MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:200}
+.modal{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:24px;width:360px}
+.modal-t{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--tx);margin-bottom:6px}
+.modal-s{font-size:11px;color:var(--dim);margin-bottom:16px;line-height:1.55}
+.modal-close{float:right;background:none;border:none;color:var(--dim);cursor:pointer;font-size:18px;padding:0;line-height:1;margin-top:-2px}
+.modal-close:hover{color:var(--tx)}
+.modal-actions{display:flex;gap:8px;margin-top:14px}
+.modal-btn{flex:1;padding:9px;border-radius:6px;font-size:11px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.06em;cursor:pointer;text-transform:uppercase;transition:.15s;border:none}
+.mb-primary{background:var(--ac);color:#0A0A0A}
+.mb-primary:hover{background:var(--ac3)}
+.mb-ghost{background:var(--s2);color:var(--dim);border:1px solid var(--bd)!important}
+.mb-ghost:hover{border-color:var(--dim)!important;color:var(--tx)}
 
-/* Map */
-.map-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
-
-/* ── CMF BOARD v2 ── */
-.cmf2-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:0}
-.cmf2-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
-.cmf2-hdr{display:flex;align-items:baseline;gap:8px;padding:14px 16px 12px;border-bottom:1px solid var(--bd)}
-.cmf2-en{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--tx)}
-.cmf2-zh{font-size:11px;color:var(--dim);letter-spacing:.06em}
-.cmf2-body{padding:14px 16px;display:flex;flex-direction:column;gap:9px}
-.cmf2-item{font-size:12px;line-height:1.6;color:var(--dim);display:flex;align-items:center;gap:7px}
-.cmf2-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;border:1.5px solid rgba(255,255,255,.1)}
-.cmf2-name{color:var(--tx);white-space:nowrap}
-.cmf2-desc{color:var(--dim);font-size:11px}
-
-/* ── ORIGIN VIEW ── */
-.o6-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
-.o6-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:18px 20px;border-top:3px solid var(--color)}
-.o6-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.o6-ico{font-size:16px}
-.o6-lbl-en{font-size:9px;font-weight:600;letter-spacing:.15em;color:var(--color);text-transform:uppercase}
-.o6-lbl-zh{font-size:13px;font-weight:600;color:var(--tx);margin-top:1px}
-.o6-txt{font-size:12px;line-height:1.75;color:var(--dim)}
-
-.origin-meta{display:flex;gap:24px;padding:20px 24px;background:var(--s1);border:1px solid var(--bd);border-radius:10px;margin-bottom:24px;flex-wrap:wrap}
-.om-item{}
-.om-k{font-size:9px;font-weight:600;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;margin-bottom:5px}
-.om-v{font-size:13px;color:var(--tx);line-height:1.4}
-.lc-badge{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;border:1px solid;letter-spacing:.05em}
-
-.events-timeline{display:flex;flex-direction:column;gap:0}
-.ev-row{display:flex;gap:16px;position:relative}
-.ev-row:not(:last-child) .ev-line{position:absolute;left:10px;top:22px;bottom:-12px;width:1px;background:var(--bd)}
-.ev-dot{width:20px;height:20px;border-radius:50%;background:var(--s2);border:1.5px solid var(--ac);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
-.ev-inner{width:7px;height:7px;border-radius:50%;background:var(--ac)}
-.ev-content{flex:1;padding-bottom:20px}
-.ev-time{font-size:10px;color:var(--ac);font-weight:600;margin-bottom:4px}
-.ev-txt{font-size:12.5px;color:var(--tx);line-height:1.55;margin-bottom:4px}
-.ev-impact{font-size:11px;color:var(--dim)}
-
-/* ── AUDIENCE VIEW ── */
-.persona-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.persona-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
-.persona-head{padding:20px;background:var(--s2);display:flex;flex-direction:column;align-items:center;text-align:center;border-bottom:1px solid var(--bd)}
-.persona-avatar{width:52px;height:52px;border-radius:50%;background:var(--ac);color:#0C0C0C;font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
-.persona-name{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;margin-bottom:4px}
-.persona-age{font-size:11px;color:var(--ac);letter-spacing:.06em}
-.persona-fields{padding:16px 18px;display:flex;flex-direction:column;gap:0}
-.pf-row{padding:10px 0;border-bottom:1px solid var(--bd);display:flex;flex-direction:column;gap:5px}
-.pf-row:last-child{border-bottom:none}
-.pk{font-size:9px;font-weight:600;letter-spacing:.15em;color:var(--ac);text-transform:uppercase}
-.pv{font-size:12px;line-height:1.65;color:var(--dim)}
-.interest-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
-.i-tag{font-size:10.5px;padding:3px 9px;background:var(--s2);border-radius:20px;color:var(--dim)}
-
-/* ── SCENARIOS VIEW ── */
-.scn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.scn-card{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
-.scn-num{font-size:9px;font-weight:600;letter-spacing:.2em;color:var(--dim);padding:16px 18px 0;text-transform:uppercase}
-.scn-name{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;padding:6px 18px 0}
-.scn-ctx{font-size:12px;line-height:1.75;color:var(--dim);padding:10px 18px;border-bottom:1px solid var(--bd);margin-bottom:0}
-.scn-dir{font-size:11.5px;color:var(--ac);padding:12px 18px 16px}
-
-/* ── SUBTRENDS VIEW ── */
-.sub-list{display:flex;flex-direction:column;gap:10px}
-.sub-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden;display:grid;grid-template-columns:1fr 2fr;min-height:130px}
-.sub-card-left{padding:18px 20px;border-right:1px solid var(--bd);background:var(--s2)}
-.sub-card-en{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;margin-bottom:3px}
-.sub-card-zh{font-size:11px;color:var(--dim);letter-spacing:.06em;margin-bottom:12px}
-.sub-cases{display:flex;flex-direction:column;gap:4px}
-.sub-case{font-size:10px;color:var(--dim);padding:2px 8px;background:var(--s3);border-radius:4px}
-.sub-card-right{padding:18px 20px}
-.sub-dir-lbl{font-size:9px;font-weight:600;letter-spacing:.15em;color:var(--ac);text-transform:uppercase;margin-bottom:7px}
-.sub-dir-txt{font-size:13px;line-height:1.75;color:var(--tx)}
-
-/* ── INDUSTRY VIEW ── */
-.ind-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.ind-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:20px 22px}
-.ind-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--bd)}
-.ind-ico{font-size:18px}
-.ind-name{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600}
-.ind-sig{font-size:12.5px;line-height:1.8;color:var(--dim)}
-
-/* ── NEWS FEED ── */
-.news-wrap{padding:28px 36px 80px}
-.news-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
-.news-t{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--ac)}
-.news-d{font-size:11px;color:var(--dim);margin-top:4px}
-.news-hint{font-size:11px;color:var(--dim);margin-top:6px;line-height:1.65}
-.refresh-btn{padding:5px 12px;background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--dim);font-size:11px;cursor:pointer;flex-shrink:0;transition:.2s;margin-left:16px}
-.refresh-btn:hover{border-color:var(--ac);color:var(--ac)}
-.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.news-cat-hdr{font-size:9px;font-weight:600;letter-spacing:.15em;color:var(--dim);text-transform:uppercase;padding-bottom:8px;border-bottom:1px solid var(--bd);margin-bottom:10px}
-.news-items{display:flex;flex-direction:column;gap:7px}
-.news-item{background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:11px 13px;cursor:pointer;transition:.2s;display:flex;gap:9px;align-items:flex-start}
-.news-item:hover{border-color:#444}
-.news-item.sel{border-color:var(--ac);background:rgba(212,197,169,.07)}
-.news-cb{width:13px;height:13px;border:1.5px solid var(--bd);border-radius:3px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:8px;color:transparent;transition:.2s}
-.news-item.sel .news-cb{background:var(--ac);border-color:var(--ac);color:#0C0C0C}
-.news-meta{font-size:9px;color:var(--dim);margin-bottom:3px}
-.news-text{font-size:11.5px;line-height:1.5;color:var(--tx)}
-.news-err{color:var(--dim);font-size:11px;opacity:.5}
-.news-action{position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 55%,transparent);padding:14px 36px 20px;display:flex;align-items:center;justify-content:flex-end;gap:12px;pointer-events:none;opacity:0;transition:.3s}
-.news-action.show{opacity:1;pointer-events:all}
-.news-go{padding:10px 22px;background:var(--ac);border:none;border-radius:8px;color:#0C0C0C;font-size:12px;font-weight:700;font-family:'Space Grotesk',sans-serif;cursor:pointer;transition:.2s}
-.news-go:hover{background:var(--ac2)}
-
-/* ── LOADING / ERROR ── */
-.center-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100vh - 57px);gap:16px}
-.load-bar{width:160px;height:2px;background:var(--bd);border-radius:1px;overflow:hidden}
-.load-prog{height:100%;background:var(--ac);animation:prog 1.6s ease-in-out infinite}
-@keyframes prog{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
-.load-txt{font-size:11px;color:var(--dim);letter-spacing:.07em}
-.err-box{background:rgba(200,60,60,.1);border:1px solid rgba(200,60,60,.3);border-radius:8px;padding:14px 18px;font-size:13px;color:#E88;margin:30px 36px}
-
-/* Scrollbar */
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
-
-/* Modal */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.modal{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:28px;width:400px;max-width:90vw;position:relative}
-.modal-t{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;margin-bottom:6px}
-.modal-s{font-size:12px;color:var(--dim);line-height:1.7;margin-bottom:18px}
-.modal-row{display:flex;gap:8px}
-.modal-row input{flex:1;background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:9px 11px;color:var(--tx);font-size:12px;font-family:monospace;outline:none;transition:.2s}
-.modal-row input:focus{border-color:var(--ac)}
-.btn-xs{padding:9px 13px;background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--tx);font-size:11px;cursor:pointer;white-space:nowrap}
-.btn-xs:hover{border-color:var(--ac)}
-.modal-hint{font-size:11px;color:var(--dim);margin-top:10px;line-height:1.6}
-.modal-hint a{color:var(--ac)}
-.modal-x{position:absolute;top:13px;right:16px;background:none;border:none;color:var(--dim);font-size:18px;cursor:pointer}
+/* ── UTILITY ── */
+.err-box{background:rgba(160,80,80,.12);border:1px solid rgba(160,80,80,.3);border-radius:8px;padding:14px 16px;font-size:11px;color:#C08080;line-height:1.55;margin:20px 0}
+.tag-scale{display:inline-block;padding:1px 5px;border-radius:3px;font-size:8px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.06em}
 </style>
 </head>
 <body>
 
-<header class="hdr">
-  <div><div class="logo">TREND AGENT</div><div class="logo-s">跨行业趋势研究系统 · Powered by DeepSeek</div></div>
-  <div class="api-chip" onclick="showModal()">
-    <div class="dot" id="dot"></div><span id="apiTxt">配置 API Key</span>
+<!-- HEADER -->
+<div class="hdr">
+  <div class="logo">
+    <span class="logo-name">TREND RESEARCH AGENT</span>
+    <span class="logo-ver">v2.0 · 4-STAGE WORKFLOW</span>
   </div>
-</header>
-
-<div class="wrap">
-  <!-- ── LEFT: input + nav ── -->
-  <aside class="left">
-    <div class="left-input">
-      <div class="input-lbl">输入信息</div>
-      <textarea class="field" id="inp" placeholder="每条信息单独一行，可混合多个行业
-
-Apple Vision Pro 空间计算
-Prada 秋冬回收尼龙主材
-小米汽车 SU7 编织内饰"></textarea>
-      <button class="btn-go" id="goBtn" onclick="analyze()">分析趋势 →</button>
-    </div>
-
-    <div class="left-nav" id="leftNav">
-      <div class="nav-empty">输入信息并点击分析<br>导航菜单将出现在这里</div>
-    </div>
-  </aside>
-
-  <!-- ── RIGHT: content ── -->
-  <main class="right" id="right"></main>
+  <div class="hdr-r">
+    <button class="reset-btn" onclick="resetAll()">↺ 重置</button>
+    <button class="api-btn" onclick="showModal()">
+      <div class="dot" id="dot"></div>
+      <span id="api-lbl">API Key</span>
+    </button>
+  </div>
 </div>
 
-<!-- Modal -->
-<div class="modal-bg" id="modalBg" style="display:none" onclick="if(event.target===this)closeModal()">
+<!-- STAGE BAR -->
+<div class="stagebar" id="stagebar"></div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="left">
+    <div class="left-body" id="left"></div>
+  </div>
+  <div class="right" id="right"></div>
+</div>
+
+<!-- MODAL: API KEY -->
+<div class="overlay" id="modal" style="display:none">
   <div class="modal">
-    <button class="modal-x" onclick="closeModal()">×</button>
-    <div class="modal-t">DeepSeek API Key</div>
-    <div class="modal-s">Key 仅存储在你的浏览器本地，不会上传到任何服务器。</div>
-    <div class="modal-row">
-      <input type="password" id="keyInp" placeholder="sk-..."/>
-      <button class="btn-xs" onclick="saveKey()">保存</button>
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-t">API Key 设置</div>
+    <div class="modal-s">输入 DeepSeek API Key，存在浏览器 localStorage，不会上传到任何服务器。</div>
+    <div class="flbl">DEEPSEEK API KEY</div>
+    <input class="fi" type="password" id="key-input" placeholder="sk-..." style="margin-top:4px">
+    <div class="modal-actions">
+      <button class="modal-btn mb-primary" onclick="saveKey()">保存</button>
+      <button class="modal-btn mb-ghost" style="border:1px solid var(--bd)" onclick="closeModal()">取消</button>
     </div>
-    <div class="modal-hint">前往 <a href="https://platform.deepseek.com" target="_blank">platform.deepseek.com</a> 注册获取</div>
   </div>
 </div>
 
 <script>
-const UNSPLASH = 'VD49E1CnAoIl05mkqyK85HxXSYBqHQZNq9lgHZbUCC4';
-const RSS_FEEDS = [
-  {cat:'消费电子', url:'https://www.theverge.com/rss/index.xml'},
-  {cat:'时尚', url:'https://www.dezeen.com/category/fashion/feed/'},
-  {cat:'汽车', url:'https://electrek.co/feed/'},
-  {cat:'家居设计', url:'https://www.dezeen.com/feed/'}
-];
-
+// ─────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────
 const S = {
-  key: localStorage.getItem('ta_key')||'',
-  tab: 'board',   // board | origin | audience | scenarios | subtrends | industry
-  ly: 'Storytelling',
-  result: null,
-  imgs: {},
-  news: null, selNews: new Set(),
-  loading: false, newsLoading: false, error: null
+  stage: 1,
+  key: localStorage.getItem('tra_key2') || '',
+  ctx: {
+    year: '2026',
+    industry: '消费电子',
+    geo: '全球 / 中国'
+  },
+  rawInput: '',
+  signals: null,
+  clusters: null,
+  selectedClusters: new Set(),
+  bigIdea: null,
+  applications: null,
+  loading: false,
+  streaming: '',
+  error: null,
 };
 
-const NAV_ITEMS = [
-  {id:'board',    ico:'◈', label:'视觉看板'},
-  {id:'origin',   ico:'◎', label:'趋势来源'},
-  {id:'audience', ico:'◉', label:'目标人群'},
-  {id:'scenarios',ico:'◆', label:'使用场景'},
-  {id:'subtrends',ico:'◇', label:'子趋势'},
-  {id:'industry', ico:'◐', label:'行业信号'}
-];
-const LAYOUTS = ['Storytelling','CMF Board','Collage','Minimal','Trend Map'];
-const LAYOUT_IDS = ['Storytelling','CMF','Collage','Minimal','Map'];
+// Cluster edits: idx -> {name_zh, name_en}
+const clusterEdits = {};
 
-const O6_FACTORS = [
-  {key:'social',      ico:'🌍', zh:'社会', en:'Social',        color:'#C4803A'},
-  {key:'economic',    ico:'📈', zh:'经济', en:'Economic',      color:'#4C9'},
-  {key:'technology',  ico:'⚡', zh:'科技', en:'Technology',    color:'#4A8FF5'},
-  {key:'environmental',ico:'🌿',zh:'环境', en:'Environmental', color:'#5BAE7E'},
-  {key:'political',   ico:'⚖️', zh:'政治', en:'Political',     color:'#9B72CF'},
-  {key:'cultural',    ico:'🎨', zh:'文化', en:'Cultural',      color:'#E57DA0'}
-];
-const IND_ICOS = {消费电子:'📱',汽车:'🚗',家居:'🏠',时尚:'✨'};
+// ─────────────────────────────────────────
+// PROMPTS
+// ─────────────────────────────────────────
+function P_COLLECT(ctx) {
+  return `你是一位资深趋势研究分析师，专注STEEP+C框架。
+用户会给你一段原始文字（新闻/描述/笔记/事件等），目标年份：${ctx.year}，行业：${ctx.industry}，地理：${ctx.geo}。
 
-updateStatus();
-if (!S.key) setTimeout(showModal, 500);
-renderNav(); renderRight();
-loadNews();
-
-function updateStatus(){
-  document.getElementById('dot').classList.toggle('on',!!S.key);
-  document.getElementById('apiTxt').textContent=S.key?'API 已连接':'配置 API Key';
-}
-function showModal(){document.getElementById('modalBg').style.display='flex';}
-function closeModal(){document.getElementById('modalBg').style.display='none';}
-function saveKey(){
-  const v=document.getElementById('keyInp').value.trim();
-  if(!v||v.startsWith('•')){closeModal();return;}
-  S.key=v;localStorage.setItem('ta_key',v);updateStatus();closeModal();
-}
-
-// ── NAV ──
-function renderNav(){
-  const el=document.getElementById('leftNav');
-  if(!S.result){
-    el.innerHTML=`<div class="nav-empty">输入信息并点击分析<br>导航菜单将出现在这里</div>`;
-    return;
-  }
-  let h=`<div class="nav-sec-lbl">分析报告</div>`;
-  NAV_ITEMS.forEach(item=>{
-    const active=S.tab===item.id;
-    h+=`<div class="nav-item ${active?'active':''}" onclick="selTab('${item.id}')">
-      <span class="nav-ico">${item.ico}</span>${esc(item.label)}
-    </div>`;
-    if(item.id==='board'&&active){
-      h+=`<div class="nav-subs">`;
-      LAYOUT_IDS.forEach((lid,i)=>{
-        h+=`<div class="nav-sub ${S.ly===lid?'active':''}" onclick="selLy('${lid}')">${esc(LAYOUTS[i])}</div>`;
-      });
-      h+=`</div>`;
-    }
-  });
-  el.innerHTML=h;
-}
-
-function selTab(tab){S.tab=tab;renderNav();renderRight();}
-function selLy(ly){S.ly=ly;renderNav();renderRight();}
-
-// ── NEWS ──
-async function loadNews(){
-  S.newsLoading=true; S.news=null;
-  if(!S.result) renderRight();
-  const results=await Promise.all(RSS_FEEDS.map(async f=>{
-    try{
-      const res=await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}&count=4`);
-      const d=await res.json();
-      return{cat:f.cat,items:(d.items||[]).slice(0,4).map(it=>({
-        title:it.title||'',
-        date:it.pubDate?new Date(it.pubDate).toLocaleDateString('zh-CN',{month:'short',day:'numeric'}):'',
-        source:(it.author||d.feed?.title||'').slice(0,20)
-      }))};
-    }catch{return{cat:f.cat,items:[],err:true};}
-  }));
-  S.news=results; S.newsLoading=false;
-  if(!S.result) renderRight();
-}
-function toggleNews(idx){
-  if(S.selNews.has(idx))S.selNews.delete(idx);else S.selNews.add(idx);
-  renderRight();
-}
-function analyzeFromNews(){
-  const lines=[];let i=0;
-  (S.news||[]).forEach(cat=>cat.items.forEach(item=>{
-    if(S.selNews.has(i))lines.push(`[${cat.cat}] ${item.title}`);i++;
-  }));
-  if(!lines.length)return;
-  document.getElementById('inp').value=lines.join('\n');
-  S.selNews.clear();analyze();
-}
-
-// ── PROMPT ──
-const PROMPT=`你是「跨行业趋势研究 + 设计表达 Agent」。只输出 JSON，绝对不要任何解释：
-
+请把其中的趋势信号提取、结构化，输出JSON：
 {
-  "core_trend":{
-    "name_en":"2-3词英文趋势名（有力量）",
-    "name_zh":"中文趋势名",
-    "definition":"2-3句趋势定义",
-    "emotion":"核心情绪词"
+  "signals": [
+    {
+      "id": "S001",
+      "signal": "一句话概括信号本质（具体事件+影响，不抽象）",
+      "dimension": "S|T|E|E2|P|C",
+      "dimension_name": "Social|Technological|Economic|Environmental|Political|Cultural",
+      "scale": "L|M|S",
+      "confidence": "高|中|低",
+      "time": "YYYY.MM（文本中有就填，没有留空）",
+      "geo": "全球|中国|北美|欧洲|东南亚|...",
+      "source_note": "来源类型（新闻/社媒/商业/学术/展览/文化）"
+    }
+  ],
+  "missing_dimensions": ["缺少信号的维度代码，如['E2','P']"],
+  "summary": "一句话总结这批信号的整体趋势方向"
+}
+
+量级说明：L=会影响行业走向的大事件，M=值得持续关注，S=参考性小信号。
+规则：每条信号必须具体（有事件/品牌/数据），不要写抽象描述。只输出JSON。`;
+}
+
+function P_CLUSTER(ctx, signals) {
+  const sigStr = JSON.stringify(signals.map(s => ({id:s.id, signal:s.signal, dim:s.dimension, scale:s.scale})));
+  return `你是一位资深趋势研究分析师，专注STEEP+C框架。
+目标年份：${ctx.year}，行业：${ctx.industry}，地理：${ctx.geo}。
+
+信号列表：${sigStr}
+
+请识别跨维度共振模式，输出聚类分组JSON：
+{
+  "clusters": [
+    {
+      "id": "A",
+      "name_zh": "中文名（必须用当年人们实际说的话语，如'躺平''疗愈''卷'，不用分析视角词如'重构''转型期'）",
+      "name_en": "ENGLISH NAME (2-4 words)",
+      "signals": ["S001","S007"],
+      "lead_dimension": "T+C（主导维度，可多个用+连接）",
+      "core_action": "一句话：这群信号在共同表达什么集体行为/状态变化",
+      "resonance": "为什么来自不同维度的信号属于同一族（1-2句，找深层联系）",
+      "scale": "L|M|S",
+      "value_shift": {
+        "from": "转变前的集体价值/信念（具体，非抽象）",
+        "to": "转变后的集体价值/信念（具体）",
+        "emotion": "恐惧|疲惫|渴望|愤怒|接受|好奇|焦虑"
+      }
+    }
+  ],
+  "outliers": ["无法归类的信号ID"],
+  "synthesis": "一句话总结所有聚类指向的整体趋势方向"
+}
+
+规则：cluster互斥度>=70%；命名必须用当年话语；一个信号只属于一个cluster。只输出JSON。`;
+}
+
+function P_DISTILL(ctx, clusters) {
+  const cStr = JSON.stringify(clusters.map(c => ({
+    name: c.name_zh, en: c.name_en,
+    action: c.core_action, resonance: c.resonance,
+    shift: c.value_shift, signals: c.signals
+  })));
+  return `你是一位资深CMF趋势研究分析师。
+目标年份：${ctx.year}，行业：${ctx.industry}，地理：${ctx.geo}。
+
+用户确认的趋势聚类：${cStr}
+
+请提炼成完整Big Idea Card，输出JSON：
+{
+  "name_zh": "趋势中文名（3-6字，有力量，当年话语）",
+  "name_en": "TREND NAME (2-4 WORDS, BOLD)",
+  "temporal_status": "emerging|accelerating|peak|declining",
+  "first_appeared": "YYYY.MM",
+  "expected_peak": "YYYY",
+  "context": "背景（2-3句，讲清楚这个趋势为什么在此时、此地、此行业出现）",
+  "key_drivers": [
+    {"n": 1, "driver": "驱动因素描述", "source": "具体事件名+时间"}
+  ],
+  "value_shift": {
+    "from": "转变前集体价值观（具体）",
+    "to": "转变后集体价值观（具体）",
+    "emotion": "情绪基底词"
   },
-  "trend_origin":{
-    "social":"社会因素：人口结构变化、消费行为转变、社会思潮（2-3句）",
-    "economic":"经济因素：经济环境、消费力变化、产业格局（2-3句）",
-    "technology":"科技因素：技术突破、数字化、制造工艺革新（2-3句）",
-    "environmental":"环境因素：可持续性、气候意识、材料限制（2-3句）",
-    "political":"政治因素：政策法规、贸易环境、监管变化（2-3句）",
-    "cultural":"文化因素：审美演变、文化输出、跨文化影响（2-3句）",
-    "start_period":"趋势开始活跃的时间段",
-    "duration_forecast":"预计持续时间段（并简述原因）",
-    "lifecycle":"从以下选一个：萌芽期/成长期/成熟期/衰退期",
-    "key_events":[
-      {"event":"关键事件名称","time":"YYYY年M月","impact":"对趋势的推动作用（1句）"}
+  "impact": {
+    "audience": "受影响人群描述（具体特征）",
+    "categories": ["消费品类1","消费品类2","消费品类3"],
+    "geo_priority": "地理优先级描述",
+    "horizon": "6mo|1yr|2-3yr|3-5yr"
+  },
+  "trend_characteristics": "在行为/消费/表达上的可观察特征（2-3句，具体）",
+  "style_characteristics": "视觉氛围、情绪基调、整体气质（2-3句）",
+  "cmf": {
+    "colors": [
+      {
+        "name_zh": "色彩中文名",
+        "name_en": "Color Name",
+        "hex": "#RRGGBB",
+        "role": "structural|neutral|emotional|accent|nature",
+        "desc": "这个颜色在情绪/设计上承担什么角色（1句）"
+      }
+    ],
+    "materials": [{"name": "材质名", "process": "具体工艺（如阳极氧化铝，不是'金属'）"}],
+    "forms": ["形态原则1（可执行的，如'圆角R≥4mm'）","形态原则2"],
+    "patterns": [{"type": "图案类型", "process": "印花|编织|蚀刻|生成式"}]
+  },
+  "keywords": [{"zh": "中文关键词", "en": "English"}],
+  "supporting_signals": [
+    {"signal": "具体事件（非抽象）", "date": "YYYY.MM", "source": "来源"}
+  ],
+  "confidence": {
+    "level": "低|中|高",
+    "reason": "为什么是这个置信度",
+    "uncertainty": "什么因素可能推翻这个判断"
+  }
+}
+
+CMF强制规则：颜色必须给HEX码；材质必须给具体工艺（不能只写'金属'）；colors至少4个；supporting_signals至少5条。
+只输出JSON。`;
+}
+
+function P_INSPIRE(ctx, bigIdea) {
+  const biStr = JSON.stringify({
+    name: bigIdea.name_zh, en: bigIdea.name_en,
+    value_shift: bigIdea.value_shift,
+    impact: bigIdea.impact,
+    style: bigIdea.style_characteristics,
+    cmf_summary: bigIdea.cmf
+  });
+  return `你是一位CMF趋势研究分析师，专注商业应用转化。
+目标年份：${ctx.year}，行业：${ctx.industry}，地理：${ctx.geo}。
+
+Big Idea: ${biStr}
+
+请生成4个商业应用方向，输出JSON：
+{
+  "concept_directions": [
+    {
+      "name_zh": "概念中文名",
+      "name_en": "Concept Name",
+      "definition": "一句话定义（是什么+为谁+核心价值）",
+      "form": "适合的产品形态（具体）",
+      "proposition": "核心selling proposition",
+      "cmf_key": "CMF关键选择（具体材料+颜色+工艺）"
+    }
+  ],
+  "brand_implications": {
+    "fit": [{"brand": "具体品牌名", "reason": "契合原因（1句）"}],
+    "reposition": [{"brand": "具体品牌名", "how": "如何借此reposition（1句）"}],
+    "avoid": [{"brand": "具体品牌名", "reason": "不匹配原因（1句）"}],
+    "tone_of_voice": "品牌语言/调性建议（2-3句）"
+  },
+  "product_innovation": {
+    "top_categories": [
+      {
+        "category": "品类名",
+        "opportunity": "创新机会描述（functional/experiential/aesthetic）",
+        "price_tier": "价格带（如1000-3000元）",
+        "channel": "渠道建议（DTC/高端零售/大众/niche）"
+      }
     ]
   },
-  "industry_signals":[
-    {"industry":"消费电子","signal":"该行业具体品牌/产品动态（1-2句）"},
-    {"industry":"汽车","signal":"..."},
-    {"industry":"家居","signal":"..."},
-    {"industry":"时尚","signal":"..."}
-  ],
-  "sub_trends":[
-    {
-      "name_en":"子趋势英文名",
-      "name_zh":"子趋势中文名",
-      "direction":"变化方向（一句话，是变化不是描述）",
-      "cases":["品牌 · 产品 · 年份"],
-      "img_kw":"3-5 word Unsplash editorial search — use: editorial/luxury/minimal/craft/studio/detail/texture descriptors, specific not generic"
-    }
-  ],
-  "cmf":{
-    "color":[{"name":"色彩名","hex":"#RRGGBB","desc":"设计含义"}],
-    "material":["材质1","材质2","材质3"],
-    "finish":["工艺1","工艺2"],
-    "texture":["纹理1","纹理2"]
-  },
-  "emotion_keywords":["词1","词2","词3","词4"],
-  "target_audience":[
-    {
-      "name":"人群标签",
-      "age":"年龄段",
-      "occupation":"职业描述",
-      "family":"家庭情况（1句）",
-      "lifestyle":"生活方式（2句，具体生动）",
-      "interests":["兴趣1","兴趣2","兴趣3","兴趣4"],
-      "usage_habits":"与此趋势相关的使用习惯（2句）"
-    }
-  ],
-  "use_scenarios":[
-    {"name":"场景名称","context":"场景描述（2句话）","direction":"产品或设计方向"}
-  ],
-  "narrative":{
-    "start":"起点场景（2句）",
-    "develop":"发展过程（2句）",
-    "turn":"关键转折（2句）",
-    "express":"设计表达（2句）",
-    "emotion":"情绪结语（1句）"
-  },
-  "visual_kw":["整体趋势氛围editorial摄影词","材质纹理特写词","生活场景词"],
-  "headline":"主标题（英文，3词内）"
+  "emerging_audience": {
+    "code": "人群代号（英文缩写）",
+    "name_zh": "人群中文名",
+    "name_en": "Audience Name",
+    "age": "年龄段",
+    "gender": "性别倾向",
+    "city": "城市类型",
+    "income": "收入区间（如15-30万/年）",
+    "psychology": ["心理特征1（具体行为）","心理特征2","心理特征3"],
+    "brands_media": ["高频品牌1","高频媒介1"],
+    "voc": "代表性一句话，用第一人称，像真人说的",
+    "diff_from_mainstream": "与现有主流人群的关键差异点（1-2句）"
+  }
 }
 
-规则：sub_trends 3-5个；target_audience 3个；use_scenarios 3个；key_events 2-4个；只输出JSON。`;
+规则：品牌名必须是真实存在的具体品牌；concept_directions给3个；top_categories给3个。只输出JSON。`;
+}
 
-function parseJ(t){
-  try{return JSON.parse(t);}catch{}
-  const m=t.match(/```(?:json)?\s*([\s\S]*?)```/);
-  if(m){try{return JSON.parse(m[1]);}catch{}}
-  const s=t.indexOf('{'),e=t.lastIndexOf('}');
-  if(s!==-1&&e!==-1){try{return JSON.parse(t.slice(s,e+1));}catch{}}
+// ─────────────────────────────────────────
+// API
+// ─────────────────────────────────────────
+async function callAPI(systemPrompt, userMsg, onStream) {
+  const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${S.key}`
+    },
+    body: JSON.stringify({
+      model: 'deepseek-chat',
+      messages: [
+        {role: 'system', content: systemPrompt},
+        {role: 'user', content: userMsg}
+      ],
+      temperature: 0.7,
+      stream: true
+    })
+  });
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({}));
+    throw new Error(e.error?.message || `API 错误 HTTP ${res.status}`);
+  }
+  const reader = res.body.getReader();
+  const dec = new TextDecoder();
+  let full = '';
+  while (true) {
+    const {done, value} = await reader.read();
+    if (done) break;
+    const lines = dec.decode(value).split('\n');
+    for (const line of lines) {
+      if (!line.startsWith('data: ')) continue;
+      const d = line.slice(6).trim();
+      if (d === '[DONE]') continue;
+      try {
+        const delta = JSON.parse(d).choices?.[0]?.delta?.content || '';
+        if (delta) { full += delta; if (onStream) onStream(full); }
+      } catch {}
+    }
+  }
+  return full;
+}
+
+function parseJ(txt) {
+  try { return JSON.parse(txt); } catch {}
+  const m = txt.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (m) try { return JSON.parse(m[1]); } catch {}
+  const s = txt.indexOf('{'), e = txt.lastIndexOf('}');
+  if (s !== -1 && e !== -1) try { return JSON.parse(txt.slice(s, e+1)); } catch {}
   throw new Error('JSON 解析失败，请重试');
 }
 
-async function analyze(){
-  const txt=document.getElementById('inp').value.trim();
-  if(!txt){alert('请先输入信息');return;}
-  if(!S.key){showModal();return;}
-  S.loading=true;S.result=null;S.imgs={};S.error=null;S.tab='board';
-  document.getElementById('goBtn').disabled=true;
-  renderNav();renderRight();
-  try{
-    const res=await fetch('https://api.deepseek.com/v1/chat/completions',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':`Bearer ${S.key}`},
-      body:JSON.stringify({
-        model:'deepseek-chat',
-        messages:[{role:'system',content:PROMPT},{role:'user',content:txt}],
-        temperature:0.75,
-        response_format:{type:'json_object'}
-      })
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─────────────────────────────────────────
+// STAGE ACTIONS
+// ─────────────────────────────────────────
+async function runCollect() {
+  const txt = document.getElementById('inp')?.value?.trim();
+  if (!txt) return;
+  if (!S.key) { showModal(); return; }
+  S.rawInput = txt;
+  S.loading = true; S.streaming = ''; S.error = null; S.signals = null;
+  render();
+  try {
+    const raw = await callAPI(P_COLLECT(S.ctx), txt, (chunk) => {
+      S.streaming = chunk; renderStreamRight();
     });
-    if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||`HTTP ${res.status}`);}
-    const data=await res.json();
-    S.result=parseJ(data.choices[0].message.content);
-    S.loading=false;renderNav();renderRight();
-    fetchImgs(S.result);
-  }catch(e){S.error=e.message;S.loading=false;renderNav();renderRight();}
-  document.getElementById('goBtn').disabled=false;
+    const data = parseJ(raw);
+    S.signals = data.signals || [];
+    S.signals.forEach((s, i) => { if (!s.id) s.id = `S${String(i+1).padStart(3,'0')}`; });
+    S.loading = false; S.streaming = '';
+    // Auto-store context from left inputs
+    render();
+  } catch(e) {
+    S.error = e.message; S.loading = false; S.streaming = '';
+    render();
+  }
 }
 
-async function fetchImgs(r){
-  const kws=[...(r.visual_kw||[]),...(r.sub_trends||[]).map(s=>s.img_kw).filter(Boolean)].filter(Boolean);
-  await Promise.all([...new Set(kws)].map(async kw=>{
-    try{
-      const res=await fetch(
-        `https://api.unsplash.com/search/photos?query=${encodeURIComponent(kw)}&per_page=8&orientation=landscape&content_filter=high`,
-        {headers:{'Authorization':`Client-ID ${UNSPLASH}`}}
-      );
-      const d=await res.json();
-      const results=d.results||[];
-      if(results.length){
-        const best=results.slice(0,5).sort((a,b)=>b.likes-a.likes)[0];
-        S.imgs[kw]=best.urls.regular;
-      }
-    }catch{}
-    if(S.result===r)renderRight();
-  }));
-}
-
-// ── RENDER RIGHT ──
-function renderRight(){
-  const el=document.getElementById('right');
-  if(S.loading){
-    el.innerHTML=`<div class="center-state"><div class="load-bar"><div class="load-prog"></div></div><div class="load-txt">正在分析趋势...</div></div>`;
-    return;
-  }
-  if(S.error){el.innerHTML=`<div class="err-box">⚠ ${esc(S.error)}</div>`;return;}
-  if(S.result){
-    const r=S.result;
-    if(S.tab==='board')     el.innerHTML=vBoard(r);
-    else if(S.tab==='origin')    el.innerHTML=vOrigin(r);
-    else if(S.tab==='audience')  el.innerHTML=vAudience(r);
-    else if(S.tab==='scenarios') el.innerHTML=vScenarios(r);
-    else if(S.tab==='subtrends') el.innerHTML=vSubtrends(r);
-    else if(S.tab==='industry')  el.innerHTML=vIndustry(r);
-    return;
-  }
-  // News
-  const today=new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric'});
-  let h=`<div class="news-wrap"><div class="news-top">
-    <div><div class="news-t">TODAY'S SIGNALS</div><div class="news-d">${today}</div><div class="news-hint">勾选信号，一键填入分析</div></div>
-    <button class="refresh-btn" onclick="loadNews()">↻ 刷新</button>
-  </div>`;
-  if(S.newsLoading||!S.news){h+=`<div style="color:var(--dim);font-size:12px;padding:16px 0">正在获取资讯...</div>`;}
-  else{
-    h+=`<div class="news-grid">`;
-    let gi=0;
-    S.news.forEach(cat=>{
-      h+=`<div><div class="news-cat-hdr">${esc(cat.cat)}</div><div class="news-items">`;
-      if(cat.err||!cat.items.length){h+=`<div class="news-err">暂无数据</div>`;}
-      else cat.items.forEach(item=>{
-        const idx=gi,sel=S.selNews.has(idx);
-        h+=`<div class="news-item ${sel?'sel':''}" onclick="toggleNews(${idx})">
-          <div class="news-cb">${sel?'✓':''}</div>
-          <div><div class="news-meta">${esc(item.source)}${item.date?' · '+esc(item.date):''}</div><div class="news-text">${esc(item.title)}</div></div>
-        </div>`;
-        gi++;
-      });
-      h+=`</div></div>`;
+async function runCluster() {
+  if (!S.signals?.length) return;
+  S.loading = true; S.streaming = ''; S.error = null; S.clusters = null;
+  S.selectedClusters = new Set();
+  render();
+  try {
+    const raw = await callAPI(P_CLUSTER(S.ctx, S.signals), '请对以上信号进行聚类分析。', (chunk) => {
+      S.streaming = chunk; renderStreamRight();
     });
-    h+=`</div>`;
+    const data = parseJ(raw);
+    S.clusters = data.clusters || [];
+    S.clusters._synthesis = data.synthesis || '';
+    S.clusters.forEach((c, i) => {
+      if (!c.id) c.id = String.fromCharCode(65+i);
+      S.selectedClusters.add(i);
+    });
+    S.loading = false; S.streaming = '';
+    render();
+  } catch(e) {
+    S.error = e.message; S.loading = false; S.streaming = '';
+    render();
   }
-  h+=`</div>`;
-  const n=S.selNews.size;
-  h+=`<div class="news-action ${n>0?'show':''}"><span style="font-size:12px;color:var(--dim)">已选 ${n} 条</span><button class="news-go" onclick="analyzeFromNews()">分析选中信号 →</button></div>`;
-  el.innerHTML=h;
 }
 
-// ── VIEW: BOARD ──
-function vBoard(r){
-  let h='<div class="view">';
-  h+=`<div class="brd-hdr">
-    <div class="t-en">${esc(r.core_trend?.name_en||'')}</div>
-    <div class="t-zh">${esc(r.core_trend?.name_zh||'')}</div>
-    <div class="t-def">${esc(r.core_trend?.definition||'')}</div>
-    <div class="pills">${(r.emotion_keywords||[]).map(k=>`<div class="pill">${esc(k)}</div>`).join('')}</div>
-  </div>`;
-  if(S.ly==='Storytelling')h+=bStory(r);
-  else if(S.ly==='CMF')h+=bCMF(r);
-  else if(S.ly==='Collage')h+=bCollage(r);
-  else if(S.ly==='Minimal')h+=bMinimal(r);
-  else if(S.ly==='Map')h+=bMap(r);
-  return h+'</div>';
-}
-
-function imgEl(kw,h=180){
-  const src=kw?(S.imgs[kw]||''):'';
-  return `<div class="img-box" style="height:${h}px">${!src?'<div class="shimmer"></div>':''}<img src="${src}" alt="" loading="lazy"></div>`;
-}
-function imgSrc(kw){return kw?(S.imgs[kw]||''):'';}
-
-function bStory(r){
-  const nav=r.narrative||{},vkw=(r.visual_kw||[])[0]||'',subs=r.sub_trends||[];
-  const stages=[{l:'起点',t:nav.start},{l:'发展',t:nav.develop},{l:'转折',t:nav.turn},{l:'表达',t:nav.express},{l:'情绪',t:nav.emotion}];
-  return `<div class="story-hero"><img src="${imgSrc(vkw)}" alt=""></div>
-  <div class="story-flow">${stages.map((s,i)=>`<div class="sc">
-    <div class="sc-img">${imgEl(subs[i]?.img_kw||(r.visual_kw||[])[i]||'',70)}</div>
-    <div class="sc-body"><div class="sc-lbl">${s.l}</div><div class="sc-txt">${esc(s.t||'—')}</div></div>
-  </div>`).join('')}</div>`;
-}
-function bCMF(r){
-  const cmf=r.cmf||{},colors=cmf.color||[],subs=r.sub_trends||[];
-  const pal=colors.map(c=>`<div class="sw" style="background:${c.hex||'#333'}"><div class="sw-lbl">${esc(c.name||'')}</div></div>`).join('');
-  const colorItems=colors.map(c=>`<div class="cmf2-item"><span class="cmf2-dot" style="background:${c.hex||'#888'}"></span><span class="cmf2-name">${esc(c.name||'')}</span>${c.desc?`<span class="cmf2-desc"> — ${esc(c.desc)}</span>`:''}</div>`).join('');
-  const matItems=(cmf.material||[]).map(m=>`<div class="cmf2-item">${esc(m)}</div>`).join('');
-  const finItems=(cmf.finish||[]).map(f=>`<div class="cmf2-item">${esc(f)}</div>`).join('');
-  const texItems=(cmf.texture||[]).map(t=>`<div class="cmf2-item">${esc(t)}</div>`).join('');
-  const subSection=subs.length?`<div style="margin-top:22px">
-    <div class="view-en" style="margin-bottom:12px">SUB TRENDS 潜在趋势</div>
-    <div class="sub-list">${subs.map(s=>`<div class="sub-card">
-      <div class="sub-card-left">
-        <div class="sub-card-en">${esc(s.name_en||'')}</div>
-        <div class="sub-card-zh">${esc(s.name_zh||'')}</div>
-        <div class="sub-cases">${(s.cases||[]).map(c=>`<span class="sub-case">${esc(c)}</span>`).join('')}</div>
-      </div>
-      <div class="sub-card-right">
-        <div class="sub-dir-lbl">变化方向</div>
-        <div class="sub-dir-txt">${esc(s.direction||'')}</div>
-      </div>
-    </div>`).join('')}</div>
-  </div>`:'';
-  return `<div class="cmf-pal">${pal}</div>
-  <div class="cmf2-grid">
-    <div class="cmf2-card">
-      <div class="cmf2-hdr"><span class="cmf2-en">COLOR</span><span class="cmf2-zh">颜色</span></div>
-      <div class="cmf2-body">${colorItems}</div>
-    </div>
-    <div class="cmf2-card">
-      <div class="cmf2-hdr"><span class="cmf2-en">MATERIAL</span><span class="cmf2-zh">材质</span></div>
-      <div class="cmf2-body">${matItems}</div>
-    </div>
-    <div class="cmf2-card">
-      <div class="cmf2-hdr"><span class="cmf2-en">FINISH</span><span class="cmf2-zh">完成</span></div>
-      <div class="cmf2-body">${finItems}</div>
-    </div>
-    <div class="cmf2-card">
-      <div class="cmf2-hdr"><span class="cmf2-en">TEXTURE</span><span class="cmf2-zh">纹理</span></div>
-      <div class="cmf2-body">${texItems}</div>
-    </div>
-  </div>${subSection}`;
-}
-function bCollage(r){
-  const subs=r.sub_trends||[],vkws=r.visual_kw||[];
-  const items=[...subs.slice(0,3).map(s=>({kw:s.img_kw,t:s.name_en,txt:s.direction})),
-    ...vkws.slice(0,3).map((kw,i)=>({kw,t:['Tension','Layer','Form'][i]||'',txt:subs[i+3]?.direction||r.core_trend?.definition||''}))].slice(0,6);
-  return `<div class="col-wrap"><div class="col-bg">${esc(r.core_trend?.name_en||'')}</div>
-  <div class="col-grid">${items.map(it=>`<div class="col-card">
-    <div class="col-img">${imgEl(it.kw,110)}</div>
-    <div class="col-body"><div class="col-tag">${esc(it.t)}</div><div class="col-txt">${esc(it.txt)}</div></div>
-  </div>`).join('')}</div></div>`;
-}
-function bMinimal(r){
-  const vkw=(r.visual_kw||[])[0]||(r.sub_trends||[])[0]?.img_kw||'',subs=r.sub_trends||[];
-  return `<div class="min-hero"><img src="${imgSrc(vkw)}" alt=""><div class="min-name">${esc(r.headline||r.core_trend?.name_en||'')}</div></div>
-  <div class="min-grid">${[0,1,2].map(i=>`<div class="min-card">
-    <div class="min-card-img">${imgEl(subs[i]?.img_kw||'',95)}</div>
-    <div class="min-card-body"><div class="min-card-lbl">Direction ${String(i+1).padStart(2,'0')}</div><div class="min-card-txt">${esc(subs[i]?.direction||'')}</div></div>
-  </div>`).join('')}</div>`;
-}
-function bMap(r){
-  const subs=r.sub_trends||[],n=subs.length;
-  if(!n)return '';
-  const W=660,H=420,cx=W/2,cy=H/2,cR=60,sR=46,orb=165;
-  const pts=subs.map((s,i)=>{const a=(i/n)*2*Math.PI-Math.PI/2;return{...s,x:cx+Math.cos(a)*orb,y:cy+Math.sin(a)*orb,a};});
-  let svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">`;
-  pts.forEach(p=>svg+=`<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="#2A2A2A" stroke-width="1.5" stroke-dasharray="5,4"/>`);
-  pts.forEach(p=>(p.cases||[]).slice(0,2).forEach((c,j)=>{
-    const ca=p.a+(j?0.38:-0.38),d=103;
-    const px=Math.max(35,Math.min(W-35,p.x+Math.cos(ca)*d));
-    const py=Math.max(16,Math.min(H-16,p.y+Math.sin(ca)*d));
-    svg+=`<line x1="${p.x}" y1="${p.y}" x2="${px}" y2="${py}" stroke="#222" stroke-width="1"/>`;
-    svg+=`<circle cx="${px}" cy="${py}" r="4" fill="#D4C5A9" opacity=".6"/>`;
-    svg+=`<text x="${px}" y="${py-8}" text-anchor="middle" fill="#666" font-size="7.5" font-family="Inter">${esc((c.split('·')[0]||c).trim().slice(0,12))}</text>`;
-  }));
-  pts.forEach(p=>{
-    svg+=`<circle cx="${p.x}" cy="${p.y}" r="${sR}" fill="#1E1E1E" stroke="#D4C5A9" stroke-width="1.5"/>`;
-    svg+=`<text x="${p.x}" y="${p.y-4}" text-anchor="middle" fill="#F0EDE8" font-size="9" font-family="Space Grotesk" font-weight="600">${esc((p.name_en||'').slice(0,14))}</text>`;
-    svg+=`<text x="${p.x}" y="${p.y+10}" text-anchor="middle" fill="#888" font-size="8" font-family="Inter">${esc((p.name_zh||'').slice(0,6))}</text>`;
+async function runDistill() {
+  const confirmed = S.clusters?.filter((_, i) => S.selectedClusters.has(i)).map((c, i) => {
+    const edits = clusterEdits[i] || {};
+    return {...c, name_zh: edits.name_zh || c.name_zh, name_en: edits.name_en || c.name_en};
   });
-  svg+=`<circle cx="${cx}" cy="${cy}" r="${cR}" fill="#D4C5A9"/>`;
-  svg+=`<text x="${cx}" y="${cy-4}" text-anchor="middle" fill="#0C0C0C" font-size="10" font-family="Space Grotesk" font-weight="700">${esc((r.core_trend?.name_en||'').slice(0,14))}</text>`;
-  svg+=`<text x="${cx}" y="${cy+11}" text-anchor="middle" fill="#0C0C0C" font-size="9" font-family="Inter" opacity=".75">${esc((r.core_trend?.name_zh||'').slice(0,6))}</text>`;
-  svg+='</svg>';
-  return `<div class="map-wrap">${svg}</div>`;
+  if (!confirmed?.length) return;
+  S.loading = true; S.streaming = ''; S.error = null; S.bigIdea = null;
+  render();
+  try {
+    const raw = await callAPI(P_DISTILL(S.ctx, confirmed), '请根据以上聚类生成Big Idea Card。', (chunk) => {
+      S.streaming = chunk; renderStreamRight();
+    });
+    S.bigIdea = parseJ(raw);
+    S.loading = false; S.streaming = '';
+    render();
+  } catch(e) {
+    S.error = e.message; S.loading = false; S.streaming = '';
+    render();
+  }
 }
 
-// ── VIEW: ORIGIN ──
-function vOrigin(r){
-  const o=r.trend_origin||{};
-  const lcMap={'萌芽期':'#C4803A','成长期':'#4C9','成熟期':'#4A8FF5','衰退期':'#888'};
-  const lc=o.lifecycle||'';
-  const cards=O6_FACTORS.map(f=>`
-    <div class="o6-card" style="--color:${f.color}">
-      <div class="o6-header">
-        <span class="o6-ico">${f.ico}</span>
-        <div><div class="o6-lbl-en">${f.en}</div><div class="o6-lbl-zh">${f.zh}</div></div>
-      </div>
-      <div class="o6-txt">${esc(o[f.key]||'—')}</div>
-    </div>`).join('');
-  const events=(o.key_events||[]).map(ev=>`
-    <div class="ev-row">
-      <div style="position:relative"><div class="ev-dot"><div class="ev-inner"></div></div><div class="ev-line"></div></div>
-      <div class="ev-content">
-        <div class="ev-time">${esc(ev.time||'')}</div>
-        <div class="ev-txt">${esc(ev.event||'')}</div>
-        ${ev.impact?`<div class="ev-impact">→ ${esc(ev.impact)}</div>`:''}
-      </div>
-    </div>`).join('');
-  return `<div class="view">
-    <div class="view-hdr">
-      <div class="view-en">Trend Origin</div>
-      <div class="view-t">趋势来源</div>
-      <div class="view-sub">${esc(r.core_trend?.name_zh||'')}的形成受六大维度驱动因素影响</div>
-    </div>
-    <div class="o6-grid">${cards}</div>
-    <div class="origin-meta">
-      <div class="om-item"><div class="om-k">起始时间</div><div class="om-v">${esc(o.start_period||'—')}</div></div>
-      <div class="om-item"><div class="om-k">持续预测</div><div class="om-v">${esc(o.duration_forecast||'—')}</div></div>
-      <div class="om-item"><div class="om-k">生命阶段</div><div class="om-v"><span class="lc-badge" style="border-color:${lcMap[lc]||'var(--ac)'};color:${lcMap[lc]||'var(--ac)'}">${esc(lc||'—')}</span></div></div>
-    </div>
-    ${events?`<div style="margin-top:4px"><div class="view-en" style="margin-bottom:14px">Key Events</div><div class="events-timeline">${events}</div></div>`:''}
+async function runInspire() {
+  if (!S.bigIdea) return;
+  S.loading = true; S.streaming = ''; S.error = null; S.applications = null;
+  render();
+  try {
+    const raw = await callAPI(P_INSPIRE(S.ctx, S.bigIdea), '请生成商业应用方向。', (chunk) => {
+      S.streaming = chunk; renderStreamRight();
+    });
+    S.applications = parseJ(raw);
+    S.loading = false; S.streaming = '';
+    render();
+  } catch(e) {
+    S.error = e.message; S.loading = false; S.streaming = '';
+    render();
+  }
+}
+
+// ─────────────────────────────────────────
+// RENDER STREAMING STATE
+// ─────────────────────────────────────────
+function renderStreamRight() {
+  const el = document.getElementById('right');
+  if (!el) return;
+  const preview = S.streaming.slice(-200).replace(/</g,'&lt;');
+  el.innerHTML = `<div class="center">
+    <div class="loadbar"><div class="loadprog"></div></div>
+    <div class="stream-txt">${preview}</div>
   </div>`;
 }
 
-// ── VIEW: AUDIENCE ──
-function vAudience(r){
-  const aud=r.target_audience||[];
-  const colors=['#C4803A','#4A8FF5','#5BAE7E'];
-  const cards=aud.map((a,i)=>{
-    const initials=(a.name||'A').slice(0,2);
-    const tags=(a.interests||[]).map(t=>`<span class="i-tag">${esc(t)}</span>`).join('');
-    return `<div class="persona-card">
-      <div class="persona-head">
-        <div class="persona-avatar" style="background:${colors[i]||'var(--ac)'}">${esc(initials)}</div>
-        <div class="persona-name">${esc(a.name||'')}</div>
-        <div class="persona-age">${esc(a.age||'')}</div>
-      </div>
-      <div class="persona-fields">
-        <div class="pf-row"><span class="pk">职业</span><span class="pv">${esc(a.occupation||'—')}</span></div>
-        <div class="pf-row"><span class="pk">家庭</span><span class="pv">${esc(a.family||'—')}</span></div>
-        <div class="pf-row"><span class="pk">生活方式</span><span class="pv">${esc(a.lifestyle||'—')}</span></div>
-        <div class="pf-row"><span class="pk">兴趣爱好</span><div class="interest-tags">${tags||'—'}</div></div>
-        <div class="pf-row"><span class="pk">使用习惯</span><span class="pv">${esc(a.usage_habits||'—')}</span></div>
-      </div>
+// ─────────────────────────────────────────
+// MAIN RENDER
+// ─────────────────────────────────────────
+function render() {
+  renderStageBar();
+  renderLeft();
+  renderRight();
+}
+
+function renderStageBar() {
+  const bar = document.getElementById('stagebar');
+  const stages = [
+    {n:1, label:'COLLECT 搜集'},
+    {n:2, label:'CLUSTER 归纳'},
+    {n:3, label:'DISTILL 提炼'},
+    {n:4, label:'INSPIRE 启发'},
+  ];
+  const maxDone = S.stage - 1;
+  bar.innerHTML = stages.map((st, i) => {
+    const isDone = i < maxDone || (i === 0 && S.signals && S.stage > 1) || (i === 1 && S.clusters && S.stage > 2) || (i === 2 && S.bigIdea && S.stage > 3);
+    const isActive = S.stage === st.n;
+    const cls = isDone ? 'done clickable' : isActive ? 'active' : '';
+    const nContent = isDone ? '✓' : st.n;
+    const clickable = isDone ? `onclick="goStage(${st.n})"` : '';
+    return `${i > 0 ? '<span class="stage-arr">›</span>' : ''}
+    <div class="stage-item ${cls}" ${clickable}>
+      <div class="stage-n">${nContent}</div>
+      <div class="stage-lbl">${st.label}</div>
     </div>`;
   }).join('');
-  return `<div class="view">
-    <div class="view-hdr">
-      <div class="view-en">Target Audience</div>
-      <div class="view-t">目标人群</div>
-      <div class="view-sub">与「${esc(r.core_trend?.name_zh||'')}」趋势高度相关的三类核心人群画像</div>
-    </div>
-    <div class="persona-grid">${cards}</div>
-  </div>`;
 }
 
-// ── VIEW: SCENARIOS ──
-function vScenarios(r){
-  const scn=r.use_scenarios||[];
-  const cards=scn.map((s,i)=>`<div class="scn-card">
-    <div class="scn-num">场景 ${String(i+1).padStart(2,'0')}</div>
-    <div class="scn-name">${esc(s.name||'')}</div>
-    <div class="scn-ctx">${esc(s.context||'')}</div>
-    <div class="scn-dir">→ ${esc(s.direction||'')}</div>
-  </div>`).join('');
-  return `<div class="view">
-    <div class="view-hdr">
-      <div class="view-en">Use Scenarios</div>
-      <div class="view-t">风格使用场景</div>
-      <div class="view-sub">此趋势在日常生活中的典型应用情境与设计机会</div>
-    </div>
-    <div class="scn-grid">${cards}</div>
-  </div>`;
+function goStage(n) {
+  S.stage = n; S.loading = false; S.error = null;
+  render();
 }
 
-// ── VIEW: SUBTRENDS ──
-function vSubtrends(r){
-  const subs=r.sub_trends||[];
-  const cards=subs.map(s=>`<div class="sub-card">
-    <div class="sub-card-left">
-      <div class="sub-card-en">${esc(s.name_en||'')}</div>
-      <div class="sub-card-zh">${esc(s.name_zh||'')}</div>
-      <div class="sub-cases">${(s.cases||[]).map(c=>`<span class="sub-case">${esc(c)}</span>`).join('')}</div>
-    </div>
-    <div class="sub-card-right">
-      <div class="sub-dir-lbl">变化方向</div>
-      <div class="sub-dir-txt">${esc(s.direction||'')}</div>
-    </div>
-  </div>`).join('');
-  return `<div class="view">
-    <div class="view-hdr">
-      <div class="view-en">Sub Trends</div>
-      <div class="view-t">子趋势</div>
-      <div class="view-sub">「${esc(r.core_trend?.name_zh||'')}」下分支的细分趋势方向</div>
-    </div>
-    <div class="sub-list">${cards}</div>
-  </div>`;
+// ─────────────────────────────────────────
+// LEFT PANEL
+// ─────────────────────────────────────────
+function renderLeft() {
+  const el = document.getElementById('left');
+  if (S.stage === 1) el.innerHTML = leftStage1();
+  else if (S.stage === 2) el.innerHTML = leftStage2();
+  else if (S.stage === 3) el.innerHTML = leftStage3();
+  else if (S.stage === 4) el.innerHTML = leftStage4();
 }
 
-// ── VIEW: INDUSTRY ──
-function vIndustry(r){
-  const sigs=r.industry_signals||[];
-  const cards=sigs.map(s=>`<div class="ind-card">
-    <div class="ind-header">
-      <span class="ind-ico">${IND_ICOS[s.industry]||'📌'}</span>
-      <div class="ind-name">${esc(s.industry||'')}</div>
-    </div>
-    <div class="ind-sig">${esc(s.signal||'')}</div>
-  </div>`).join('');
-  return `<div class="view">
-    <div class="view-hdr">
-      <div class="view-en">Industry Signals</div>
-      <div class="view-t">行业信号</div>
-      <div class="view-sub">「${esc(r.core_trend?.name_zh||'')}」在各行业中的具体表现与动态</div>
-    </div>
-    <div class="ind-grid">${cards}</div>
-  </div>`;
+function leftStage1() {
+  const yr = S.ctx.year;
+  const ind = S.ctx.industry;
+  const geo = S.ctx.geo;
+  return `<div class="plbl">STAGE 1 · COLLECT</div>
+  <div class="flbl">目标年份</div>
+  <select class="fi" onchange="S.ctx.year=this.value">
+    ${['2025','2026','2027','2028'].map(y=>`<option ${y===yr?'selected':''}>${y}</option>`).join('')}
+  </select>
+  <div class="flbl">目标行业</div>
+  <input class="fi" value="${esc(ind)}" placeholder="消费电子" onchange="S.ctx.industry=this.value">
+  <div class="flbl">地理范围</div>
+  <input class="fi" value="${esc(geo)}" placeholder="全球 / 中国" onchange="S.ctx.geo=this.value">
+  <div class="div"></div>
+  <div class="flbl">输入信号原料</div>
+  <textarea class="fi" id="inp" rows="10" placeholder="粘贴新闻标题、事件描述、观察笔记...&#10;&#10;例：&#10;- DeepSeek R1发布，NVIDIA股价跌17%&#10;- 小红书'反精英穿搭'话题3天1.2亿播放&#10;- LA山火导致保险公司集体退出加州&#10;...">${esc(S.rawInput)}</textarea>
+  <button class="btn-go" onclick="runCollect()" ${S.loading?'disabled':''}>
+    ${S.loading ? '分析中...' : '⟶ 分析信号'}
+  </button>
+  ${S.signals ? `<div class="div"></div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end">
+    <div><div class="stat-num">${S.signals.length}</div><div class="stat-lbl">SIGNALS</div></div>
+    <div class="dim-tags">${[...new Set(S.signals.map(s=>s.dimension))].map(d=>`<div class="dtag dtag-${d}">${d}</div>`).join('')}</div>
+  </div>
+  <button class="btn-ok" onclick="S.stage=2;render()">进入归纳 CLUSTER →</button>
+  <button class="btn-ghost" onclick="S.signals=null;render()">重新分析</button>` : ''}`;
 }
 
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function leftStage2() {
+  const total = S.clusters?.length || 0;
+  const sel = S.selectedClusters.size;
+  return `<div class="plbl">STAGE 2 · CLUSTER</div>
+  <div style="display:flex;gap:12px;margin-bottom:12px">
+    <div><div class="stat-num">${total}</div><div class="stat-lbl">CLUSTERS</div></div>
+    <div><div class="stat-num" style="color:var(--green)">${sel}</div><div class="stat-lbl">SELECTED</div></div>
+  </div>
+  ${S.clusters ? S.clusters.map((c,i)=>{
+    const edit = clusterEdits[i]||{};
+    const name = edit.name_zh || c.name_zh;
+    const isSel = S.selectedClusters.has(i);
+    return `<div class="cluster-sum ${isSel?'':'opacity-40'}" style="${isSel?'':'opacity:.45'}">
+      <div class="cluster-sum-name">${esc(name)}</div>
+      <div class="cluster-sum-en">${esc(edit.name_en||c.name_en)}</div>
+      <div class="cluster-sum-cnt">${(c.signals||[]).length} 信号 · ${esc(c.lead_dimension)}</div>
+    </div>`;
+  }).join('') : ''}
+  ${S.clusters?.length ? `<button class="btn-ok" onclick="onConfirmClusters()" ${sel===0?'disabled':''}>确认聚类，进入提炼 →</button>
+  <button class="btn-ghost" onclick="runCluster()">重新聚类</button>` : `<button class="btn-go" onclick="runCluster()" ${S.loading?'disabled':''}>
+    ${S.loading ? '归纳中...' : '⟶ 开始归纳'}
+  </button>`}
+  <button class="btn-ghost" onclick="goStage(1)">← 返回搜集</button>`;
+}
+
+function leftStage3() {
+  return `<div class="plbl">STAGE 3 · DISTILL</div>
+  ${S.bigIdea ? `<div style="margin-bottom:12px">
+    <div class="stat-num" style="font-size:18px;line-height:1.2">${esc(S.bigIdea.name_zh)}</div>
+    <div style="font-size:9px;color:var(--dim);letter-spacing:.08em;margin-top:4px;text-transform:uppercase">${esc(S.bigIdea.name_en)}</div>
+    <div style="margin-top:8px;font-size:10px;color:var(--muted)">
+      置信度：<span style="color:${S.bigIdea.confidence?.level==='高'?'var(--green)':S.bigIdea.confidence?.level==='中'?'var(--gold)':'var(--red)'}">${S.bigIdea.confidence?.level||'—'}</span>
+    </div>
+  </div>
+  <button class="btn-ok" onclick="S.stage=4;render()">进入启发 INSPIRE →</button>
+  <button class="btn-ghost" onclick="runDistill()">重新提炼</button>` : `<button class="btn-go" onclick="runDistill()" ${S.loading?'disabled':''}>
+    ${S.loading ? '提炼中...' : '⟶ 生成 Big Idea Card'}
+  </button>`}
+  <button class="btn-ghost" onclick="goStage(2)">← 返回归纳</button>`;
+}
+
+function leftStage4() {
+  return `<div class="plbl">STAGE 4 · INSPIRE</div>
+  ${S.bigIdea ? `<div style="margin-bottom:12px;font-size:11px;color:var(--dim)">
+    基于 <strong style="color:var(--ac)">${esc(S.bigIdea.name_zh)}</strong> 生成商业应用
+  </div>` : ''}
+  ${S.applications ? `<div style="font-size:10px;color:var(--green);margin-bottom:12px">✓ 4 个应用方向已生成</div>
+  <button class="btn-ghost" onclick="copyAll()">复制 Markdown</button>
+  <button class="btn-ghost" onclick="runInspire()">重新生成</button>` : `<button class="btn-go" onclick="runInspire()" ${S.loading?'disabled':''}>
+    ${S.loading ? '生成中...' : '⟶ 生成应用方向'}
+  </button>`}
+  <button class="btn-ghost" onclick="goStage(3)">← 返回提炼</button>`;
+}
+
+function onConfirmClusters() {
+  S.stage = 3;
+  render();
+}
+
+// ─────────────────────────────────────────
+// RIGHT PANEL
+// ─────────────────────────────────────────
+function renderRight() {
+  const el = document.getElementById('right');
+  if (S.loading) { renderStreamRight(); return; }
+  if (S.error) { el.innerHTML = `<div class="err-box">⚠ ${esc(S.error)}</div>`; return; }
+
+  if (S.stage === 1) el.innerHTML = rightStage1();
+  else if (S.stage === 2) el.innerHTML = rightStage2();
+  else if (S.stage === 3) el.innerHTML = rightStage3();
+  else if (S.stage === 4) el.innerHTML = rightStage4();
+}
+
+// ── STAGE 1 RIGHT ──
+function rightStage1() {
+  if (!S.signals) return `<div class="center">
+    <div class="center-ico">◎</div>
+    <div class="center-msg">在左侧输入趋势信号原料<br>支持新闻标题、事件描述、观察笔记</div>
+  </div>`;
+
+  const dims = S.signals.reduce((acc, s) => { acc[s.dimension] = (acc[s.dimension]||0)+1; return acc; }, {});
+  const missing = [...'STEEP'.split('').map((_,i)=>['S','T','E','E2','P','C'][i]), 'C', 'E2'].filter((d,i,a)=>a.indexOf(d)===i && !dims[d]);
+
+  let h = `<div class="r-hdr">
+    <div class="r-title">信号库 SIGNAL POOL</div>
+    <div class="r-sub">${S.signals.length} 条 · ${S.ctx.year} · ${esc(S.ctx.industry)}</div>
+  </div>
+  <div class="sig-wrap">
+  <table class="sig-table">
+    <thead><tr>
+      <th>ID</th><th>信号</th><th>维度</th><th>量级</th><th>可信度</th><th>时间</th><th>地理</th>
+    </tr></thead>
+    <tbody>`;
+  S.signals.forEach(s => {
+    h += `<tr>
+      <td><span class="sig-id">${esc(s.id)}</span></td>
+      <td><span class="sig-text">${esc(s.signal)}</span></td>
+      <td><span class="dtag dtag-${esc(s.dimension)}">${esc(s.dimension)}</span></td>
+      <td><span class="sbadge sb-${esc(s.scale)}">${esc(s.scale)}</span></td>
+      <td><span class="conf-dot cd-${esc(s.confidence)}"></span>${esc(s.confidence)}</td>
+      <td style="color:var(--muted);font-size:10px;white-space:nowrap">${esc(s.time||'—')}</td>
+      <td style="color:var(--muted);font-size:10px;white-space:nowrap">${esc(s.geo||'—')}</td>
+    </tr>`;
+  });
+  h += `</tbody></table></div>`;
+  if (missing.length) h += `<div class="notice" style="margin-top:14px">
+    <strong>⚠ 维度不足提示</strong>
+    以下 STEEP+C 维度信号 &lt;3 条：<strong>${missing.join(' · ')}</strong><br>建议补充后再进行聚类分析
+  </div>`;
+  return h;
+}
+
+// ── STAGE 2 RIGHT ──
+function rightStage2() {
+  if (!S.clusters) return `<div class="center">
+    <div class="center-ico">◈</div>
+    <div class="center-msg">点击左侧「开始归纳」<br>AI 将识别跨维度共振模式</div>
+  </div>`;
+
+  let h = `<div class="r-hdr">
+    <div class="r-title">聚类结果 CLUSTERS</div>
+    <div class="r-sub">点击卡片选择 / 双击编辑名称</div>
+  </div>
+  <div class="cluster-grid">`;
+
+  S.clusters.forEach((c, i) => {
+    const isSel = S.selectedClusters.has(i);
+    const edit = clusterEdits[i] || {};
+    const nameZh = edit.name_zh || c.name_zh;
+    const nameEn = edit.name_en || c.name_en;
+    const vs = c.value_shift || {};
+    h += `<div class="c-card ${isSel?'sel':''}" id="cc-${i}" onclick="toggleCluster(${i})">
+      <div class="c-top">
+        <div>
+          <div class="c-id">CLUSTER ${esc(c.id)} · <span class="c-dim">${esc(c.lead_dimension)}</span></div>
+          <div class="c-name-zh">${esc(nameZh)}</div>
+          <div class="c-name-en">${esc(nameEn)}</div>
+        </div>
+        <div class="c-check">✓</div>
+      </div>
+      <div class="c-action">${esc(c.core_action)}</div>
+      ${vs.from ? `<div class="c-shift">
+        <div class="c-shift-from">FROM: ${esc(vs.from)}</div>
+        <div class="c-shift-arr">↓</div>
+        <div class="c-shift-to">TO: ${esc(vs.to)}</div>
+        <div class="c-shift-emo">${esc(vs.emotion||'')}</div>
+      </div>` : ''}
+      <div class="c-sigs">${(c.signals||[]).map(sid=>`<span class="c-sig-tag">${esc(sid)}</span>`).join('')}</div>
+      <div class="c-btns">
+        <button class="c-btn edit-btn" onclick="event.stopPropagation();openEdit(${i})">编辑名称</button>
+        <button class="c-btn" onclick="event.stopPropagation();toggleCluster(${i})">${isSel?'取消选择':'选中'}</button>
+      </div>
+      <div class="c-edit-area" id="cedit-${i}">
+        <div class="c-edit-row">
+          <div class="c-edit-lbl">中文名</div>
+          <input class="c-edit-input" id="cedit-zh-${i}" value="${esc(nameZh)}" onclick="event.stopPropagation()">
+        </div>
+        <div class="c-edit-row">
+          <div class="c-edit-lbl">ENGLISH NAME</div>
+          <input class="c-edit-input" id="cedit-en-${i}" value="${esc(nameEn)}" onclick="event.stopPropagation()">
+        </div>
+        <div class="c-btns">
+          <button class="c-btn" onclick="event.stopPropagation();saveEdit(${i})" style="color:var(--green);border-color:rgba(77,153,112,.4)">保存</button>
+          <button class="c-btn" onclick="event.stopPropagation();closeEdit(${i})">取消</button>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  h += `</div>`;
+
+  // Outliers if any (from synthesis data)
+  h += `<div class="sum-bar" style="margin-top:14px">
+    <strong>综合：</strong>${esc(S.clusters._synthesis || '')}
+  </div>`;
+
+  return h;
+}
+
+// ── STAGE 3 RIGHT ──
+function rightStage3() {
+  if (!S.bigIdea) return `<div class="center">
+    <div class="center-ico">◆</div>
+    <div class="center-msg">点击左侧「生成 Big Idea Card」<br>AI 将提炼核心趋势洞察</div>
+  </div>`;
+
+  const r = S.bigIdea;
+  const vs = r.value_shift || {};
+  const imp = r.impact || {};
+  const cmf = r.cmf || {};
+  const conf = r.confidence || {};
+
+  const statusCls = {emerging:'bs-emerging', accelerating:'bs-accelerating', peak:'bs-peak', declining:'bs-declining'}[r.temporal_status] || 'bs-emerging';
+
+  let h = `<div class="bia">
+    <div class="bia-head">
+      <div class="bia-eyebrow">BIG IDEA CARD · ${esc(S.ctx.year)} · ${esc(S.ctx.industry)}</div>
+      <div class="bia-title-zh">${esc(r.name_zh)}</div>
+      <div class="bia-title-en">${esc(r.name_en)}</div>
+      <div class="bia-meta">
+        <div class="bia-mi"><span class="bia-status ${statusCls}">${esc(r.temporal_status)}</span></div>
+        ${r.first_appeared ? `<div class="bia-mi">首现<span>${esc(r.first_appeared)}</span></div>` : ''}
+        ${r.expected_peak ? `<div class="bia-mi">预期峰值<span>${esc(r.expected_peak)}</span></div>` : ''}
+        ${imp.horizon ? `<div class="bia-mi">窗口<span>${esc(imp.horizon)}</span></div>` : ''}
+      </div>
+    </div>
+    <div class="bia-body">`;
+
+  // Context
+  if (r.context) h += `<div class="bia-sec">
+    <div class="bia-sec-t">CONTEXT 背景</div>
+    <div class="bia-p">${esc(r.context)}</div>
+  </div>`;
+
+  // Key Drivers
+  if (r.key_drivers?.length) h += `<div class="bia-sec">
+    <div class="bia-sec-t">KEY DRIVERS 核心驱动</div>
+    ${r.key_drivers.map(d=>`<div class="driver-row">
+      <div class="driver-n">${d.n||'·'}</div>
+      <div class="driver-body">${esc(d.driver)}<div class="driver-src">${esc(d.source)}</div></div>
+    </div>`).join('')}
+  </div>`;
+
+  // Value Shift
+  if (vs.from) h += `<div class="bia-sec">
+    <div class="bia-sec-t">VALUE SHIFT 价值观转变</div>
+    <div class="vs-box">
+      <div class="vs-from">FROM: ${esc(vs.from)}</div>
+      <div class="vs-arr">↓</div>
+      <div class="vs-to">TO: ${esc(vs.to)}</div>
+      ${vs.emotion ? `<div class="vs-emo">情绪基底：${esc(vs.emotion)}</div>` : ''}
+    </div>
+  </div>`;
+
+  // Impact
+  if (imp.audience || imp.categories?.length) h += `<div class="bia-sec">
+    <div class="bia-sec-t">IMPACT 影响范围</div>
+    <div class="impact-grid">
+      ${imp.audience ? `<div class="impact-item"><div class="impact-lbl">受影响人群</div><div class="impact-val">${esc(imp.audience)}</div></div>` : ''}
+      ${imp.geo_priority ? `<div class="impact-item"><div class="impact-lbl">地理优先</div><div class="impact-val">${esc(imp.geo_priority)}</div></div>` : ''}
+    </div>
+    ${imp.categories?.length ? `<div style="margin-top:8px"><div class="impact-lbl" style="font-size:8px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px">受影响品类</div><div class="cats-list">${imp.categories.map(c=>`<span class="cat-tag">${esc(c)}</span>`).join('')}</div></div>` : ''}
+  </div>`;
+
+  // Trend Characteristics
+  if (r.trend_characteristics) h += `<div class="bia-sec">
+    <div class="bia-sec-t">TREND CHARACTERISTICS 趋势特征</div>
+    <div class="bia-p">${esc(r.trend_characteristics)}</div>
+  </div>`;
+
+  // Style Characteristics
+  if (r.style_characteristics) h += `<div class="bia-sec">
+    <div class="bia-sec-t">STYLE CHARACTERISTICS 风格特征</div>
+    <div class="bia-p">${esc(r.style_characteristics)}</div>
+  </div>`;
+
+  // CMF
+  h += `<div class="bia-sec">
+    <div class="bia-sec-t">CMF DESIGN TRANSLATION 设计转译</div>`;
+
+  if (cmf.colors?.length) {
+    h += `<div class="bia-sec-t" style="margin-top:10px;font-size:8px;color:var(--muted)">COLOR 色彩</div>
+    <div class="cmf-colors">`;
+    cmf.colors.forEach(c => {
+      h += `<div class="color-item">
+        <div class="color-swatch" style="background:${esc(c.hex||'#333')}"></div>
+        <div class="color-info">
+          <div class="ci-zh">${esc(c.name_zh)}</div>
+          <div class="ci-en">${esc(c.name_en)}</div>
+          <div class="ci-hex">${esc(c.hex)}</div>
+          <div class="ci-role">${esc(c.role)}</div>
+          ${c.desc ? `<div class="ci-desc">${esc(c.desc)}</div>` : ''}
+        </div>
+      </div>`;
+    });
+    h += `</div>`;
+  }
+
+  if (cmf.materials?.length) h += `<div class="cmf-row">
+    <div class="cmf-row-lbl">MATERIAL 材质</div>
+    <div class="cmf-tags">${cmf.materials.map(m=>`<span class="cmf-tag">${esc(m.name)} · ${esc(m.process)}</span>`).join('')}</div>
+  </div>`;
+
+  if (cmf.forms?.length) h += `<div class="cmf-row">
+    <div class="cmf-row-lbl">FORM 形态原则</div>
+    <div class="cmf-tags">${cmf.forms.map(f=>`<span class="cmf-tag">${esc(f)}</span>`).join('')}</div>
+  </div>`;
+
+  if (cmf.patterns?.length) h += `<div class="cmf-row">
+    <div class="cmf-row-lbl">PATTERN 图案</div>
+    <div class="cmf-tags">${cmf.patterns.map(p=>`<span class="cmf-tag">${esc(p.type)} · ${esc(p.process)}</span>`).join('')}</div>
+  </div>`;
+
+  h += `</div>`;
+
+  // Keywords
+  if (r.keywords?.length) h += `<div class="bia-sec">
+    <div class="bia-sec-t">KEYWORDS</div>
+    <div class="kw-tags">${r.keywords.map(k=>`<span class="kw-tag">${esc(k.zh)}<span class="kw-en">${esc(k.en)}</span></span>`).join('')}</div>
+  </div>`;
+
+  // Supporting Signals
+  if (r.supporting_signals?.length) h += `<div class="bia-sec">
+    <div class="bia-sec-t">SUPPORTING SIGNALS 信号支撑</div>
+    <div class="sig-list">${r.supporting_signals.map(s=>`<div class="sig-item"><span>${esc(s.signal)}</span> <span style="color:var(--muted)">${esc(s.date)} · ${esc(s.source)}</span></div>`).join('')}</div>
+  </div>`;
+
+  // Confidence
+  if (conf.level) h += `<div class="bia-sec">
+    <div class="bia-sec-t">CONFIDENCE 置信度</div>
+    <div class="conf-box">
+      <div class="conf-lvl cl-${esc(conf.level)}">${esc(conf.level)}</div>
+      <div class="conf-detail">${esc(conf.reason)}${conf.uncertainty ? `<div class="conf-unc">不确定性：${esc(conf.uncertainty)}</div>` : ''}</div>
+    </div>
+  </div>`;
+
+  h += `</div></div>`;
+  return h;
+}
+
+// ── STAGE 4 RIGHT ──
+function rightStage4() {
+  if (!S.applications) return `<div class="center">
+    <div class="center-ico">◉</div>
+    <div class="center-msg">点击左侧「生成应用方向」<br>AI 将输出 4 个商业应用卡片</div>
+  </div>`;
+
+  const a = S.applications;
+  let h = `<div class="r-hdr">
+    <div class="r-title">应用方向 APPLICATION CARDS</div>
+    <div class="r-sub">${esc(S.bigIdea?.name_zh)} → 商业落地</div>
+  </div>
+  <div class="app-grid">`;
+
+  // App 1: Concept Directions
+  if (a.concept_directions?.length) {
+    h += `<div class="app-card">
+      <div class="app-head"><div class="app-n">APP 01</div><div class="app-t">方案概念 CONCEPT DIRECTIONS</div></div>
+      <div class="app-body">`;
+    a.concept_directions.forEach(c => {
+      h += `<div class="concept-item">
+        <div class="concept-name">${esc(c.name_zh)} / <span style="color:var(--dim);font-size:10px;letter-spacing:.06em">${esc(c.name_en)}</span></div>
+        <div class="concept-def">${esc(c.definition)}</div>
+        ${c.form ? `<div style="font-size:10px;color:var(--muted);margin-top:3px">形态：${esc(c.form)}</div>` : ''}
+        ${c.proposition ? `<div style="font-size:10px;color:var(--ac);margin-top:3px">卖点：${esc(c.proposition)}</div>` : ''}
+        ${c.cmf_key ? `<div class="concept-cmf">CMF: ${esc(c.cmf_key)}</div>` : ''}
+      </div>`;
+    });
+    h += `</div></div>`;
+  }
+
+  // App 2: Brand Implications
+  const bi = a.brand_implications;
+  if (bi) {
+    h += `<div class="app-card">
+      <div class="app-head"><div class="app-n">APP 02</div><div class="app-t">品牌建议 BRAND IMPLICATIONS</div></div>
+      <div class="app-body">`;
+    if (bi.fit?.length) h += `<div class="app-sec"><div class="app-sec-lbl">契合品牌 FIT</div>
+      <div class="brand-row">${bi.fit.map(b=>`<span class="brand-chip brand-fit" title="${esc(b.reason)}">${esc(b.brand)}</span>`).join('')}</div></div>`;
+    if (bi.reposition?.length) h += `<div class="app-sec"><div class="app-sec-lbl">可借此转型 REPOSITION</div>
+      <div class="brand-row">${bi.reposition.map(b=>`<span class="brand-chip brand-repo" title="${esc(b.how)}">${esc(b.brand)}</span>`).join('')}</div></div>`;
+    if (bi.avoid?.length) h += `<div class="app-sec"><div class="app-sec-lbl">不匹配 AVOID</div>
+      <div class="brand-row">${bi.avoid.map(b=>`<span class="brand-chip brand-avoid" title="${esc(b.reason)}">${esc(b.brand)}</span>`).join('')}</div></div>`;
+    if (bi.tone_of_voice) h += `<div class="app-sec"><div class="app-sec-lbl">品牌调性 TONE OF VOICE</div>
+      <div style="font-size:11px;color:var(--dim);line-height:1.6">${esc(bi.tone_of_voice)}</div></div>`;
+    h += `</div></div>`;
+  }
+
+  // App 3: Product Innovation
+  const pi = a.product_innovation;
+  if (pi?.top_categories?.length) {
+    h += `<div class="app-card">
+      <div class="app-head"><div class="app-n">APP 03</div><div class="app-t">产品创新 PRODUCT INNOVATION</div></div>
+      <div class="app-body">`;
+    pi.top_categories.forEach(c => {
+      h += `<div class="cat-row">
+        <div class="cat-name">${esc(c.category)}</div>
+        <div class="cat-opp">${esc(c.opportunity)}</div>
+        <div class="cat-meta">
+          <span>💰 ${esc(c.price_tier)}</span>
+          <span>📦 ${esc(c.channel)}</span>
+        </div>
+      </div>`;
+    });
+    h += `</div></div>`;
+  }
+
+  // App 4: Emerging Audience
+  const ea = a.emerging_audience;
+  if (ea) {
+    h += `<div class="app-card">
+      <div class="app-head"><div class="app-n">APP 04</div><div class="app-t">新人群识别 EMERGING AUDIENCE</div></div>
+      <div class="app-body">
+        <div class="audience-card">
+          <div class="aud-name">${esc(ea.name_zh)} <span style="color:var(--muted);font-size:11px">[${esc(ea.code)}]</span></div>
+          <div class="aud-en">${esc(ea.name_en)}</div>
+          <div class="aud-meta">
+            ${ea.age ? `<span>年龄 ${esc(ea.age)}</span>` : ''}
+            ${ea.gender ? `<span>${esc(ea.gender)}</span>` : ''}
+            ${ea.city ? `<span>${esc(ea.city)}</span>` : ''}
+            ${ea.income ? `<span>收入 ${esc(ea.income)}</span>` : ''}
+          </div>
+          ${ea.voc ? `<div class="aud-voc">"${esc(ea.voc)}"</div>` : ''}
+          ${ea.psychology?.length ? `<div class="app-sec-lbl" style="font-size:8px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:6px">心理特征</div>
+          <ul class="aud-list">${ea.psychology.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+          ${ea.brands_media?.length ? `<div style="margin-top:10px">
+            <div class="app-sec-lbl" style="font-size:8px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px">高频品牌/媒介</div>
+            <div class="brand-row">${ea.brands_media.map(b=>`<span class="brand-chip brand-fit">${esc(b)}</span>`).join('')}</div>
+          </div>` : ''}
+          ${ea.diff_from_mainstream ? `<div style="margin-top:10px;font-size:10px;color:var(--muted);font-style:italic;line-height:1.5">${esc(ea.diff_from_mainstream)}</div>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  h += `</div>`;
+  return h;
+}
+
+// ─────────────────────────────────────────
+// CLUSTER INTERACTIONS
+// ─────────────────────────────────────────
+function toggleCluster(i) {
+  const ea = document.getElementById(`cedit-${i}`);
+  if (ea && ea.style.display !== 'none') return; // editing, skip toggle
+  if (S.selectedClusters.has(i)) S.selectedClusters.delete(i);
+  else S.selectedClusters.add(i);
+  render();
+}
+
+function openEdit(i) {
+  const card = document.getElementById(`cc-${i}`);
+  const ea = document.getElementById(`cedit-${i}`);
+  if (!card || !ea) return;
+  card.classList.add('editing');
+  ea.style.display = 'block';
+}
+
+function closeEdit(i) {
+  const card = document.getElementById(`cc-${i}`);
+  const ea = document.getElementById(`cedit-${i}`);
+  if (!card || !ea) return;
+  card.classList.remove('editing');
+  ea.style.display = 'none';
+}
+
+function saveEdit(i) {
+  const zh = document.getElementById(`cedit-zh-${i}`)?.value?.trim();
+  const en = document.getElementById(`cedit-en-${i}`)?.value?.trim();
+  if (zh || en) {
+    clusterEdits[i] = clusterEdits[i] || {};
+    if (zh) clusterEdits[i].name_zh = zh;
+    if (en) clusterEdits[i].name_en = en;
+  }
+  closeEdit(i);
+  render();
+}
+
+// ─────────────────────────────────────────
+// EXPORT
+// ─────────────────────────────────────────
+function copyAll() {
+  const lines = [];
+  if (S.bigIdea) {
+    const r = S.bigIdea;
+    lines.push(`# ${r.name_zh} / ${r.name_en}`);
+    lines.push(`> ${r.context}`);
+    lines.push('');
+    if (r.value_shift) lines.push(`FROM: ${r.value_shift.from}\nTO: ${r.value_shift.to}`);
+    lines.push('');
+    if (r.cmf?.colors) {
+      lines.push('## CMF Colors');
+      r.cmf.colors.forEach(c => lines.push(`- ${c.name_zh} / ${c.name_en} ${c.hex} [${c.role}]`));
+    }
+    if (r.cmf?.materials) {
+      lines.push('\n## Materials');
+      r.cmf.materials.forEach(m => lines.push(`- ${m.name} · ${m.process}`));
+    }
+  }
+  if (S.applications) {
+    lines.push('\n## Application Directions');
+    const a = S.applications;
+    if (a.concept_directions) {
+      lines.push('\n### Concept Directions');
+      a.concept_directions.forEach(c => lines.push(`- **${c.name_zh}**: ${c.definition}`));
+    }
+    if (a.brand_implications?.fit) {
+      lines.push('\n### Brand Fit');
+      a.brand_implications.fit.forEach(b => lines.push(`- ${b.brand}: ${b.reason}`));
+    }
+    if (a.emerging_audience) {
+      const ea = a.emerging_audience;
+      lines.push(`\n### Emerging Audience: ${ea.name_zh} [${ea.code}]`);
+      lines.push(`"${ea.voc}"`);
+    }
+  }
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    alert('已复制到剪贴板');
+  }).catch(() => alert('复制失败，请手动复制'));
+}
+
+// ─────────────────────────────────────────
+// MODAL
+// ─────────────────────────────────────────
+function showModal() {
+  document.getElementById('modal').style.display = 'flex';
+  document.getElementById('key-input').value = S.key;
+  setTimeout(() => document.getElementById('key-input').focus(), 100);
+}
+
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+}
+
+function saveKey() {
+  const k = document.getElementById('key-input').value.trim();
+  S.key = k;
+  localStorage.setItem('tra_key2', k);
+  closeModal();
+  updateApiDot();
+}
+
+function updateApiDot() {
+  const dot = document.getElementById('dot');
+  const lbl = document.getElementById('api-lbl');
+  if (dot) dot.className = 'dot' + (S.key ? ' on' : '');
+  if (lbl) lbl.textContent = S.key ? 'API ●' : 'API Key';
+}
+
+// ─────────────────────────────────────────
+// RESET
+// ─────────────────────────────────────────
+function resetAll() {
+  if (!confirm('重置所有数据，从第一阶段重新开始？')) return;
+  S.stage = 1; S.rawInput = ''; S.signals = null;
+  S.clusters = null; S.selectedClusters = new Set();
+  S.bigIdea = null; S.applications = null;
+  S.loading = false; S.streaming = ''; S.error = null;
+  Object.keys(clusterEdits).forEach(k => delete clusterEdits[k]);
+  render();
+}
+
+// Keyboard: Escape closes modal
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ─────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────
+updateApiDot();
+render();
 </script>
 </body>
 </html>
-<!-- deploy trigger: 1777995924 -->

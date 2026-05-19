@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TREND RESEARCH AGENT</title>
+<title>TREND RESEARCH V3 0519</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -15,118 +15,146 @@
 }
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);height:100vh;display:flex;flex-direction:column;overflow:hidden}
 
-/* ── HEADER ── */
+/* HEADER */
 .hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:1px solid var(--bd);flex-shrink:0}
 .logo{display:flex;align-items:baseline;gap:14px}
 .logo-name{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--ac)}
 .logo-ver{font-size:9px;color:var(--muted);letter-spacing:.06em}
 .hdr-r{display:flex;align-items:center;gap:8px}
-.api-btn{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--dim);cursor:pointer;padding:4px 10px;border:1px solid var(--bd);border-radius:20px;background:none;transition:.15s;letter-spacing:.04em}
+.api-btn{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--dim);cursor:pointer;padding:4px 10px;border:1px solid var(--bd);border-radius:20px;background:none;transition:.15s}
 .api-btn:hover{border-color:var(--ac);color:var(--ac2)}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--muted);transition:.3s;flex-shrink:0}
 .dot.on{background:#5BC98A}
 .reset-btn{font-size:10px;color:var(--muted);cursor:pointer;padding:4px 10px;border:1px solid var(--bd);border-radius:20px;background:none;transition:.15s}
 .reset-btn:hover{border-color:var(--dim);color:var(--dim)}
 
-/* ── STAGE BAR ── */
-.stagebar{display:flex;align-items:center;padding:0 20px;height:40px;border-bottom:1px solid var(--bd);flex-shrink:0;gap:0}
+/* STAGE BAR */
+.stagebar{display:flex;align-items:center;padding:0 20px;height:40px;border-bottom:1px solid var(--bd);flex-shrink:0}
 .stage-item{display:flex;align-items:center;gap:7px;padding:0 14px;height:100%;cursor:default;transition:.15s}
 .stage-item:first-child{padding-left:0}
 .stage-item.clickable{cursor:pointer}
 .stage-item.clickable:hover .stage-lbl{color:var(--dim)}
 .stage-n{width:18px;height:18px;border-radius:50%;border:1px solid var(--muted);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--muted);font-family:'Space Grotesk',sans-serif;flex-shrink:0;transition:.2s}
 .stage-lbl{font-size:9px;font-weight:700;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;transition:.2s;white-space:nowrap}
-.stage-arr{color:var(--muted);font-size:9px;padding:0 2px;opacity:.5}
+.stage-arr{color:var(--muted);font-size:9px;padding:0 4px;opacity:.4}
 .stage-item.active .stage-n{border-color:var(--ac);color:var(--ac);background:rgba(200,184,154,.1)}
 .stage-item.active .stage-lbl{color:var(--ac2)}
 .stage-item.done .stage-n{border-color:var(--green);background:rgba(77,153,112,.12);color:var(--green);font-size:10px}
 .stage-item.done .stage-lbl{color:var(--dim)}
 
-/* ── MAIN ── */
+/* MAIN */
 .main{display:flex;flex:1;min-height:0;overflow:hidden}
 
-/* ── LEFT ── */
-.left{width:270px;flex-shrink:0;border-right:1px solid var(--bd);display:flex;flex-direction:column;min-height:0}
-.left-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:0}
+/* LEFT */
+.left{width:260px;flex-shrink:0;border-right:1px solid var(--bd);display:flex;flex-direction:column;min-height:0}
+.left-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column}
 .left-body::-webkit-scrollbar{width:3px}
 .left-body::-webkit-scrollbar-thumb{background:var(--bd)}
-.plbl{font-size:9px;font-weight:700;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
-.flbl{font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px;margin-top:10px}
+.plbl{font-size:9px;font-weight:700;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
+.flbl{font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px;margin-top:11px}
 .flbl:first-of-type{margin-top:0}
-input.fi,textarea.fi,select.fi{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:7px 10px;color:var(--tx);font-size:11px;font-family:inherit;outline:none;transition:.15s;line-height:1.5}
-input.fi:focus,textarea.fi:focus,select.fi:focus{border-color:var(--ac)}
-input.fi::placeholder,textarea.fi::placeholder{color:var(--muted)}
-textarea.fi{resize:none}
-select.fi{cursor:pointer;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555550'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+input.fi,select.fi{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:7px 10px;color:var(--tx);font-size:11px;font-family:inherit;outline:none;transition:.15s}
+input.fi:focus,select.fi:focus{border-color:var(--ac)}
+input.fi::placeholder{color:var(--muted)}
+select.fi{cursor:pointer;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234A4A46'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.fi-row{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .div{height:1px;background:var(--bd);margin:14px 0}
-.btn-go{width:100%;padding:9px;background:var(--ac);border:none;border-radius:6px;color:#0A0A0A;font-size:11px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.07em;cursor:pointer;transition:.15s;text-transform:uppercase;margin-top:12px}
+.btn-go{width:100%;padding:10px;background:var(--ac);border:none;border-radius:6px;color:#0A0A0A;font-size:11px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.07em;cursor:pointer;transition:.15s;text-transform:uppercase;margin-top:12px}
 .btn-go:hover{background:var(--ac3)}
 .btn-go:disabled{opacity:.3;cursor:not-allowed}
 .btn-ok{width:100%;padding:9px;background:rgba(77,153,112,.15);border:1px solid rgba(77,153,112,.35);border-radius:6px;color:var(--green);font-size:11px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.07em;cursor:pointer;transition:.15s;text-transform:uppercase;margin-top:8px}
 .btn-ok:hover{background:rgba(77,153,112,.25)}
 .btn-ok:disabled{opacity:.35;cursor:not-allowed}
-.btn-ghost{width:100%;padding:8px;background:none;border:1px solid var(--bd);border-radius:6px;color:var(--dim);font-size:10px;font-weight:600;font-family:'Space Grotesk',sans-serif;letter-spacing:.07em;cursor:pointer;transition:.15s;text-transform:uppercase;margin-top:6px}
+.btn-ghost{width:100%;padding:8px;background:none;border:1px solid var(--bd);border-radius:6px;color:var(--dim);font-size:10px;font-weight:600;font-family:'Space Grotesk',sans-serif;letter-spacing:.06em;cursor:pointer;transition:.15s;text-transform:uppercase;margin-top:6px}
 .btn-ghost:hover{border-color:var(--dim);color:var(--tx)}
-.stat-num{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:300;color:var(--ac);letter-spacing:-.02em;line-height:1}
-.stat-lbl{font-size:9px;color:var(--muted);letter-spacing:.1em;margin-top:2px}
-.dim-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-.dtag{padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.08em}
-.dtag-S{background:rgba(74,127,165,.18);color:#80AECB}
-.dtag-T{background:rgba(100,80,160,.18);color:#A090D0}
-.dtag-E{background:rgba(180,140,50,.18);color:#C8A040}
-.dtag-E2{background:rgba(77,153,112,.18);color:#6DB890}
-.dtag-P{background:rgba(160,80,80,.18);color:#C08080}
-.dtag-C{background:rgba(160,100,160,.18);color:#C090C0}
-.cluster-sum{padding:8px 10px;background:var(--s2);border-radius:6px;border:1px solid var(--bd);margin-bottom:6px}
-.cluster-sum-name{font-size:11px;color:var(--tx);margin-bottom:2px}
-.cluster-sum-en{font-size:9px;color:var(--dim);letter-spacing:.06em}
-.cluster-sum-cnt{font-size:9px;color:var(--muted);margin-top:2px}
+.stat-row{display:flex;gap:16px;margin-bottom:12px}
+.stat-item .stat-num{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:300;color:var(--ac);letter-spacing:-.02em;line-height:1}
+.stat-item .stat-lbl{font-size:8px;color:var(--muted);letter-spacing:.1em;margin-top:2px}
+.stat-item .stat-num.green{color:var(--green)}
 .notice{background:rgba(176,144,64,.1);border:1px solid rgba(176,144,64,.25);border-radius:6px;padding:9px 11px;font-size:10px;color:var(--gold);line-height:1.55;margin-top:8px}
-.notice strong{display:block;font-size:8px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px;color:var(--gold)}
 
-/* ── RIGHT ── */
-.right{flex:1;overflow-y:auto;padding:20px 24px;min-height:0}
+/* RIGHT */
+.right{flex:1;overflow-y:auto;padding:0;min-height:0;display:flex;flex-direction:column}
 .right::-webkit-scrollbar{width:4px}
 .right::-webkit-scrollbar-thumb{background:var(--bd)}
-.r-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
-.r-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--tx);letter-spacing:.02em}
-.r-sub{font-size:10px;color:var(--dim);letter-spacing:.04em}
 
-/* ── CENTER STATE ── */
-.center{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:14px;color:var(--muted);text-align:center}
-.center-ico{font-size:28px;opacity:.35}
-.center-msg{font-size:11px;letter-spacing:.04em;line-height:1.6;max-width:260px}
+/* CENTER STATE */
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:14px;color:var(--muted);text-align:center;padding:40px}
+.center-ico{font-size:32px;opacity:.3}
+.center-msg{font-size:11px;letter-spacing:.04em;line-height:1.7;max-width:280px}
 .loadbar{width:180px;height:2px;background:var(--bd);border-radius:2px;overflow:hidden}
 .loadprog{height:100%;background:var(--ac);animation:lp 1.4s ease-in-out infinite}
 @keyframes lp{0%{width:0;margin-left:0}50%{width:60%;margin-left:20%}100%{width:0;margin-left:100%}}
-.stream-txt{font-size:10px;font-family:monospace;color:var(--muted);margin-top:8px;max-width:320px;text-align:left;line-height:1.6;max-height:80px;overflow:hidden;word-break:break-all}
 
-/* ── SIGNAL TABLE ── */
-.sig-wrap{overflow-x:auto}
-.sig-table{width:100%;border-collapse:collapse;font-size:11px;min-width:700px}
-.sig-table th{text-align:left;font-size:8px;font-weight:700;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;padding:7px 10px;border-bottom:1px solid var(--bd);white-space:nowrap}
-.sig-table td{padding:8px 10px;border-bottom:1px solid rgba(40,40,40,.7);vertical-align:top;line-height:1.4}
-.sig-table tr:last-child td{border-bottom:none}
-.sig-table tr:hover td{background:var(--s1)}
-.sig-id{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;color:var(--muted);white-space:nowrap}
-.sig-text{font-size:11px;color:var(--dim);line-height:1.4}
-.sbadge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:8px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.05em;white-space:nowrap}
-.sb-L{background:rgba(160,80,80,.18);color:#C08080}
-.sb-M{background:rgba(176,144,64,.18);color:#C8A040}
-.sb-S{background:rgba(80,80,80,.18);color:#888}
-.sb-高{color:#5BC98A}
-.sb-中{color:var(--gold)}
-.sb-低{color:var(--red)}
-.conf-dot{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:4px;vertical-align:middle}
-.cd-高{background:#5BC98A}
-.cd-中{background:var(--gold)}
-.cd-低{background:var(--red)}
-.sum-bar{background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:14px 16px;margin-top:16px;font-size:11px;color:var(--dim);line-height:1.5}
-.sum-bar strong{color:var(--ac);font-weight:500}
+/* DOMAIN SECTIONS */
+.domains-wrap{padding:0;flex:1}
+.domain-section{border-bottom:1px solid var(--bd)}
+.domain-section:last-child{border-bottom:none}
+.domain-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:var(--s1);position:sticky;top:0;z-index:10;border-bottom:1px solid var(--bd)}
+.domain-hdr-left{display:flex;align-items:center;gap:10px}
+.domain-badge{padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.1em}
+.db-S{background:rgba(74,127,165,.18);color:#80AECB}
+.db-T{background:rgba(100,80,160,.18);color:#A090D0}
+.db-E{background:rgba(180,140,50,.18);color:#C8A040}
+.db-E2{background:rgba(77,153,112,.18);color:#6DB890}
+.db-P{background:rgba(160,80,80,.18);color:#C08080}
+.db-C{background:rgba(160,100,160,.18);color:#C090C0}
+.domain-name{font-size:11px;font-weight:500;color:var(--tx)}
+.domain-count{font-size:10px;color:var(--muted)}
+.domain-hdr-right{display:flex;align-items:center;gap:8px}
+.refetch-btn{padding:3px 9px;background:none;border:1px solid var(--bd);border-radius:4px;font-size:9px;font-weight:600;letter-spacing:.06em;color:var(--muted);cursor:pointer;transition:.15s;font-family:'Space Grotesk',sans-serif;text-transform:uppercase}
+.refetch-btn:hover{border-color:var(--dim);color:var(--tx)}
+.refetch-btn:disabled{opacity:.4;cursor:not-allowed}
+.domain-loading{padding:16px 20px;display:flex;align-items:center;gap:12px;color:var(--muted);font-size:11px}
+.domain-error{padding:12px 20px;font-size:11px;color:var(--red)}
+.signals-list{padding:6px 16px 10px}
 
-/* ── CLUSTER CARDS ── */
+/* SIGNAL CARD */
+.sig-card{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:7px;margin-bottom:4px;transition:.15s;border:1px solid transparent;cursor:pointer}
+.sig-card:hover{background:var(--s2)}
+.sig-card.selected{background:rgba(77,153,112,.06);border-color:rgba(77,153,112,.2)}
+.sig-card.rejected{opacity:.35}
+.sig-check{width:20px;height:20px;border-radius:50%;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:.2s;font-size:10px;color:transparent}
+.sig-card.selected .sig-check{border-color:var(--green);background:rgba(77,153,112,.15);color:var(--green)}
+.sig-card.rejected .sig-check{border-color:var(--red);background:rgba(160,80,80,.1);color:var(--red)}
+.sig-body{flex:1;min-width:0}
+.sig-text{font-size:11px;color:var(--dim);line-height:1.5;margin-bottom:4px}
+.sig-card.selected .sig-text{color:var(--tx)}
+.sig-meta{display:flex;gap:8px;flex-wrap:wrap}
+.sig-meta span{font-size:9px;color:var(--muted)}
+.sig-scale{display:inline-block;padding:1px 5px;border-radius:3px;font-size:8px;font-weight:700;font-family:'Space Grotesk',sans-serif}
+.sc-L{background:rgba(160,80,80,.18);color:#C08080}
+.sc-M{background:rgba(176,144,64,.18);color:#C8A040}
+.sc-S{background:rgba(80,80,80,.18);color:#888}
+.sig-actions{display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+.sig-x{width:22px;height:22px;border-radius:50%;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;color:var(--muted);transition:.15s;background:none;flex-shrink:0;line-height:1}
+.sig-x:hover{border-color:var(--red);color:var(--red);background:rgba(160,80,80,.1)}
+.sig-card.rejected .sig-x{border-color:rgba(77,153,112,.4);color:var(--green)}
+.sig-card.rejected .sig-x:hover{background:rgba(77,153,112,.1)}
+
+/* SIGNAL SKELETON */
+.skel-card{padding:10px;border-radius:7px;margin-bottom:4px;background:var(--s2)}
+.skel-line{height:11px;border-radius:3px;background:var(--bd);margin-bottom:5px;animation:sk 1.2s ease-in-out infinite}
+.skel-line.short{width:40%}
+@keyframes sk{0%,100%{opacity:.4}50%{opacity:.7}}
+
+/* STAGE 1 SUMMARY BAR */
+.s1-summary{padding:10px 20px;border-top:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;background:var(--s1);flex-shrink:0}
+.s1-counts{display:flex;gap:16px;font-size:11px}
+.s1-cnt{color:var(--dim)}.s1-cnt span{font-family:'Space Grotesk',sans-serif;font-weight:700;margin-right:3px}
+.s1-cnt .green{color:var(--green)}
+.s1-cnt .muted{color:var(--muted)}
+.s1-proceed{padding:7px 16px;background:var(--ac);border:none;border-radius:6px;color:#0A0A0A;font-size:10px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.07em;cursor:pointer;transition:.15s;text-transform:uppercase}
+.s1-proceed:hover{background:var(--ac3)}
+.s1-proceed:disabled{opacity:.35;cursor:not-allowed}
+
+/* CLUSTER CARDS */
+.r-pad{padding:20px 24px}
+.r-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
+.r-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--tx);letter-spacing:.02em}
+.r-sub{font-size:10px;color:var(--dim);letter-spacing:.04em}
 .cluster-grid{display:grid;gap:12px}
-.c-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:16px;transition:.15s;cursor:pointer;position:relative}
+.c-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:16px;transition:.15s;cursor:pointer}
 .c-card:hover{border-color:var(--dim)}
 .c-card.sel{border-color:var(--green);background:rgba(77,153,112,.04)}
 .c-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
@@ -146,23 +174,17 @@ select.fi{cursor:pointer;-webkit-appearance:none;background-image:url("data:imag
 .c-sig-tag{padding:2px 6px;background:var(--s2);border-radius:3px;font-size:9px;color:var(--muted);font-family:'Space Grotesk',sans-serif}
 .c-edit-area{margin-top:8px;display:none}
 .c-card.editing .c-edit-area{display:block}
-.c-edit-row{margin-bottom:6px}
-.c-edit-lbl{font-size:8px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.c-edit-lbl{font-size:8px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;margin-top:6px}
 .c-edit-input{width:100%;background:var(--s2);border:1px solid var(--ac);border-radius:4px;padding:5px 8px;color:var(--tx);font-size:11px;font-family:inherit;outline:none}
 .c-btns{display:flex;gap:6px;margin-top:8px}
 .c-btn{flex:1;padding:6px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:4px;cursor:pointer;border:1px solid var(--bd);background:none;color:var(--dim);font-family:'Space Grotesk',sans-serif;transition:.15s}
 .c-btn:hover{border-color:var(--dim);color:var(--tx)}
-.c-btn.edit-btn{color:var(--muted)}
-.outlier-box{background:var(--s1);border:1px dashed var(--bd);border-radius:8px;padding:14px 16px;margin-top:12px}
-.outlier-title{font-size:9px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
-.outlier-tags{display:flex;flex-wrap:wrap;gap:4px}
-.outlier-tag{padding:2px 7px;border:1px dashed var(--bd);border-radius:4px;font-size:10px;color:var(--muted)}
 
-/* ── BIG IDEA CARD ── */
+/* BIG IDEA CARD */
 .bia{background:var(--s1);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
 .bia-head{padding:22px 24px;background:var(--s2);border-bottom:1px solid var(--bd)}
 .bia-eyebrow{font-size:8px;font-weight:700;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
-.bia-title-zh{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:300;color:var(--tx);line-height:1.15;letter-spacing:-.01em}
+.bia-title-zh{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:300;color:var(--tx);line-height:1.15}
 .bia-title-en{font-size:13px;letter-spacing:.12em;color:var(--ac);margin-top:5px;text-transform:uppercase}
 .bia-meta{display:flex;gap:20px;margin-top:14px;flex-wrap:wrap}
 .bia-mi{font-size:10px;color:var(--muted)}
@@ -177,26 +199,24 @@ select.fi{cursor:pointer;-webkit-appearance:none;background-image:url("data:imag
 .bia-sec:last-child{border-bottom:none;padding-bottom:0}
 .bia-sec-t{font-size:8px;font-weight:700;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
 .bia-p{font-size:11px;color:var(--dim);line-height:1.7}
-.driver-row{display:flex;gap:10px;margin-bottom:7px;font-size:11px}
-.driver-n{color:var(--ac);font-weight:700;flex-shrink:0;font-family:'Space Grotesk',sans-serif;width:20px}
-.driver-body{color:var(--dim);line-height:1.5}
+.driver-row{display:flex;gap:10px;margin-bottom:7px}
+.driver-n{color:var(--ac);font-weight:700;flex-shrink:0;font-family:'Space Grotesk',sans-serif;width:20px;font-size:11px}
+.driver-body{color:var(--dim);line-height:1.5;font-size:11px}
 .driver-src{color:var(--muted);font-size:9px;margin-top:2px}
 .vs-box{background:var(--s2);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:5px}
 .vs-from{font-size:11px;color:var(--muted);padding:5px 9px;border-radius:4px;background:rgba(40,40,40,.5)}
-.vs-arr{text-align:center;font-size:13px;color:var(--ac);padding:1px 0}
+.vs-arr{text-align:center;font-size:13px;color:var(--ac)}
 .vs-to{font-size:11px;color:var(--ac2);padding:5px 9px;border-radius:4px;background:rgba(200,184,154,.07)}
 .vs-emo{text-align:center;font-size:9px;color:var(--muted);font-style:italic;margin-top:3px}
 .impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .impact-item{background:var(--s2);border-radius:6px;padding:10px 12px}
 .impact-lbl{font-size:8px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
 .impact-val{font-size:11px;color:var(--dim);line-height:1.4}
-.cats-list{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.cats-list{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
 .cat-tag{padding:2px 7px;background:var(--s3);border-radius:4px;font-size:10px;color:var(--dim)}
-/* CMF */
-.cmf-colors{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+.cmf-colors{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:12px}
 .color-item{display:flex;gap:10px;align-items:flex-start}
 .color-swatch{width:44px;height:44px;border-radius:8px;flex-shrink:0;border:1px solid rgba(255,255,255,.06)}
-.color-info{}
 .ci-zh{font-size:11px;font-weight:500;color:var(--tx)}
 .ci-en{font-size:9px;color:var(--dim);letter-spacing:.06em;margin-top:1px}
 .ci-hex{font-family:'Space Grotesk',sans-serif;font-size:9px;color:var(--muted);letter-spacing:.06em}
@@ -209,19 +229,17 @@ select.fi{cursor:pointer;-webkit-appearance:none;background-image:url("data:imag
 .kw-tags{display:flex;flex-wrap:wrap;gap:5px}
 .kw-tag{padding:3px 9px;border:1px solid var(--bd);border-radius:5px;font-size:10px;color:var(--dim)}
 .kw-en{font-size:8px;color:var(--muted);margin-left:4px}
-.sig-list{display:flex;flex-direction:column;gap:5px}
-.sig-item{font-size:10px;color:var(--muted);line-height:1.4;padding-left:10px;position:relative}
-.sig-item::before{content:'·';position:absolute;left:0;color:var(--ac)}
-.sig-item span{color:var(--dim)}
+.sig-list-out{display:flex;flex-direction:column;gap:5px}
+.sig-item-out{font-size:10px;color:var(--muted);line-height:1.4;padding-left:10px;position:relative}
+.sig-item-out::before{content:'·';position:absolute;left:0;color:var(--ac)}
+.sig-item-out span{color:var(--dim)}
 .conf-box{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--s2);border-radius:6px;border:1px solid var(--bd)}
 .conf-lvl{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700}
-.cl-高{color:#5BC98A}
-.cl-中{color:var(--gold)}
-.cl-低{color:var(--red)}
+.cl-高{color:#5BC98A}.cl-中{color:var(--gold)}.cl-低{color:var(--red)}
 .conf-detail{font-size:10px;color:var(--dim);line-height:1.5}
 .conf-unc{font-size:9px;color:var(--muted);margin-top:4px;font-style:italic}
 
-/* ── APPLICATION CARDS ── */
+/* APPLICATION CARDS */
 .app-grid{display:grid;gap:14px}
 .app-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
 .app-head{padding:12px 18px;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px}
@@ -253,7 +271,7 @@ select.fi{cursor:pointer;-webkit-appearance:none;background-image:url("data:imag
 .aud-list li{font-size:11px;color:var(--dim);padding-left:10px;position:relative}
 .aud-list li::before{content:'·';position:absolute;left:0;color:var(--ac)}
 
-/* ── MODAL ── */
+/* MODAL */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:200}
 .modal{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:24px;width:360px}
 .modal-t{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--tx);margin-bottom:6px}
@@ -264,21 +282,24 @@ select.fi{cursor:pointer;-webkit-appearance:none;background-image:url("data:imag
 .modal-btn{flex:1;padding:9px;border-radius:6px;font-size:11px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.06em;cursor:pointer;text-transform:uppercase;transition:.15s;border:none}
 .mb-primary{background:var(--ac);color:#0A0A0A}
 .mb-primary:hover{background:var(--ac3)}
-.mb-ghost{background:var(--s2);color:var(--dim);border:1px solid var(--bd)!important}
-.mb-ghost:hover{border-color:var(--dim)!important;color:var(--tx)}
 
-/* ── UTILITY ── */
-.err-box{background:rgba(160,80,80,.12);border:1px solid rgba(160,80,80,.3);border-radius:8px;padding:14px 16px;font-size:11px;color:#C08080;line-height:1.55;margin:20px 0}
-.tag-scale{display:inline-block;padding:1px 5px;border-radius:3px;font-size:8px;font-weight:700;font-family:'Space Grotesk',sans-serif;letter-spacing:.06em}
+/* UTIL */
+.err-box{background:rgba(160,80,80,.12);border:1px solid rgba(160,80,80,.3);border-radius:8px;padding:14px 16px;font-size:11px;color:#C08080;line-height:1.55}
+.cluster-sum{padding:8px 10px;background:var(--s2);border-radius:6px;border:1px solid var(--bd);margin-bottom:6px}
+.cluster-sum-name{font-size:11px;color:var(--tx);margin-bottom:2px}
+.cluster-sum-en{font-size:9px;color:var(--dim);letter-spacing:.06em}
+.cluster-sum-cnt{font-size:9px;color:var(--muted);margin-top:2px}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="hdr">
   <div class="logo">
-    <span class="logo-name">TREND RESEARCH AGENT</span>
-    <span class="logo-ver">v2.0 · 4-STAGE WORKFLOW</span>
+    <span class="logo-name">TREND RESEARCH V3</span>
+    <span class="logo-ver">0519 · 4-STAGE WORKFLOW</span>
   </div>
   <div class="hdr-r">
     <button class="reset-btn" onclick="resetAll()">↺ 重置</button>
@@ -289,267 +310,131 @@ select.fi{cursor:pointer;-webkit-appearance:none;background-image:url("data:imag
   </div>
 </div>
 
-<!-- STAGE BAR -->
 <div class="stagebar" id="stagebar"></div>
 
-<!-- MAIN -->
 <div class="main">
-  <div class="left">
-    <div class="left-body" id="left"></div>
-  </div>
+  <div class="left"><div class="left-body" id="left"></div></div>
   <div class="right" id="right"></div>
 </div>
 
-<!-- MODAL: API KEY -->
 <div class="overlay" id="modal" style="display:none">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">×</button>
     <div class="modal-t">API Key 设置</div>
-    <div class="modal-s">输入 DeepSeek API Key，存在浏览器 localStorage，不会上传到任何服务器。</div>
-    <div class="flbl">DEEPSEEK API KEY</div>
-    <input class="fi" type="password" id="key-input" placeholder="sk-..." style="margin-top:4px">
+    <div class="modal-s">输入 DeepSeek API Key，存在浏览器 localStorage，不上传到任何服务器。</div>
+    <div style="font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px">DEEPSEEK API KEY</div>
+    <input class="fi" type="password" id="key-input" placeholder="sk-...">
     <div class="modal-actions">
       <button class="modal-btn mb-primary" onclick="saveKey()">保存</button>
-      <button class="modal-btn mb-ghost" style="border:1px solid var(--bd)" onclick="closeModal()">取消</button>
+      <button class="modal-btn" style="background:var(--s2);color:var(--dim);border:1px solid var(--bd)" onclick="closeModal()">取消</button>
     </div>
   </div>
 </div>
 
 <script>
 // ─────────────────────────────────────────
+// CONSTANTS
+// ─────────────────────────────────────────
+const DOMAINS = [
+  {code:'S', name:'Social',         zh:'社会',  en:'SOCIAL'},
+  {code:'T', name:'Technological',  zh:'科技',  en:'TECH'},
+  {code:'E', name:'Economic',       zh:'经济',  en:'ECONOMIC'},
+  {code:'E2',name:'Environmental',  zh:'环境',  en:'ENVIRON'},
+  {code:'P', name:'Political',      zh:'政治',  en:'POLITICAL'},
+  {code:'C', name:'Cultural',       zh:'文化',  en:'CULTURAL'},
+];
+
+// ─────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────
 const S = {
   stage: 1,
-  key: localStorage.getItem('tra_key2') || '',
+  key: localStorage.getItem('tra_key3') || '',
   ctx: {
-    year: '2026',
     industry: '消费电子',
-    geo: '全球 / 中国'
+    geo: '全球 / 中国',
+    grain: 'month',   // year | month | day
+    startY: '2025', startM: '01', startD: '01',
+    endY:   '2025', endM:   '06', endD:   '30',
   },
-  rawInput: '',
+  // Stage 1
+  domainSignals: {},   // {code: [{id,signal,time,geo,source_note,confidence,scale,selected}]}
+  domainLoading: {},   // {code: bool}
+  domainErrors:  {},   // {code: string}
+  fetchStarted: false,
+  // confirmed signals going into Stage 2
   signals: null,
+  // Stage 2
   clusters: null,
   selectedClusters: new Set(),
+  // Stage 3
   bigIdea: null,
+  // Stage 4
   applications: null,
+  // Global
   loading: false,
   streaming: '',
   error: null,
 };
 
-// Cluster edits: idx -> {name_zh, name_en}
 const clusterEdits = {};
 
 // ─────────────────────────────────────────
-// PROMPTS
+// TIME HELPERS
 // ─────────────────────────────────────────
-function P_COLLECT(ctx) {
-  return `你是一位资深趋势研究分析师，专注STEEP+C框架。
-用户会给你一段原始文字（新闻/描述/笔记/事件等），目标年份：${ctx.year}，行业：${ctx.industry}，地理：${ctx.geo}。
-
-请把其中的趋势信号提取、结构化，输出JSON：
-{
-  "signals": [
-    {
-      "id": "S001",
-      "signal": "一句话概括信号本质（具体事件+影响，不抽象）",
-      "dimension": "S|T|E|E2|P|C",
-      "dimension_name": "Social|Technological|Economic|Environmental|Political|Cultural",
-      "scale": "L|M|S",
-      "confidence": "高|中|低",
-      "time": "YYYY.MM（文本中有就填，没有留空）",
-      "geo": "全球|中国|北美|欧洲|东南亚|...",
-      "source_note": "来源类型（新闻/社媒/商业/学术/展览/文化）"
-    }
-  ],
-  "missing_dimensions": ["缺少信号的维度代码，如['E2','P']"],
-  "summary": "一句话总结这批信号的整体趋势方向"
+function timeRange() {
+  const c = S.ctx;
+  if (c.grain === 'year') return `${c.startY}年至${c.endY}年`;
+  if (c.grain === 'month') return `${c.startY}年${c.startM}月至${c.endY}年${c.endM}月`;
+  return `${c.startY}年${c.startM}月${c.startD}日至${c.endY}年${c.endM}月${c.endD}日`;
 }
 
-量级说明：L=会影响行业走向的大事件，M=值得持续关注，S=参考性小信号。
-规则：每条信号必须具体（有事件/品牌/数据），不要写抽象描述。只输出JSON。`;
+function months() {
+  return Array.from({length:12},(_,i)=>String(i+1).padStart(2,'0'));
 }
-
-function P_CLUSTER(ctx, signals) {
-  const sigStr = JSON.stringify(signals.map(s => ({id:s.id, signal:s.signal, dim:s.dimension, scale:s.scale})));
-  return `你是一位资深趋势研究分析师，专注STEEP+C框架。
-目标年份：${ctx.year}，行业：${ctx.industry}，地理：${ctx.geo}。
-
-信号列表：${sigStr}
-
-请识别跨维度共振模式，输出聚类分组JSON：
-{
-  "clusters": [
-    {
-      "id": "A",
-      "name_zh": "中文名（必须用当年人们实际说的话语，如'躺平''疗愈''卷'，不用分析视角词如'重构''转型期'）",
-      "name_en": "ENGLISH NAME (2-4 words)",
-      "signals": ["S001","S007"],
-      "lead_dimension": "T+C（主导维度，可多个用+连接）",
-      "core_action": "一句话：这群信号在共同表达什么集体行为/状态变化",
-      "resonance": "为什么来自不同维度的信号属于同一族（1-2句，找深层联系）",
-      "scale": "L|M|S",
-      "value_shift": {
-        "from": "转变前的集体价值/信念（具体，非抽象）",
-        "to": "转变后的集体价值/信念（具体）",
-        "emotion": "恐惧|疲惫|渴望|愤怒|接受|好奇|焦虑"
-      }
-    }
-  ],
-  "outliers": ["无法归类的信号ID"],
-  "synthesis": "一句话总结所有聚类指向的整体趋势方向"
+function days() {
+  return Array.from({length:31},(_,i)=>String(i+1).padStart(2,'0'));
 }
-
-规则：cluster互斥度>=70%；命名必须用当年话语；一个信号只属于一个cluster。只输出JSON。`;
-}
-
-function P_DISTILL(ctx, clusters) {
-  const cStr = JSON.stringify(clusters.map(c => ({
-    name: c.name_zh, en: c.name_en,
-    action: c.core_action, resonance: c.resonance,
-    shift: c.value_shift, signals: c.signals
-  })));
-  return `你是一位资深CMF趋势研究分析师。
-目标年份：${ctx.year}，行业：${ctx.industry}，地理：${ctx.geo}。
-
-用户确认的趋势聚类：${cStr}
-
-请提炼成完整Big Idea Card，输出JSON：
-{
-  "name_zh": "趋势中文名（3-6字，有力量，当年话语）",
-  "name_en": "TREND NAME (2-4 WORDS, BOLD)",
-  "temporal_status": "emerging|accelerating|peak|declining",
-  "first_appeared": "YYYY.MM",
-  "expected_peak": "YYYY",
-  "context": "背景（2-3句，讲清楚这个趋势为什么在此时、此地、此行业出现）",
-  "key_drivers": [
-    {"n": 1, "driver": "驱动因素描述", "source": "具体事件名+时间"}
-  ],
-  "value_shift": {
-    "from": "转变前集体价值观（具体）",
-    "to": "转变后集体价值观（具体）",
-    "emotion": "情绪基底词"
-  },
-  "impact": {
-    "audience": "受影响人群描述（具体特征）",
-    "categories": ["消费品类1","消费品类2","消费品类3"],
-    "geo_priority": "地理优先级描述",
-    "horizon": "6mo|1yr|2-3yr|3-5yr"
-  },
-  "trend_characteristics": "在行为/消费/表达上的可观察特征（2-3句，具体）",
-  "style_characteristics": "视觉氛围、情绪基调、整体气质（2-3句）",
-  "cmf": {
-    "colors": [
-      {
-        "name_zh": "色彩中文名",
-        "name_en": "Color Name",
-        "hex": "#RRGGBB",
-        "role": "structural|neutral|emotional|accent|nature",
-        "desc": "这个颜色在情绪/设计上承担什么角色（1句）"
-      }
-    ],
-    "materials": [{"name": "材质名", "process": "具体工艺（如阳极氧化铝，不是'金属'）"}],
-    "forms": ["形态原则1（可执行的，如'圆角R≥4mm'）","形态原则2"],
-    "patterns": [{"type": "图案类型", "process": "印花|编织|蚀刻|生成式"}]
-  },
-  "keywords": [{"zh": "中文关键词", "en": "English"}],
-  "supporting_signals": [
-    {"signal": "具体事件（非抽象）", "date": "YYYY.MM", "source": "来源"}
-  ],
-  "confidence": {
-    "level": "低|中|高",
-    "reason": "为什么是这个置信度",
-    "uncertainty": "什么因素可能推翻这个判断"
-  }
-}
-
-CMF强制规则：颜色必须给HEX码；材质必须给具体工艺（不能只写'金属'）；colors至少4个；supporting_signals至少5条。
-只输出JSON。`;
-}
-
-function P_INSPIRE(ctx, bigIdea) {
-  const biStr = JSON.stringify({
-    name: bigIdea.name_zh, en: bigIdea.name_en,
-    value_shift: bigIdea.value_shift,
-    impact: bigIdea.impact,
-    style: bigIdea.style_characteristics,
-    cmf_summary: bigIdea.cmf
-  });
-  return `你是一位CMF趋势研究分析师，专注商业应用转化。
-目标年份：${ctx.year}，行业：${ctx.industry}，地理：${ctx.geo}。
-
-Big Idea: ${biStr}
-
-请生成4个商业应用方向，输出JSON：
-{
-  "concept_directions": [
-    {
-      "name_zh": "概念中文名",
-      "name_en": "Concept Name",
-      "definition": "一句话定义（是什么+为谁+核心价值）",
-      "form": "适合的产品形态（具体）",
-      "proposition": "核心selling proposition",
-      "cmf_key": "CMF关键选择（具体材料+颜色+工艺）"
-    }
-  ],
-  "brand_implications": {
-    "fit": [{"brand": "具体品牌名", "reason": "契合原因（1句）"}],
-    "reposition": [{"brand": "具体品牌名", "how": "如何借此reposition（1句）"}],
-    "avoid": [{"brand": "具体品牌名", "reason": "不匹配原因（1句）"}],
-    "tone_of_voice": "品牌语言/调性建议（2-3句）"
-  },
-  "product_innovation": {
-    "top_categories": [
-      {
-        "category": "品类名",
-        "opportunity": "创新机会描述（functional/experiential/aesthetic）",
-        "price_tier": "价格带（如1000-3000元）",
-        "channel": "渠道建议（DTC/高端零售/大众/niche）"
-      }
-    ]
-  },
-  "emerging_audience": {
-    "code": "人群代号（英文缩写）",
-    "name_zh": "人群中文名",
-    "name_en": "Audience Name",
-    "age": "年龄段",
-    "gender": "性别倾向",
-    "city": "城市类型",
-    "income": "收入区间（如15-30万/年）",
-    "psychology": ["心理特征1（具体行为）","心理特征2","心理特征3"],
-    "brands_media": ["高频品牌1","高频媒介1"],
-    "voc": "代表性一句话，用第一人称，像真人说的",
-    "diff_from_mainstream": "与现有主流人群的关键差异点（1-2句）"
-  }
-}
-
-规则：品牌名必须是真实存在的具体品牌；concept_directions给3个；top_categories给3个。只输出JSON。`;
+function years() {
+  return ['2022','2023','2024','2025','2026','2027'];
 }
 
 // ─────────────────────────────────────────
 // API
 // ─────────────────────────────────────────
-async function callAPI(systemPrompt, userMsg, onStream) {
+async function callSimple(systemPrompt, userMsg) {
   const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${S.key}`
-    },
+    headers: {'Content-Type':'application/json','Authorization':`Bearer ${S.key}`},
     body: JSON.stringify({
       model: 'deepseek-chat',
-      messages: [
-        {role: 'system', content: systemPrompt},
-        {role: 'user', content: userMsg}
-      ],
+      messages: [{role:'system',content:systemPrompt},{role:'user',content:userMsg}],
+      temperature: 0.75,
+      stream: false
+    })
+  });
+  if (!res.ok) {
+    const e = await res.json().catch(()=>({}));
+    throw new Error(e.error?.message || `HTTP ${res.status}`);
+  }
+  const data = await res.json();
+  return data.choices[0].message.content;
+}
+
+async function callStream(systemPrompt, userMsg, onChunk) {
+  const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json','Authorization':`Bearer ${S.key}`},
+    body: JSON.stringify({
+      model: 'deepseek-chat',
+      messages: [{role:'system',content:systemPrompt},{role:'user',content:userMsg}],
       temperature: 0.7,
       stream: true
     })
   });
   if (!res.ok) {
-    const e = await res.json().catch(() => ({}));
-    throw new Error(e.error?.message || `API 错误 HTTP ${res.status}`);
+    const e = await res.json().catch(()=>({}));
+    throw new Error(e.error?.message || `HTTP ${res.status}`);
   }
   const reader = res.body.getReader();
   const dec = new TextDecoder();
@@ -557,14 +442,13 @@ async function callAPI(systemPrompt, userMsg, onStream) {
   while (true) {
     const {done, value} = await reader.read();
     if (done) break;
-    const lines = dec.decode(value).split('\n');
-    for (const line of lines) {
+    for (const line of dec.decode(value).split('\n')) {
       if (!line.startsWith('data: ')) continue;
       const d = line.slice(6).trim();
       if (d === '[DONE]') continue;
       try {
         const delta = JSON.parse(d).choices?.[0]?.delta?.content || '';
-        if (delta) { full += delta; if (onStream) onStream(full); }
+        if (delta) { full += delta; if (onChunk) onChunk(full); }
       } catch {}
     }
   }
@@ -576,7 +460,7 @@ function parseJ(txt) {
   const m = txt.match(/```(?:json)?\s*([\s\S]*?)```/);
   if (m) try { return JSON.parse(m[1]); } catch {}
   const s = txt.indexOf('{'), e = txt.lastIndexOf('}');
-  if (s !== -1 && e !== -1) try { return JSON.parse(txt.slice(s, e+1)); } catch {}
+  if (s !== -1 && e !== -1) try { return JSON.parse(txt.slice(s,e+1)); } catch {}
   throw new Error('JSON 解析失败，请重试');
 }
 
@@ -585,29 +469,203 @@ function esc(s) {
 }
 
 // ─────────────────────────────────────────
-// STAGE ACTIONS
+// STAGE 1: FETCH BY DOMAIN
 // ─────────────────────────────────────────
-async function runCollect() {
-  const txt = document.getElementById('inp')?.value?.trim();
-  if (!txt) return;
+function domainPrompt(domain) {
+  return `你是资深趋势研究分析师，熟悉全球政治、经济、社会、科技、文化动态。
+
+请生成指定时间段、指定STEEP+C维度内的趋势信号，要求：
+1. 每条信号对应真实发生的事件（有品牌名/人名/具体数据/事件名）
+2. 时间与指定时间段吻合
+3. 与行业背景相关联
+4. 信号要具体，不要抽象描述
+
+输出JSON：
+{
+  "signals": [
+    {
+      "signal": "一句话：事件名称 + 核心影响（25-45字，有具体数据/品牌/人名）",
+      "time": "YYYY.MM",
+      "geo": "地区（全球/中国/北美/欧洲...）",
+      "source_note": "新闻|社媒|商业|学术|展览|文化",
+      "confidence": "高|中|低",
+      "scale": "L|M|S"
+    }
+  ]
+}
+
+量级：L=行业走向级事件，M=值得关注，S=参考性信号
+只输出JSON，不要解释。`;
+}
+
+async function fetchDomain(code) {
   if (!S.key) { showModal(); return; }
-  S.rawInput = txt;
-  S.loading = true; S.streaming = ''; S.error = null; S.signals = null;
-  render();
+  const domain = DOMAINS.find(d => d.code === code);
+  S.domainLoading[code] = true;
+  S.domainErrors[code] = null;
+  renderRight(); // show loading state for this domain
+
   try {
-    const raw = await callAPI(P_COLLECT(S.ctx), txt, (chunk) => {
-      S.streaming = chunk; renderStreamRight();
-    });
+    const userMsg = `时间段：${timeRange()}
+行业背景：${S.ctx.industry}
+地理范围：${S.ctx.geo}
+维度：${domain.zh}（${domain.name}，代码${domain.code}）
+
+请生成5条该维度的趋势信号。`;
+
+    const raw = await callSimple(domainPrompt(domain), userMsg);
     const data = parseJ(raw);
-    S.signals = data.signals || [];
-    S.signals.forEach((s, i) => { if (!s.id) s.id = `S${String(i+1).padStart(3,'0')}`; });
-    S.loading = false; S.streaming = '';
-    // Auto-store context from left inputs
-    render();
+    S.domainSignals[code] = (data.signals || []).map((s, i) => ({
+      ...s,
+      id: `${code}${String(i+1).padStart(2,'0')}`,
+      dimension: code,
+      selected: true,
+    }));
+    S.domainLoading[code] = false;
+    renderRight();
   } catch(e) {
-    S.error = e.message; S.loading = false; S.streaming = '';
-    render();
+    S.domainErrors[code] = e.message;
+    S.domainLoading[code] = false;
+    renderRight();
   }
+}
+
+async function fetchAll() {
+  if (!S.key) { showModal(); return; }
+  S.fetchStarted = true;
+  S.domainSignals = {};
+  S.domainErrors = {};
+  DOMAINS.forEach(d => { S.domainLoading[d.code] = true; });
+  renderLeft();
+  renderRight();
+  // Fetch all in parallel
+  await Promise.all(DOMAINS.map(d => fetchDomain(d.code)));
+}
+
+function toggleSignal(code, idx) {
+  const sigs = S.domainSignals[code];
+  if (!sigs || !sigs[idx]) return;
+  sigs[idx].selected = !sigs[idx].selected;
+  renderRight();
+  renderLeft();
+}
+
+function rejectSignal(code, idx) {
+  const sigs = S.domainSignals[code];
+  if (!sigs || !sigs[idx]) return;
+  sigs[idx].selected = false;
+  renderRight();
+  renderLeft();
+}
+
+function proceedToCluster() {
+  // Flatten selected signals
+  const all = [];
+  DOMAINS.forEach(d => {
+    const sigs = S.domainSignals[d.code] || [];
+    sigs.filter(s => s.selected).forEach(s => all.push(s));
+  });
+  if (!all.length) return;
+  S.signals = all;
+  S.stage = 2;
+  render();
+}
+
+function countSelected() {
+  let n = 0;
+  DOMAINS.forEach(d => {
+    (S.domainSignals[d.code] || []).forEach(s => { if(s.selected) n++; });
+  });
+  return n;
+}
+
+function countTotal() {
+  let n = 0;
+  DOMAINS.forEach(d => { n += (S.domainSignals[d.code] || []).length; });
+  return n;
+}
+
+function isAnyFetched() {
+  return DOMAINS.some(d => S.domainSignals[d.code]?.length > 0);
+}
+
+function isAnyLoading() {
+  return DOMAINS.some(d => S.domainLoading[d.code]);
+}
+
+// ─────────────────────────────────────────
+// STAGE 2-4 ACTIONS
+// ─────────────────────────────────────────
+function P_CLUSTER(ctx, signals) {
+  const sigStr = JSON.stringify(signals.map(s=>({id:s.id,signal:s.signal,dim:s.dimension,scale:s.scale})));
+  return `你是资深趋势研究分析师。接收结构化信号列表，识别跨维度共振模式，输出聚类分组JSON：
+{
+  "clusters": [
+    {
+      "id": "A",
+      "name_zh": "中文名（必须用当年人们实际说的话语，如'躺平''疗愈''卷'，不用分析视角词如'重构''转型期'）",
+      "name_en": "ENGLISH NAME (2-4 words)",
+      "signals": ["S001","S007"],
+      "lead_dimension": "T+C",
+      "core_action": "一句话：这群信号在共同表达什么集体行为/状态变化",
+      "resonance": "为什么来自不同维度的信号属于同一族（1-2句）",
+      "scale": "L|M|S",
+      "value_shift": {
+        "from": "转变前的集体价值/信念（具体）",
+        "to": "转变后的集体价值/信念（具体）",
+        "emotion": "恐惧|疲惫|渴望|愤怒|接受|好奇|焦虑"
+      }
+    }
+  ],
+  "outliers": [],
+  "synthesis": "一句话总结所有聚类指向的整体趋势方向"
+}
+命名规则：用当年话语。只输出JSON。`;
+}
+
+function P_DISTILL(ctx, clusters) {
+  const cStr = JSON.stringify(clusters.map(c=>({name:c.name_zh,en:c.name_en,action:c.core_action,resonance:c.resonance,shift:c.value_shift,signals:c.signals})));
+  return `你是资深CMF趋势研究分析师。接收用户确认的趋势聚类，提炼成完整Big Idea Card，输出JSON：
+{
+  "name_zh": "趋势中文名（3-6字，有力量，当年话语）",
+  "name_en": "TREND NAME (2-4 WORDS)",
+  "temporal_status": "emerging|accelerating|peak|declining",
+  "first_appeared": "YYYY.MM",
+  "expected_peak": "YYYY",
+  "context": "背景（2-3句，讲清楚这个趋势为什么在此时、此地、此行业出现）",
+  "key_drivers": [{"n":1,"driver":"驱动因素","source":"具体事件+时间"}],
+  "value_shift": {"from":"转变前","to":"转变后","emotion":"情绪基底词"},
+  "impact": {"audience":"受影响人群","categories":["品类1","品类2","品类3"],"geo_priority":"地理优先","horizon":"6mo|1yr|2-3yr|3-5yr"},
+  "trend_characteristics": "在行为/消费/表达上的可观察特征（2-3句具体）",
+  "style_characteristics": "视觉氛围、情绪基调、整体气质（2-3句）",
+  "cmf": {
+    "colors": [{"name_zh":"色名","name_en":"Name","hex":"#RRGGBB","role":"structural|neutral|emotional|accent|nature","desc":"情绪角色"}],
+    "materials": [{"name":"材质","process":"具体工艺（不能只写'金属'）"}],
+    "forms": ["形态原则（可执行）"],
+    "patterns": [{"type":"图案类型","process":"印花|编织|蚀刻|生成式"}]
+  },
+  "keywords": [{"zh":"关键词","en":"English"}],
+  "supporting_signals": [{"signal":"具体事件","date":"YYYY.MM","source":"来源"}],
+  "confidence": {"level":"低|中|高","reason":"原因","uncertainty":"可能推翻的因素"}
+}
+CMF强制：颜色必须给HEX；materials具体到工艺；colors至少4个；supporting_signals至少5条。只输出JSON。`;
+}
+
+function P_INSPIRE(ctx, bigIdea) {
+  const biStr = JSON.stringify({name:bigIdea.name_zh,en:bigIdea.name_en,value_shift:bigIdea.value_shift,impact:bigIdea.impact,style:bigIdea.style_characteristics,cmf:bigIdea.cmf});
+  return `你是CMF趋势研究分析师，专注商业应用。生成4个商业应用方向，输出JSON：
+{
+  "concept_directions": [{"name_zh":"","name_en":"","definition":"一句话","form":"产品形态","proposition":"核心卖点","cmf_key":"CMF关键选择"}],
+  "brand_implications": {
+    "fit": [{"brand":"具体品牌","reason":"一句话"}],
+    "reposition": [{"brand":"品牌","how":"一句话"}],
+    "avoid": [{"brand":"品牌","reason":"一句话"}],
+    "tone_of_voice": "品牌调性建议"
+  },
+  "product_innovation": {"top_categories": [{"category":"","opportunity":"","price_tier":"","channel":""}]},
+  "emerging_audience": {"code":"缩写","name_zh":"","name_en":"","age":"","gender":"","city":"","income":"","psychology":[""],"brands_media":[""],"voc":"第一人称一句话","diff_from_mainstream":""}
+}
+品牌名必须真实；concept_directions给3个；top_categories给3个。只输出JSON。`;
 }
 
 async function runCluster() {
@@ -616,16 +674,13 @@ async function runCluster() {
   S.selectedClusters = new Set();
   render();
   try {
-    const raw = await callAPI(P_CLUSTER(S.ctx, S.signals), '请对以上信号进行聚类分析。', (chunk) => {
+    const raw = await callStream(P_CLUSTER(S.ctx, S.signals), '请对以上信号进行聚类分析。', chunk => {
       S.streaming = chunk; renderStreamRight();
     });
     const data = parseJ(raw);
     S.clusters = data.clusters || [];
     S.clusters._synthesis = data.synthesis || '';
-    S.clusters.forEach((c, i) => {
-      if (!c.id) c.id = String.fromCharCode(65+i);
-      S.selectedClusters.add(i);
-    });
+    S.clusters.forEach((c,i) => { if(!c.id) c.id = String.fromCharCode(65+i); S.selectedClusters.add(i); });
     S.loading = false; S.streaming = '';
     render();
   } catch(e) {
@@ -635,15 +690,15 @@ async function runCluster() {
 }
 
 async function runDistill() {
-  const confirmed = S.clusters?.filter((_, i) => S.selectedClusters.has(i)).map((c, i) => {
-    const edits = clusterEdits[i] || {};
-    return {...c, name_zh: edits.name_zh || c.name_zh, name_en: edits.name_en || c.name_en};
+  const confirmed = S.clusters?.filter((_,i)=>S.selectedClusters.has(i)).map((c,i)=>{
+    const ed = clusterEdits[i]||{};
+    return {...c, name_zh: ed.name_zh||c.name_zh, name_en: ed.name_en||c.name_en};
   });
   if (!confirmed?.length) return;
   S.loading = true; S.streaming = ''; S.error = null; S.bigIdea = null;
   render();
   try {
-    const raw = await callAPI(P_DISTILL(S.ctx, confirmed), '请根据以上聚类生成Big Idea Card。', (chunk) => {
+    const raw = await callStream(P_DISTILL(S.ctx, confirmed), '请生成Big Idea Card。', chunk => {
       S.streaming = chunk; renderStreamRight();
     });
     S.bigIdea = parseJ(raw);
@@ -660,7 +715,7 @@ async function runInspire() {
   S.loading = true; S.streaming = ''; S.error = null; S.applications = null;
   render();
   try {
-    const raw = await callAPI(P_INSPIRE(S.ctx, S.bigIdea), '请生成商业应用方向。', (chunk) => {
+    const raw = await callStream(P_INSPIRE(S.ctx, S.bigIdea), '请生成商业应用方向。', chunk => {
       S.streaming = chunk; renderStreamRight();
     });
     S.applications = parseJ(raw);
@@ -673,21 +728,16 @@ async function runInspire() {
 }
 
 // ─────────────────────────────────────────
-// RENDER STREAMING STATE
+// RENDER
 // ─────────────────────────────────────────
 function renderStreamRight() {
   const el = document.getElementById('right');
   if (!el) return;
-  const preview = S.streaming.slice(-200).replace(/</g,'&lt;');
-  el.innerHTML = `<div class="center">
-    <div class="loadbar"><div class="loadprog"></div></div>
-    <div class="stream-txt">${preview}</div>
-  </div>`;
+  const preview = esc(S.streaming.slice(-150));
+  el.innerHTML = `<div class="center"><div class="loadbar"><div class="loadprog"></div></div>
+    <div style="font-size:10px;font-family:monospace;color:var(--muted);margin-top:10px;max-width:300px;word-break:break-all;line-height:1.5;text-align:left">${preview}</div></div>`;
 }
 
-// ─────────────────────────────────────────
-// MAIN RENDER
-// ─────────────────────────────────────────
 function render() {
   renderStageBar();
   renderLeft();
@@ -695,22 +745,15 @@ function render() {
 }
 
 function renderStageBar() {
-  const bar = document.getElementById('stagebar');
-  const stages = [
-    {n:1, label:'COLLECT 搜集'},
-    {n:2, label:'CLUSTER 归纳'},
-    {n:3, label:'DISTILL 提炼'},
-    {n:4, label:'INSPIRE 启发'},
-  ];
-  const maxDone = S.stage - 1;
-  bar.innerHTML = stages.map((st, i) => {
-    const isDone = i < maxDone || (i === 0 && S.signals && S.stage > 1) || (i === 1 && S.clusters && S.stage > 2) || (i === 2 && S.bigIdea && S.stage > 3);
+  const stages = [{n:1,label:'COLLECT 搜集'},{n:2,label:'CLUSTER 归纳'},{n:3,label:'DISTILL 提炼'},{n:4,label:'INSPIRE 启发'}];
+  document.getElementById('stagebar').innerHTML = stages.map((st,i) => {
+    const isDone = st.n < S.stage;
     const isActive = S.stage === st.n;
     const cls = isDone ? 'done clickable' : isActive ? 'active' : '';
     const nContent = isDone ? '✓' : st.n;
-    const clickable = isDone ? `onclick="goStage(${st.n})"` : '';
-    return `${i > 0 ? '<span class="stage-arr">›</span>' : ''}
-    <div class="stage-item ${cls}" ${clickable}>
+    const click = isDone ? `onclick="goStage(${st.n})"` : '';
+    return `${i>0?'<span class="stage-arr">›</span>':''}
+    <div class="stage-item ${cls}" ${click}>
       <div class="stage-n">${nContent}</div>
       <div class="stage-lbl">${st.label}</div>
     </div>`;
@@ -722,461 +765,404 @@ function goStage(n) {
   render();
 }
 
-// ─────────────────────────────────────────
-// LEFT PANEL
-// ─────────────────────────────────────────
+// ── LEFT ──
 function renderLeft() {
   const el = document.getElementById('left');
-  if (S.stage === 1) el.innerHTML = leftStage1();
-  else if (S.stage === 2) el.innerHTML = leftStage2();
-  else if (S.stage === 3) el.innerHTML = leftStage3();
-  else if (S.stage === 4) el.innerHTML = leftStage4();
+  if (S.stage === 1) el.innerHTML = leftS1();
+  else if (S.stage === 2) el.innerHTML = leftS2();
+  else if (S.stage === 3) el.innerHTML = leftS3();
+  else el.innerHTML = leftS4();
 }
 
-function leftStage1() {
-  const yr = S.ctx.year;
-  const ind = S.ctx.industry;
-  const geo = S.ctx.geo;
+function leftS1() {
+  const c = S.ctx;
+  const sel = countSelected(), tot = countTotal();
+  const anyLoading = isAnyLoading();
+
+  const grainOpts = ['year','month','day'].map(g =>
+    `<option value="${g}" ${c.grain===g?'selected':''}>${{year:'年',month:'月',day:'日'}[g]}</option>`
+  ).join('');
+
+  let timeInputs = '';
+  if (c.grain === 'year') {
+    timeInputs = `
+      <div class="fi-row">
+        <div><div class="flbl">开始年</div>
+          <select class="fi" onchange="S.ctx.startY=this.value">${years().map(y=>`<option ${y===c.startY?'selected':''}>${y}</option>`).join('')}</select>
+        </div>
+        <div><div class="flbl">结束年</div>
+          <select class="fi" onchange="S.ctx.endY=this.value">${years().map(y=>`<option ${y===c.endY?'selected':''}>${y}</option>`).join('')}</select>
+        </div>
+      </div>`;
+  } else if (c.grain === 'month') {
+    timeInputs = `
+      <div class="fi-row">
+        <div><div class="flbl">开始</div>
+          <select class="fi" onchange="S.ctx.startY=this.value">${years().map(y=>`<option ${y===c.startY?'selected':''}>${y}</option>`).join('')}</select>
+        </div>
+        <div><div class="flbl">&nbsp;</div>
+          <select class="fi" onchange="S.ctx.startM=this.value">${months().map(m=>`<option ${m===c.startM?'selected':''}>${m}</option>`).join('')}</select>
+        </div>
+      </div>
+      <div class="fi-row" style="margin-top:6px">
+        <div><div class="flbl">结束</div>
+          <select class="fi" onchange="S.ctx.endY=this.value">${years().map(y=>`<option ${y===c.endY?'selected':''}>${y}</option>`).join('')}</select>
+        </div>
+        <div><div class="flbl">&nbsp;</div>
+          <select class="fi" onchange="S.ctx.endM=this.value">${months().map(m=>`<option ${m===c.endM?'selected':''}>${m}</option>`).join('')}</select>
+        </div>
+      </div>`;
+  } else {
+    timeInputs = `
+      <div class="fi-row">
+        <div><div class="flbl">开始</div>
+          <select class="fi" onchange="S.ctx.startY=this.value" style="margin-bottom:4px">${years().map(y=>`<option ${y===c.startY?'selected':''}>${y}</option>`).join('')}</select>
+          <select class="fi" onchange="S.ctx.startM=this.value" style="margin-bottom:4px">${months().map(m=>`<option ${m===c.startM?'selected':''}>${m}</option>`).join('')}</select>
+          <select class="fi" onchange="S.ctx.startD=this.value">${days().map(d=>`<option ${d===c.startD?'selected':''}>${d}</option>`).join('')}</select>
+        </div>
+        <div><div class="flbl">结束</div>
+          <select class="fi" onchange="S.ctx.endY=this.value" style="margin-bottom:4px">${years().map(y=>`<option ${y===c.endY?'selected':''}>${y}</option>`).join('')}</select>
+          <select class="fi" onchange="S.ctx.endM=this.value" style="margin-bottom:4px">${months().map(m=>`<option ${m===c.endM?'selected':''}>${m}</option>`).join('')}</select>
+          <select class="fi" onchange="S.ctx.endD=this.value">${days().map(d=>`<option ${d===c.endD?'selected':''}>${d}</option>`).join('')}</select>
+        </div>
+      </div>`;
+  }
+
   return `<div class="plbl">STAGE 1 · COLLECT</div>
-  <div class="flbl">目标年份</div>
-  <select class="fi" onchange="S.ctx.year=this.value">
-    ${['2025','2026','2027','2028'].map(y=>`<option ${y===yr?'selected':''}>${y}</option>`).join('')}
-  </select>
-  <div class="flbl">目标行业</div>
-  <input class="fi" value="${esc(ind)}" placeholder="消费电子" onchange="S.ctx.industry=this.value">
+
+  <div class="flbl">时间精度</div>
+  <select class="fi" onchange="S.ctx.grain=this.value;renderLeft()">${grainOpts}</select>
+
+  ${timeInputs}
+
+  <div class="flbl" style="margin-top:10px">目标行业</div>
+  <input class="fi" value="${esc(c.industry)}" onchange="S.ctx.industry=this.value" placeholder="消费电子">
+
   <div class="flbl">地理范围</div>
-  <input class="fi" value="${esc(geo)}" placeholder="全球 / 中国" onchange="S.ctx.geo=this.value">
-  <div class="div"></div>
-  <div class="flbl">输入信号原料</div>
-  <textarea class="fi" id="inp" rows="10" placeholder="粘贴新闻标题、事件描述、观察笔记...&#10;&#10;例：&#10;- DeepSeek R1发布，NVIDIA股价跌17%&#10;- 小红书'反精英穿搭'话题3天1.2亿播放&#10;- LA山火导致保险公司集体退出加州&#10;...">${esc(S.rawInput)}</textarea>
-  <button class="btn-go" onclick="runCollect()" ${S.loading?'disabled':''}>
-    ${S.loading ? '分析中...' : '⟶ 分析信号'}
+  <input class="fi" value="${esc(c.geo)}" onchange="S.ctx.geo=this.value" placeholder="全球 / 中国">
+
+  <button class="btn-go" onclick="fetchAll()" ${anyLoading?'disabled':''}>
+    ${anyLoading ? '搜集中...' : '⟶ AI 搜集 6 维度信号'}
   </button>
-  ${S.signals ? `<div class="div"></div>
-  <div style="display:flex;justify-content:space-between;align-items:flex-end">
-    <div><div class="stat-num">${S.signals.length}</div><div class="stat-lbl">SIGNALS</div></div>
-    <div class="dim-tags">${[...new Set(S.signals.map(s=>s.dimension))].map(d=>`<div class="dtag dtag-${d}">${d}</div>`).join('')}</div>
+
+  ${isAnyFetched() ? `
+  <div class="div"></div>
+  <div class="stat-row">
+    <div class="stat-item"><div class="stat-num green">${sel}</div><div class="stat-lbl">已选中</div></div>
+    <div class="stat-item"><div class="stat-num">${tot}</div><div class="stat-lbl">总信号数</div></div>
   </div>
-  <button class="btn-ok" onclick="S.stage=2;render()">进入归纳 CLUSTER →</button>
-  <button class="btn-ghost" onclick="S.signals=null;render()">重新分析</button>` : ''}`;
+  <button class="btn-ok" onclick="proceedToCluster()" ${sel===0||anyLoading?'disabled':''}>确认选择，进入归纳 →</button>
+  <button class="btn-ghost" onclick="fetchAll()">重新全部搜集</button>
+  ` : ''}`;
 }
 
-function leftStage2() {
-  const total = S.clusters?.length || 0;
+function leftS2() {
   const sel = S.selectedClusters.size;
   return `<div class="plbl">STAGE 2 · CLUSTER</div>
-  <div style="display:flex;gap:12px;margin-bottom:12px">
-    <div><div class="stat-num">${total}</div><div class="stat-lbl">CLUSTERS</div></div>
-    <div><div class="stat-num" style="color:var(--green)">${sel}</div><div class="stat-lbl">SELECTED</div></div>
+  <div class="stat-row">
+    <div class="stat-item"><div class="stat-num">${S.clusters?.length||0}</div><div class="stat-lbl">CLUSTERS</div></div>
+    <div class="stat-item"><div class="stat-num green">${sel}</div><div class="stat-lbl">SELECTED</div></div>
   </div>
   ${S.clusters ? S.clusters.map((c,i)=>{
-    const edit = clusterEdits[i]||{};
-    const name = edit.name_zh || c.name_zh;
+    const ed = clusterEdits[i]||{};
     const isSel = S.selectedClusters.has(i);
-    return `<div class="cluster-sum ${isSel?'':'opacity-40'}" style="${isSel?'':'opacity:.45'}">
-      <div class="cluster-sum-name">${esc(name)}</div>
-      <div class="cluster-sum-en">${esc(edit.name_en||c.name_en)}</div>
+    return `<div class="cluster-sum" style="${isSel?'':'opacity:.4'}">
+      <div class="cluster-sum-name">${esc(ed.name_zh||c.name_zh)}</div>
+      <div class="cluster-sum-en">${esc(ed.name_en||c.name_en)}</div>
       <div class="cluster-sum-cnt">${(c.signals||[]).length} 信号 · ${esc(c.lead_dimension)}</div>
     </div>`;
   }).join('') : ''}
-  ${S.clusters?.length ? `<button class="btn-ok" onclick="onConfirmClusters()" ${sel===0?'disabled':''}>确认聚类，进入提炼 →</button>
-  <button class="btn-ghost" onclick="runCluster()">重新聚类</button>` : `<button class="btn-go" onclick="runCluster()" ${S.loading?'disabled':''}>
-    ${S.loading ? '归纳中...' : '⟶ 开始归纳'}
+  ${S.clusters?.length ? `
+  <button class="btn-ok" onclick="S.stage=3;render()" ${sel===0?'disabled':''}>确认聚类，进入提炼 →</button>
+  <button class="btn-ghost" onclick="runCluster()">重新归纳</button>
+  ` : `<button class="btn-go" onclick="runCluster()" ${S.loading?'disabled':''}>
+    ${S.loading?'归纳中...':'⟶ 开始归纳'}
   </button>`}
   <button class="btn-ghost" onclick="goStage(1)">← 返回搜集</button>`;
 }
 
-function leftStage3() {
+function leftS3() {
   return `<div class="plbl">STAGE 3 · DISTILL</div>
-  ${S.bigIdea ? `<div style="margin-bottom:12px">
-    <div class="stat-num" style="font-size:18px;line-height:1.2">${esc(S.bigIdea.name_zh)}</div>
+  ${S.bigIdea ? `
+  <div style="margin-bottom:12px">
+    <div style="font-size:16px;font-weight:500;color:var(--tx);line-height:1.3">${esc(S.bigIdea.name_zh)}</div>
     <div style="font-size:9px;color:var(--dim);letter-spacing:.08em;margin-top:4px;text-transform:uppercase">${esc(S.bigIdea.name_en)}</div>
-    <div style="margin-top:8px;font-size:10px;color:var(--muted)">
-      置信度：<span style="color:${S.bigIdea.confidence?.level==='高'?'var(--green)':S.bigIdea.confidence?.level==='中'?'var(--gold)':'var(--red)'}">${S.bigIdea.confidence?.level||'—'}</span>
-    </div>
+    <div style="margin-top:8px;font-size:10px;color:var(--muted)">置信度：<span style="color:${S.bigIdea.confidence?.level==='高'?'var(--green)':S.bigIdea.confidence?.level==='中'?'var(--gold)':'var(--red)'}">${S.bigIdea.confidence?.level||'—'}</span></div>
   </div>
   <button class="btn-ok" onclick="S.stage=4;render()">进入启发 INSPIRE →</button>
-  <button class="btn-ghost" onclick="runDistill()">重新提炼</button>` : `<button class="btn-go" onclick="runDistill()" ${S.loading?'disabled':''}>
-    ${S.loading ? '提炼中...' : '⟶ 生成 Big Idea Card'}
+  <button class="btn-ghost" onclick="runDistill()">重新提炼</button>
+  ` : `<button class="btn-go" onclick="runDistill()" ${S.loading?'disabled':''}>
+    ${S.loading?'提炼中...':'⟶ 生成 Big Idea Card'}
   </button>`}
   <button class="btn-ghost" onclick="goStage(2)">← 返回归纳</button>`;
 }
 
-function leftStage4() {
+function leftS4() {
   return `<div class="plbl">STAGE 4 · INSPIRE</div>
-  ${S.bigIdea ? `<div style="margin-bottom:12px;font-size:11px;color:var(--dim)">
-    基于 <strong style="color:var(--ac)">${esc(S.bigIdea.name_zh)}</strong> 生成商业应用
-  </div>` : ''}
+  ${S.bigIdea ? `<div style="font-size:11px;color:var(--dim);margin-bottom:12px">基于 <strong style="color:var(--ac)">${esc(S.bigIdea.name_zh)}</strong></div>` : ''}
   ${S.applications ? `<div style="font-size:10px;color:var(--green);margin-bottom:12px">✓ 4 个应用方向已生成</div>
   <button class="btn-ghost" onclick="copyAll()">复制 Markdown</button>
-  <button class="btn-ghost" onclick="runInspire()">重新生成</button>` : `<button class="btn-go" onclick="runInspire()" ${S.loading?'disabled':''}>
-    ${S.loading ? '生成中...' : '⟶ 生成应用方向'}
+  <button class="btn-ghost" onclick="runInspire()">重新生成</button>
+  ` : `<button class="btn-go" onclick="runInspire()" ${S.loading?'disabled':''}>
+    ${S.loading?'生成中...':'⟶ 生成应用方向'}
   </button>`}
   <button class="btn-ghost" onclick="goStage(3)">← 返回提炼</button>`;
 }
 
-function onConfirmClusters() {
-  S.stage = 3;
-  render();
-}
-
-// ─────────────────────────────────────────
-// RIGHT PANEL
-// ─────────────────────────────────────────
+// ── RIGHT ──
 function renderRight() {
   const el = document.getElementById('right');
+  if (!el) return;
   if (S.loading) { renderStreamRight(); return; }
-  if (S.error) { el.innerHTML = `<div class="err-box">⚠ ${esc(S.error)}</div>`; return; }
-
-  if (S.stage === 1) el.innerHTML = rightStage1();
-  else if (S.stage === 2) el.innerHTML = rightStage2();
-  else if (S.stage === 3) el.innerHTML = rightStage3();
-  else if (S.stage === 4) el.innerHTML = rightStage4();
+  if (S.error && S.stage > 1) { el.innerHTML = `<div class="r-pad"><div class="err-box">⚠ ${esc(S.error)}</div></div>`; return; }
+  if (S.stage === 1) el.innerHTML = rightS1();
+  else if (S.stage === 2) el.innerHTML = rightS2();
+  else if (S.stage === 3) el.innerHTML = rightS3();
+  else el.innerHTML = rightS4();
 }
 
-// ── STAGE 1 RIGHT ──
-function rightStage1() {
-  if (!S.signals) return `<div class="center">
-    <div class="center-ico">◎</div>
-    <div class="center-msg">在左侧输入趋势信号原料<br>支持新闻标题、事件描述、观察笔记</div>
-  </div>`;
+function rightS1() {
+  if (!S.fetchStarted) {
+    return `<div class="center">
+      <div class="center-ico">◎</div>
+      <div class="center-msg">设置时间范围和行业<br>点击「AI 搜集 6 维度信号」<br><br>
+      AI 将按 STEEP+C 框架<br>每个维度搜集 5 条信号，共 30 条<br>你选择保留哪些</div>
+    </div>`;
+  }
 
-  const dims = S.signals.reduce((acc, s) => { acc[s.dimension] = (acc[s.dimension]||0)+1; return acc; }, {});
-  const missing = [...'STEEP'.split('').map((_,i)=>['S','T','E','E2','P','C'][i]), 'C', 'E2'].filter((d,i,a)=>a.indexOf(d)===i && !dims[d]);
+  // Build domain sections
+  let h = `<div class="domains-wrap">`;
+  DOMAINS.forEach(d => {
+    const sigs = S.domainSignals[d.code] || [];
+    const isLoading = S.domainLoading[d.code];
+    const err = S.domainErrors[d.code];
+    const selCnt = sigs.filter(s=>s.selected).length;
 
-  let h = `<div class="r-hdr">
-    <div class="r-title">信号库 SIGNAL POOL</div>
-    <div class="r-sub">${S.signals.length} 条 · ${S.ctx.year} · ${esc(S.ctx.industry)}</div>
-  </div>
-  <div class="sig-wrap">
-  <table class="sig-table">
-    <thead><tr>
-      <th>ID</th><th>信号</th><th>维度</th><th>量级</th><th>可信度</th><th>时间</th><th>地理</th>
-    </tr></thead>
-    <tbody>`;
-  S.signals.forEach(s => {
-    h += `<tr>
-      <td><span class="sig-id">${esc(s.id)}</span></td>
-      <td><span class="sig-text">${esc(s.signal)}</span></td>
-      <td><span class="dtag dtag-${esc(s.dimension)}">${esc(s.dimension)}</span></td>
-      <td><span class="sbadge sb-${esc(s.scale)}">${esc(s.scale)}</span></td>
-      <td><span class="conf-dot cd-${esc(s.confidence)}"></span>${esc(s.confidence)}</td>
-      <td style="color:var(--muted);font-size:10px;white-space:nowrap">${esc(s.time||'—')}</td>
-      <td style="color:var(--muted);font-size:10px;white-space:nowrap">${esc(s.geo||'—')}</td>
-    </tr>`;
+    h += `<div class="domain-section">
+      <div class="domain-hdr">
+        <div class="domain-hdr-left">
+          <span class="domain-badge db-${d.code}">${d.en}</span>
+          <span class="domain-name">${d.zh}</span>
+          ${!isLoading && sigs.length ? `<span class="domain-count">${selCnt}/${sigs.length}</span>` : ''}
+        </div>
+        <div class="domain-hdr-right">
+          ${isLoading ? '<span style="font-size:9px;color:var(--muted)">搜集中...</span>' :
+            `<button class="refetch-btn" onclick="fetchDomain('${d.code}')">↻ 重新搜集</button>`}
+        </div>
+      </div>`;
+
+    if (isLoading) {
+      h += `<div class="signals-list">
+        ${[0,1,2,3,4].map(()=>`<div class="skel-card"><div class="skel-line" style="width:${60+Math.random()*35|0}%"></div><div class="skel-line short"></div></div>`).join('')}
+      </div>`;
+    } else if (err) {
+      h += `<div class="domain-error">⚠ ${esc(err)} <button class="refetch-btn" onclick="fetchDomain('${d.code}')" style="margin-left:8px">重试</button></div>`;
+    } else if (sigs.length) {
+      h += `<div class="signals-list">`;
+      sigs.forEach((s,i) => {
+        const state = s.selected ? 'selected' : 'rejected';
+        const checkContent = s.selected ? '✓' : '✗';
+        const xLabel = s.selected ? '✕' : '↩';
+        h += `<div class="sig-card ${state}" onclick="toggleSignal('${d.code}',${i})">
+          <div class="sig-check">${checkContent}</div>
+          <div class="sig-body">
+            <div class="sig-text">${esc(s.signal)}</div>
+            <div class="sig-meta">
+              <span>${esc(s.time||'—')}</span>
+              <span>${esc(s.geo||'—')}</span>
+              <span>${esc(s.source_note||'—')}</span>
+              <span class="sig-scale sc-${esc(s.scale)}">${esc(s.scale)}</span>
+              <span style="color:${s.confidence==='高'?'var(--green)':s.confidence==='中'?'var(--gold)':'var(--red)'}">${esc(s.confidence)}</span>
+            </div>
+          </div>
+        </div>`;
+      });
+      h += `</div>`;
+    } else {
+      h += `<div class="domain-loading"><span style="font-size:11px;color:var(--muted)">尚未搜集</span></div>`;
+    }
+    h += `</div>`;
   });
-  h += `</tbody></table></div>`;
-  if (missing.length) h += `<div class="notice" style="margin-top:14px">
-    <strong>⚠ 维度不足提示</strong>
-    以下 STEEP+C 维度信号 &lt;3 条：<strong>${missing.join(' · ')}</strong><br>建议补充后再进行聚类分析
-  </div>`;
+  h += `</div>`;
+
+  // Summary bar
+  const sel = countSelected(), tot = countTotal();
+  if (tot > 0) {
+    h += `<div class="s1-summary">
+      <div class="s1-counts">
+        <div class="s1-cnt"><span class="green">${sel}</span>已选</div>
+        <div class="s1-cnt"><span class="muted">${tot-sel}</span>已去除</div>
+        <div class="s1-cnt"><span>${tot}</span>总计</div>
+      </div>
+      <button class="s1-proceed" onclick="proceedToCluster()" ${sel===0||isAnyLoading()?'disabled':''}>
+        确认选择 → 进入归纳
+      </button>
+    </div>`;
+  }
   return h;
 }
 
-// ── STAGE 2 RIGHT ──
-function rightStage2() {
+function rightS2() {
   if (!S.clusters) return `<div class="center">
     <div class="center-ico">◈</div>
-    <div class="center-msg">点击左侧「开始归纳」<br>AI 将识别跨维度共振模式</div>
+    <div class="center-msg">点击左侧「开始归纳」<br>AI 识别跨维度共振模式</div>
   </div>`;
-
-  let h = `<div class="r-hdr">
+  let h = `<div class="r-pad"><div class="r-hdr">
     <div class="r-title">聚类结果 CLUSTERS</div>
     <div class="r-sub">点击卡片选择 / 双击编辑名称</div>
   </div>
   <div class="cluster-grid">`;
-
-  S.clusters.forEach((c, i) => {
+  S.clusters.forEach((c,i)=>{
     const isSel = S.selectedClusters.has(i);
-    const edit = clusterEdits[i] || {};
-    const nameZh = edit.name_zh || c.name_zh;
-    const nameEn = edit.name_en || c.name_en;
-    const vs = c.value_shift || {};
+    const ed = clusterEdits[i]||{};
+    const vs = c.value_shift||{};
     h += `<div class="c-card ${isSel?'sel':''}" id="cc-${i}" onclick="toggleCluster(${i})">
       <div class="c-top">
         <div>
           <div class="c-id">CLUSTER ${esc(c.id)} · <span class="c-dim">${esc(c.lead_dimension)}</span></div>
-          <div class="c-name-zh">${esc(nameZh)}</div>
-          <div class="c-name-en">${esc(nameEn)}</div>
+          <div class="c-name-zh">${esc(ed.name_zh||c.name_zh)}</div>
+          <div class="c-name-en">${esc(ed.name_en||c.name_en)}</div>
         </div>
         <div class="c-check">✓</div>
       </div>
       <div class="c-action">${esc(c.core_action)}</div>
-      ${vs.from ? `<div class="c-shift">
+      ${vs.from?`<div class="c-shift">
         <div class="c-shift-from">FROM: ${esc(vs.from)}</div>
         <div class="c-shift-arr">↓</div>
         <div class="c-shift-to">TO: ${esc(vs.to)}</div>
         <div class="c-shift-emo">${esc(vs.emotion||'')}</div>
-      </div>` : ''}
+      </div>`:''}
       <div class="c-sigs">${(c.signals||[]).map(sid=>`<span class="c-sig-tag">${esc(sid)}</span>`).join('')}</div>
       <div class="c-btns">
-        <button class="c-btn edit-btn" onclick="event.stopPropagation();openEdit(${i})">编辑名称</button>
-        <button class="c-btn" onclick="event.stopPropagation();toggleCluster(${i})">${isSel?'取消选择':'选中'}</button>
+        <button class="c-btn" onclick="event.stopPropagation();openEdit(${i})">编辑名称</button>
+        <button class="c-btn" onclick="event.stopPropagation();toggleCluster(${i})">${isSel?'取消':'选中'}</button>
       </div>
       <div class="c-edit-area" id="cedit-${i}">
-        <div class="c-edit-row">
-          <div class="c-edit-lbl">中文名</div>
-          <input class="c-edit-input" id="cedit-zh-${i}" value="${esc(nameZh)}" onclick="event.stopPropagation()">
-        </div>
-        <div class="c-edit-row">
-          <div class="c-edit-lbl">ENGLISH NAME</div>
-          <input class="c-edit-input" id="cedit-en-${i}" value="${esc(nameEn)}" onclick="event.stopPropagation()">
-        </div>
-        <div class="c-btns">
+        <div class="c-edit-lbl">中文名</div>
+        <input class="c-edit-input" id="cedit-zh-${i}" value="${esc(ed.name_zh||c.name_zh)}" onclick="event.stopPropagation()">
+        <div class="c-edit-lbl">ENGLISH NAME</div>
+        <input class="c-edit-input" id="cedit-en-${i}" value="${esc(ed.name_en||c.name_en)}" onclick="event.stopPropagation()">
+        <div class="c-btns" style="margin-top:8px">
           <button class="c-btn" onclick="event.stopPropagation();saveEdit(${i})" style="color:var(--green);border-color:rgba(77,153,112,.4)">保存</button>
           <button class="c-btn" onclick="event.stopPropagation();closeEdit(${i})">取消</button>
         </div>
       </div>
     </div>`;
   });
-
   h += `</div>`;
-
-  // Outliers if any (from synthesis data)
-  h += `<div class="sum-bar" style="margin-top:14px">
-    <strong>综合：</strong>${esc(S.clusters._synthesis || '')}
-  </div>`;
-
+  if (S.clusters._synthesis) h += `<div style="margin-top:14px;padding:12px 14px;background:var(--s1);border:1px solid var(--bd);border-radius:8px;font-size:11px;color:var(--dim);line-height:1.6">
+    <strong style="color:var(--ac)">综合：</strong>${esc(S.clusters._synthesis)}</div>`;
+  h += `</div>`;
   return h;
 }
 
-// ── STAGE 3 RIGHT ──
-function rightStage3() {
+function rightS3() {
   if (!S.bigIdea) return `<div class="center">
     <div class="center-ico">◆</div>
     <div class="center-msg">点击左侧「生成 Big Idea Card」<br>AI 将提炼核心趋势洞察</div>
   </div>`;
-
-  const r = S.bigIdea;
-  const vs = r.value_shift || {};
-  const imp = r.impact || {};
-  const cmf = r.cmf || {};
-  const conf = r.confidence || {};
-
-  const statusCls = {emerging:'bs-emerging', accelerating:'bs-accelerating', peak:'bs-peak', declining:'bs-declining'}[r.temporal_status] || 'bs-emerging';
-
-  let h = `<div class="bia">
+  const r = S.bigIdea, vs = r.value_shift||{}, imp = r.impact||{}, cmf = r.cmf||{}, conf = r.confidence||{};
+  const stCls = {emerging:'bs-emerging',accelerating:'bs-accelerating',peak:'bs-peak',declining:'bs-declining'}[r.temporal_status]||'bs-emerging';
+  let h = `<div class="r-pad"><div class="bia">
     <div class="bia-head">
-      <div class="bia-eyebrow">BIG IDEA CARD · ${esc(S.ctx.year)} · ${esc(S.ctx.industry)}</div>
+      <div class="bia-eyebrow">BIG IDEA CARD · ${esc(S.ctx.industry)}</div>
       <div class="bia-title-zh">${esc(r.name_zh)}</div>
       <div class="bia-title-en">${esc(r.name_en)}</div>
       <div class="bia-meta">
-        <div class="bia-mi"><span class="bia-status ${statusCls}">${esc(r.temporal_status)}</span></div>
-        ${r.first_appeared ? `<div class="bia-mi">首现<span>${esc(r.first_appeared)}</span></div>` : ''}
-        ${r.expected_peak ? `<div class="bia-mi">预期峰值<span>${esc(r.expected_peak)}</span></div>` : ''}
-        ${imp.horizon ? `<div class="bia-mi">窗口<span>${esc(imp.horizon)}</span></div>` : ''}
+        <div class="bia-mi"><span class="bia-status ${stCls}">${esc(r.temporal_status)}</span></div>
+        ${r.first_appeared?`<div class="bia-mi">首现<span>${esc(r.first_appeared)}</span></div>`:''}
+        ${r.expected_peak?`<div class="bia-mi">峰值<span>${esc(r.expected_peak)}</span></div>`:''}
+        ${imp.horizon?`<div class="bia-mi">窗口<span>${esc(imp.horizon)}</span></div>`:''}
       </div>
     </div>
     <div class="bia-body">`;
-
-  // Context
-  if (r.context) h += `<div class="bia-sec">
-    <div class="bia-sec-t">CONTEXT 背景</div>
-    <div class="bia-p">${esc(r.context)}</div>
-  </div>`;
-
-  // Key Drivers
-  if (r.key_drivers?.length) h += `<div class="bia-sec">
-    <div class="bia-sec-t">KEY DRIVERS 核心驱动</div>
-    ${r.key_drivers.map(d=>`<div class="driver-row">
-      <div class="driver-n">${d.n||'·'}</div>
-      <div class="driver-body">${esc(d.driver)}<div class="driver-src">${esc(d.source)}</div></div>
-    </div>`).join('')}
-  </div>`;
-
-  // Value Shift
-  if (vs.from) h += `<div class="bia-sec">
-    <div class="bia-sec-t">VALUE SHIFT 价值观转变</div>
-    <div class="vs-box">
-      <div class="vs-from">FROM: ${esc(vs.from)}</div>
-      <div class="vs-arr">↓</div>
-      <div class="vs-to">TO: ${esc(vs.to)}</div>
-      ${vs.emotion ? `<div class="vs-emo">情绪基底：${esc(vs.emotion)}</div>` : ''}
-    </div>
-  </div>`;
-
-  // Impact
-  if (imp.audience || imp.categories?.length) h += `<div class="bia-sec">
-    <div class="bia-sec-t">IMPACT 影响范围</div>
+  if (r.context) h += `<div class="bia-sec"><div class="bia-sec-t">CONTEXT 背景</div><div class="bia-p">${esc(r.context)}</div></div>`;
+  if (r.key_drivers?.length) h += `<div class="bia-sec"><div class="bia-sec-t">KEY DRIVERS 核心驱动</div>
+    ${r.key_drivers.map(d=>`<div class="driver-row"><div class="driver-n">${d.n||'·'}</div><div class="driver-body">${esc(d.driver)}<div class="driver-src">${esc(d.source)}</div></div></div>`).join('')}</div>`;
+  if (vs.from) h += `<div class="bia-sec"><div class="bia-sec-t">VALUE SHIFT 价值观转变</div>
+    <div class="vs-box"><div class="vs-from">FROM: ${esc(vs.from)}</div><div class="vs-arr">↓</div><div class="vs-to">TO: ${esc(vs.to)}</div>${vs.emotion?`<div class="vs-emo">情绪：${esc(vs.emotion)}</div>`:''}</div></div>`;
+  if (imp.audience) h += `<div class="bia-sec"><div class="bia-sec-t">IMPACT 影响范围</div>
     <div class="impact-grid">
-      ${imp.audience ? `<div class="impact-item"><div class="impact-lbl">受影响人群</div><div class="impact-val">${esc(imp.audience)}</div></div>` : ''}
-      ${imp.geo_priority ? `<div class="impact-item"><div class="impact-lbl">地理优先</div><div class="impact-val">${esc(imp.geo_priority)}</div></div>` : ''}
+      <div class="impact-item"><div class="impact-lbl">受影响人群</div><div class="impact-val">${esc(imp.audience)}</div></div>
+      ${imp.geo_priority?`<div class="impact-item"><div class="impact-lbl">地理优先</div><div class="impact-val">${esc(imp.geo_priority)}</div></div>`:''}
     </div>
-    ${imp.categories?.length ? `<div style="margin-top:8px"><div class="impact-lbl" style="font-size:8px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px">受影响品类</div><div class="cats-list">${imp.categories.map(c=>`<span class="cat-tag">${esc(c)}</span>`).join('')}</div></div>` : ''}
-  </div>`;
-
-  // Trend Characteristics
-  if (r.trend_characteristics) h += `<div class="bia-sec">
-    <div class="bia-sec-t">TREND CHARACTERISTICS 趋势特征</div>
-    <div class="bia-p">${esc(r.trend_characteristics)}</div>
-  </div>`;
-
-  // Style Characteristics
-  if (r.style_characteristics) h += `<div class="bia-sec">
-    <div class="bia-sec-t">STYLE CHARACTERISTICS 风格特征</div>
-    <div class="bia-p">${esc(r.style_characteristics)}</div>
-  </div>`;
-
-  // CMF
-  h += `<div class="bia-sec">
-    <div class="bia-sec-t">CMF DESIGN TRANSLATION 设计转译</div>`;
-
+    ${imp.categories?.length?`<div class="cats-list" style="margin-top:8px">${imp.categories.map(c=>`<span class="cat-tag">${esc(c)}</span>`).join('')}</div>`:''}</div>`;
+  if (r.trend_characteristics) h += `<div class="bia-sec"><div class="bia-sec-t">TREND CHARACTERISTICS 趋势特征</div><div class="bia-p">${esc(r.trend_characteristics)}</div></div>`;
+  if (r.style_characteristics) h += `<div class="bia-sec"><div class="bia-sec-t">STYLE CHARACTERISTICS 风格特征</div><div class="bia-p">${esc(r.style_characteristics)}</div></div>`;
+  h += `<div class="bia-sec"><div class="bia-sec-t">CMF DESIGN TRANSLATION 设计转译</div>`;
   if (cmf.colors?.length) {
-    h += `<div class="bia-sec-t" style="margin-top:10px;font-size:8px;color:var(--muted)">COLOR 色彩</div>
+    h += `<div class="bia-sec-t" style="font-size:8px;color:var(--muted);margin-bottom:8px;margin-top:6px">COLOR 色彩</div>
     <div class="cmf-colors">`;
-    cmf.colors.forEach(c => {
-      h += `<div class="color-item">
-        <div class="color-swatch" style="background:${esc(c.hex||'#333')}"></div>
-        <div class="color-info">
-          <div class="ci-zh">${esc(c.name_zh)}</div>
-          <div class="ci-en">${esc(c.name_en)}</div>
-          <div class="ci-hex">${esc(c.hex)}</div>
-          <div class="ci-role">${esc(c.role)}</div>
-          ${c.desc ? `<div class="ci-desc">${esc(c.desc)}</div>` : ''}
-        </div>
-      </div>`;
-    });
+    cmf.colors.forEach(c=>{h+=`<div class="color-item"><div class="color-swatch" style="background:${esc(c.hex||'#333')}"></div>
+      <div><div class="ci-zh">${esc(c.name_zh)}</div><div class="ci-en">${esc(c.name_en)}</div><div class="ci-hex">${esc(c.hex)}</div><div class="ci-role">${esc(c.role)}</div>${c.desc?`<div class="ci-desc">${esc(c.desc)}</div>`:''}</div></div>`;});
     h += `</div>`;
   }
-
-  if (cmf.materials?.length) h += `<div class="cmf-row">
-    <div class="cmf-row-lbl">MATERIAL 材质</div>
-    <div class="cmf-tags">${cmf.materials.map(m=>`<span class="cmf-tag">${esc(m.name)} · ${esc(m.process)}</span>`).join('')}</div>
-  </div>`;
-
-  if (cmf.forms?.length) h += `<div class="cmf-row">
-    <div class="cmf-row-lbl">FORM 形态原则</div>
-    <div class="cmf-tags">${cmf.forms.map(f=>`<span class="cmf-tag">${esc(f)}</span>`).join('')}</div>
-  </div>`;
-
-  if (cmf.patterns?.length) h += `<div class="cmf-row">
-    <div class="cmf-row-lbl">PATTERN 图案</div>
-    <div class="cmf-tags">${cmf.patterns.map(p=>`<span class="cmf-tag">${esc(p.type)} · ${esc(p.process)}</span>`).join('')}</div>
-  </div>`;
-
+  if (cmf.materials?.length) h += `<div class="cmf-row"><div class="cmf-row-lbl">MATERIAL 材质</div><div class="cmf-tags">${cmf.materials.map(m=>`<span class="cmf-tag">${esc(m.name)} · ${esc(m.process)}</span>`).join('')}</div></div>`;
+  if (cmf.forms?.length) h += `<div class="cmf-row"><div class="cmf-row-lbl">FORM 形态</div><div class="cmf-tags">${cmf.forms.map(f=>`<span class="cmf-tag">${esc(f)}</span>`).join('')}</div></div>`;
+  if (cmf.patterns?.length) h += `<div class="cmf-row"><div class="cmf-row-lbl">PATTERN 图案</div><div class="cmf-tags">${cmf.patterns.map(p=>`<span class="cmf-tag">${esc(p.type)} · ${esc(p.process)}</span>`).join('')}</div></div>`;
   h += `</div>`;
-
-  // Keywords
-  if (r.keywords?.length) h += `<div class="bia-sec">
-    <div class="bia-sec-t">KEYWORDS</div>
-    <div class="kw-tags">${r.keywords.map(k=>`<span class="kw-tag">${esc(k.zh)}<span class="kw-en">${esc(k.en)}</span></span>`).join('')}</div>
-  </div>`;
-
-  // Supporting Signals
-  if (r.supporting_signals?.length) h += `<div class="bia-sec">
-    <div class="bia-sec-t">SUPPORTING SIGNALS 信号支撑</div>
-    <div class="sig-list">${r.supporting_signals.map(s=>`<div class="sig-item"><span>${esc(s.signal)}</span> <span style="color:var(--muted)">${esc(s.date)} · ${esc(s.source)}</span></div>`).join('')}</div>
-  </div>`;
-
-  // Confidence
-  if (conf.level) h += `<div class="bia-sec">
-    <div class="bia-sec-t">CONFIDENCE 置信度</div>
-    <div class="conf-box">
-      <div class="conf-lvl cl-${esc(conf.level)}">${esc(conf.level)}</div>
-      <div class="conf-detail">${esc(conf.reason)}${conf.uncertainty ? `<div class="conf-unc">不确定性：${esc(conf.uncertainty)}</div>` : ''}</div>
-    </div>
-  </div>`;
-
-  h += `</div></div>`;
+  if (r.keywords?.length) h += `<div class="bia-sec"><div class="bia-sec-t">KEYWORDS</div><div class="kw-tags">${r.keywords.map(k=>`<span class="kw-tag">${esc(k.zh)}<span class="kw-en">${esc(k.en)}</span></span>`).join('')}</div></div>`;
+  if (r.supporting_signals?.length) h += `<div class="bia-sec"><div class="bia-sec-t">SUPPORTING SIGNALS 信号支撑</div><div class="sig-list-out">${r.supporting_signals.map(s=>`<div class="sig-item-out"><span>${esc(s.signal)}</span> <span style="color:var(--muted)">${esc(s.date)} · ${esc(s.source)}</span></div>`).join('')}</div></div>`;
+  if (conf.level) h += `<div class="bia-sec"><div class="bia-sec-t">CONFIDENCE 置信度</div>
+    <div class="conf-box"><div class="conf-lvl cl-${esc(conf.level)}">${esc(conf.level)}</div>
+    <div class="conf-detail">${esc(conf.reason)}${conf.uncertainty?`<div class="conf-unc">不确定性：${esc(conf.uncertainty)}</div>`:''}</div></div></div>`;
+  h += `</div></div></div>`;
   return h;
 }
 
-// ── STAGE 4 RIGHT ──
-function rightStage4() {
+function rightS4() {
   if (!S.applications) return `<div class="center">
     <div class="center-ico">◉</div>
-    <div class="center-msg">点击左侧「生成应用方向」<br>AI 将输出 4 个商业应用卡片</div>
+    <div class="center-msg">点击左侧「生成应用方向」<br>输出 4 个商业应用卡片</div>
   </div>`;
-
   const a = S.applications;
-  let h = `<div class="r-hdr">
+  let h = `<div class="r-pad"><div class="r-hdr">
     <div class="r-title">应用方向 APPLICATION CARDS</div>
     <div class="r-sub">${esc(S.bigIdea?.name_zh)} → 商业落地</div>
-  </div>
-  <div class="app-grid">`;
-
-  // App 1: Concept Directions
+  </div><div class="app-grid">`;
   if (a.concept_directions?.length) {
-    h += `<div class="app-card">
-      <div class="app-head"><div class="app-n">APP 01</div><div class="app-t">方案概念 CONCEPT DIRECTIONS</div></div>
-      <div class="app-body">`;
-    a.concept_directions.forEach(c => {
-      h += `<div class="concept-item">
-        <div class="concept-name">${esc(c.name_zh)} / <span style="color:var(--dim);font-size:10px;letter-spacing:.06em">${esc(c.name_en)}</span></div>
-        <div class="concept-def">${esc(c.definition)}</div>
-        ${c.form ? `<div style="font-size:10px;color:var(--muted);margin-top:3px">形态：${esc(c.form)}</div>` : ''}
-        ${c.proposition ? `<div style="font-size:10px;color:var(--ac);margin-top:3px">卖点：${esc(c.proposition)}</div>` : ''}
-        ${c.cmf_key ? `<div class="concept-cmf">CMF: ${esc(c.cmf_key)}</div>` : ''}
-      </div>`;
-    });
+    h += `<div class="app-card"><div class="app-head"><div class="app-n">APP 01</div><div class="app-t">方案概念 CONCEPT DIRECTIONS</div></div><div class="app-body">`;
+    a.concept_directions.forEach(c=>{h+=`<div class="concept-item"><div class="concept-name">${esc(c.name_zh)} <span style="color:var(--dim);font-size:10px;letter-spacing:.05em">/ ${esc(c.name_en)}</span></div>
+      <div class="concept-def">${esc(c.definition)}</div>
+      ${c.form?`<div style="font-size:10px;color:var(--muted);margin-top:3px">形态：${esc(c.form)}</div>`:''}
+      ${c.proposition?`<div style="font-size:10px;color:var(--ac);margin-top:3px">卖点：${esc(c.proposition)}</div>`:''}
+      ${c.cmf_key?`<div class="concept-cmf">CMF: ${esc(c.cmf_key)}</div>`:''}</div>`;});
     h += `</div></div>`;
   }
-
-  // App 2: Brand Implications
   const bi = a.brand_implications;
   if (bi) {
-    h += `<div class="app-card">
-      <div class="app-head"><div class="app-n">APP 02</div><div class="app-t">品牌建议 BRAND IMPLICATIONS</div></div>
-      <div class="app-body">`;
-    if (bi.fit?.length) h += `<div class="app-sec"><div class="app-sec-lbl">契合品牌 FIT</div>
-      <div class="brand-row">${bi.fit.map(b=>`<span class="brand-chip brand-fit" title="${esc(b.reason)}">${esc(b.brand)}</span>`).join('')}</div></div>`;
-    if (bi.reposition?.length) h += `<div class="app-sec"><div class="app-sec-lbl">可借此转型 REPOSITION</div>
-      <div class="brand-row">${bi.reposition.map(b=>`<span class="brand-chip brand-repo" title="${esc(b.how)}">${esc(b.brand)}</span>`).join('')}</div></div>`;
-    if (bi.avoid?.length) h += `<div class="app-sec"><div class="app-sec-lbl">不匹配 AVOID</div>
-      <div class="brand-row">${bi.avoid.map(b=>`<span class="brand-chip brand-avoid" title="${esc(b.reason)}">${esc(b.brand)}</span>`).join('')}</div></div>`;
-    if (bi.tone_of_voice) h += `<div class="app-sec"><div class="app-sec-lbl">品牌调性 TONE OF VOICE</div>
-      <div style="font-size:11px;color:var(--dim);line-height:1.6">${esc(bi.tone_of_voice)}</div></div>`;
+    h += `<div class="app-card"><div class="app-head"><div class="app-n">APP 02</div><div class="app-t">品牌建议 BRAND IMPLICATIONS</div></div><div class="app-body">`;
+    if (bi.fit?.length) h += `<div class="app-sec"><div class="app-sec-lbl">契合品牌 FIT</div><div class="brand-row">${bi.fit.map(b=>`<span class="brand-chip brand-fit" title="${esc(b.reason)}">${esc(b.brand)}</span>`).join('')}</div></div>`;
+    if (bi.reposition?.length) h += `<div class="app-sec"><div class="app-sec-lbl">可转型 REPOSITION</div><div class="brand-row">${bi.reposition.map(b=>`<span class="brand-chip brand-repo" title="${esc(b.how)}">${esc(b.brand)}</span>`).join('')}</div></div>`;
+    if (bi.avoid?.length) h += `<div class="app-sec"><div class="app-sec-lbl">不匹配 AVOID</div><div class="brand-row">${bi.avoid.map(b=>`<span class="brand-chip brand-avoid" title="${esc(b.reason)}">${esc(b.brand)}</span>`).join('')}</div></div>`;
+    if (bi.tone_of_voice) h += `<div class="app-sec"><div class="app-sec-lbl">品牌调性</div><div style="font-size:11px;color:var(--dim);line-height:1.6">${esc(bi.tone_of_voice)}</div></div>`;
     h += `</div></div>`;
   }
-
-  // App 3: Product Innovation
   const pi = a.product_innovation;
   if (pi?.top_categories?.length) {
-    h += `<div class="app-card">
-      <div class="app-head"><div class="app-n">APP 03</div><div class="app-t">产品创新 PRODUCT INNOVATION</div></div>
-      <div class="app-body">`;
-    pi.top_categories.forEach(c => {
-      h += `<div class="cat-row">
-        <div class="cat-name">${esc(c.category)}</div>
-        <div class="cat-opp">${esc(c.opportunity)}</div>
-        <div class="cat-meta">
-          <span>💰 ${esc(c.price_tier)}</span>
-          <span>📦 ${esc(c.channel)}</span>
-        </div>
-      </div>`;
-    });
+    h += `<div class="app-card"><div class="app-head"><div class="app-n">APP 03</div><div class="app-t">产品创新 PRODUCT INNOVATION</div></div><div class="app-body">`;
+    pi.top_categories.forEach(c=>{h+=`<div class="cat-row"><div class="cat-name">${esc(c.category)}</div><div class="cat-opp">${esc(c.opportunity)}</div><div class="cat-meta"><span>💰 ${esc(c.price_tier)}</span><span>📦 ${esc(c.channel)}</span></div></div>`;});
     h += `</div></div>`;
   }
-
-  // App 4: Emerging Audience
   const ea = a.emerging_audience;
   if (ea) {
-    h += `<div class="app-card">
-      <div class="app-head"><div class="app-n">APP 04</div><div class="app-t">新人群识别 EMERGING AUDIENCE</div></div>
-      <div class="app-body">
-        <div class="audience-card">
-          <div class="aud-name">${esc(ea.name_zh)} <span style="color:var(--muted);font-size:11px">[${esc(ea.code)}]</span></div>
-          <div class="aud-en">${esc(ea.name_en)}</div>
-          <div class="aud-meta">
-            ${ea.age ? `<span>年龄 ${esc(ea.age)}</span>` : ''}
-            ${ea.gender ? `<span>${esc(ea.gender)}</span>` : ''}
-            ${ea.city ? `<span>${esc(ea.city)}</span>` : ''}
-            ${ea.income ? `<span>收入 ${esc(ea.income)}</span>` : ''}
-          </div>
-          ${ea.voc ? `<div class="aud-voc">"${esc(ea.voc)}"</div>` : ''}
-          ${ea.psychology?.length ? `<div class="app-sec-lbl" style="font-size:8px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:6px">心理特征</div>
-          <ul class="aud-list">${ea.psychology.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>` : ''}
-          ${ea.brands_media?.length ? `<div style="margin-top:10px">
-            <div class="app-sec-lbl" style="font-size:8px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px">高频品牌/媒介</div>
-            <div class="brand-row">${ea.brands_media.map(b=>`<span class="brand-chip brand-fit">${esc(b)}</span>`).join('')}</div>
-          </div>` : ''}
-          ${ea.diff_from_mainstream ? `<div style="margin-top:10px;font-size:10px;color:var(--muted);font-style:italic;line-height:1.5">${esc(ea.diff_from_mainstream)}</div>` : ''}
+    h += `<div class="app-card"><div class="app-head"><div class="app-n">APP 04</div><div class="app-t">新人群 EMERGING AUDIENCE</div></div><div class="app-body">
+      <div class="audience-card">
+        <div class="aud-name">${esc(ea.name_zh)} <span style="color:var(--muted);font-size:11px">[${esc(ea.code)}]</span></div>
+        <div class="aud-en">${esc(ea.name_en)}</div>
+        <div class="aud-meta">
+          ${ea.age?`<span>${esc(ea.age)}</span>`:''}${ea.gender?`<span>${esc(ea.gender)}</span>`:''}
+          ${ea.city?`<span>${esc(ea.city)}</span>`:''}${ea.income?`<span>${esc(ea.income)}</span>`:''}
         </div>
-      </div>
-    </div>`;
+        ${ea.voc?`<div class="aud-voc">"${esc(ea.voc)}"</div>`:''}
+        ${ea.psychology?.length?`<div class="app-sec-lbl" style="font-size:8px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px">心理特征</div>
+        <ul class="aud-list">${ea.psychology.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>`:''}
+        ${ea.brands_media?.length?`<div style="margin-top:10px"><div class="app-sec-lbl" style="font-size:8px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px">高频品牌/媒介</div>
+        <div class="brand-row">${ea.brands_media.map(b=>`<span class="brand-chip brand-fit">${esc(b)}</span>`).join('')}</div></div>`:''}
+        ${ea.diff_from_mainstream?`<div style="margin-top:10px;font-size:10px;color:var(--muted);font-style:italic;line-height:1.5">${esc(ea.diff_from_mainstream)}</div>`:''}
+      </div></div></div>`;
   }
-
-  h += `</div>`;
+  h += `</div></div>`;
   return h;
 }
 
@@ -1185,38 +1171,26 @@ function rightStage4() {
 // ─────────────────────────────────────────
 function toggleCluster(i) {
   const ea = document.getElementById(`cedit-${i}`);
-  if (ea && ea.style.display !== 'none') return; // editing, skip toggle
+  if (ea?.style.display !== 'none') return;
   if (S.selectedClusters.has(i)) S.selectedClusters.delete(i);
   else S.selectedClusters.add(i);
   render();
 }
-
 function openEdit(i) {
-  const card = document.getElementById(`cc-${i}`);
+  document.getElementById(`cc-${i}`)?.classList.add('editing');
   const ea = document.getElementById(`cedit-${i}`);
-  if (!card || !ea) return;
-  card.classList.add('editing');
-  ea.style.display = 'block';
+  if (ea) ea.style.display = 'block';
 }
-
 function closeEdit(i) {
-  const card = document.getElementById(`cc-${i}`);
+  document.getElementById(`cc-${i}`)?.classList.remove('editing');
   const ea = document.getElementById(`cedit-${i}`);
-  if (!card || !ea) return;
-  card.classList.remove('editing');
-  ea.style.display = 'none';
+  if (ea) ea.style.display = 'none';
 }
-
 function saveEdit(i) {
   const zh = document.getElementById(`cedit-zh-${i}`)?.value?.trim();
   const en = document.getElementById(`cedit-en-${i}`)?.value?.trim();
-  if (zh || en) {
-    clusterEdits[i] = clusterEdits[i] || {};
-    if (zh) clusterEdits[i].name_zh = zh;
-    if (en) clusterEdits[i].name_en = en;
-  }
-  closeEdit(i);
-  render();
+  if (zh || en) { clusterEdits[i] = clusterEdits[i]||{}; if(zh) clusterEdits[i].name_zh=zh; if(en) clusterEdits[i].name_en=en; }
+  closeEdit(i); render();
 }
 
 // ─────────────────────────────────────────
@@ -1228,38 +1202,16 @@ function copyAll() {
     const r = S.bigIdea;
     lines.push(`# ${r.name_zh} / ${r.name_en}`);
     lines.push(`> ${r.context}`);
-    lines.push('');
-    if (r.value_shift) lines.push(`FROM: ${r.value_shift.from}\nTO: ${r.value_shift.to}`);
-    lines.push('');
-    if (r.cmf?.colors) {
-      lines.push('## CMF Colors');
-      r.cmf.colors.forEach(c => lines.push(`- ${c.name_zh} / ${c.name_en} ${c.hex} [${c.role}]`));
-    }
-    if (r.cmf?.materials) {
-      lines.push('\n## Materials');
-      r.cmf.materials.forEach(m => lines.push(`- ${m.name} · ${m.process}`));
-    }
+    if (r.value_shift) lines.push(`\nFROM: ${r.value_shift.from}\nTO: ${r.value_shift.to}`);
+    if (r.cmf?.colors) { lines.push('\n## CMF Colors'); r.cmf.colors.forEach(c=>lines.push(`- ${c.name_zh} ${c.hex} [${c.role}] — ${c.desc}`)); }
+    if (r.cmf?.materials) { lines.push('\n## Materials'); r.cmf.materials.forEach(m=>lines.push(`- ${m.name} · ${m.process}`)); }
   }
   if (S.applications) {
-    lines.push('\n## Application Directions');
     const a = S.applications;
-    if (a.concept_directions) {
-      lines.push('\n### Concept Directions');
-      a.concept_directions.forEach(c => lines.push(`- **${c.name_zh}**: ${c.definition}`));
-    }
-    if (a.brand_implications?.fit) {
-      lines.push('\n### Brand Fit');
-      a.brand_implications.fit.forEach(b => lines.push(`- ${b.brand}: ${b.reason}`));
-    }
-    if (a.emerging_audience) {
-      const ea = a.emerging_audience;
-      lines.push(`\n### Emerging Audience: ${ea.name_zh} [${ea.code}]`);
-      lines.push(`"${ea.voc}"`);
-    }
+    if (a.concept_directions) { lines.push('\n## Concept Directions'); a.concept_directions.forEach(c=>lines.push(`- **${c.name_zh}**: ${c.definition}`)); }
+    if (a.emerging_audience) { const ea = a.emerging_audience; lines.push(`\n## Audience: ${ea.name_zh}\n"${ea.voc}"`); }
   }
-  navigator.clipboard.writeText(lines.join('\n')).then(() => {
-    alert('已复制到剪贴板');
-  }).catch(() => alert('复制失败，请手动复制'));
+  navigator.clipboard.writeText(lines.join('\n')).then(()=>alert('已复制')).catch(()=>alert('复制失败'));
 }
 
 // ─────────────────────────────────────────
@@ -1268,50 +1220,37 @@ function copyAll() {
 function showModal() {
   document.getElementById('modal').style.display = 'flex';
   document.getElementById('key-input').value = S.key;
-  setTimeout(() => document.getElementById('key-input').focus(), 100);
+  setTimeout(()=>document.getElementById('key-input').focus(),100);
 }
-
-function closeModal() {
-  document.getElementById('modal').style.display = 'none';
-}
-
+function closeModal() { document.getElementById('modal').style.display = 'none'; }
 function saveKey() {
   const k = document.getElementById('key-input').value.trim();
-  S.key = k;
-  localStorage.setItem('tra_key2', k);
-  closeModal();
-  updateApiDot();
+  S.key = k; localStorage.setItem('tra_key3', k);
+  closeModal(); updateDot();
 }
-
-function updateApiDot() {
-  const dot = document.getElementById('dot');
-  const lbl = document.getElementById('api-lbl');
-  if (dot) dot.className = 'dot' + (S.key ? ' on' : '');
-  if (lbl) lbl.textContent = S.key ? 'API ●' : 'API Key';
+function updateDot() {
+  const d = document.getElementById('dot'), l = document.getElementById('api-lbl');
+  if (d) d.className = 'dot'+(S.key?' on':'');
+  if (l) l.textContent = S.key ? 'API ●' : 'API Key';
 }
 
 // ─────────────────────────────────────────
 // RESET
 // ─────────────────────────────────────────
 function resetAll() {
-  if (!confirm('重置所有数据，从第一阶段重新开始？')) return;
-  S.stage = 1; S.rawInput = ''; S.signals = null;
-  S.clusters = null; S.selectedClusters = new Set();
-  S.bigIdea = null; S.applications = null;
-  S.loading = false; S.streaming = ''; S.error = null;
-  Object.keys(clusterEdits).forEach(k => delete clusterEdits[k]);
+  if (!confirm('重置所有数据？')) return;
+  S.stage=1; S.fetchStarted=false;
+  S.domainSignals={}; S.domainLoading={}; S.domainErrors={};
+  S.signals=null; S.clusters=null; S.selectedClusters=new Set();
+  S.bigIdea=null; S.applications=null;
+  S.loading=false; S.streaming=''; S.error=null;
+  Object.keys(clusterEdits).forEach(k=>delete clusterEdits[k]);
   render();
 }
 
-// Keyboard: Escape closes modal
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 
-// ─────────────────────────────────────────
-// INIT
-// ─────────────────────────────────────────
-updateApiDot();
+updateDot();
 render();
 </script>
 </body>
